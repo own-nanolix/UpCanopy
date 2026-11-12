@@ -33,7 +33,7 @@ The same pipeline was run first on Tectra (`../project-2`); its fixes are applie
 - [x] 5. Build team, two waves; check reports 30 of 30 `ok`
 - [x] 6. Review team; shared fixes applied
 - [x] 7. Verify in the browser; SVG export
-- [ ] 8. `REPORT.md` and `README.md`
+- [x] 8. `REPORT.md` and `README.md`
 - [ ] 9. Offer to publish to Vercel
 
 ## Decisions
