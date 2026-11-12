@@ -1,0 +1,18 @@
+.stair {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 48px);
+  align-items: start;
+  padding-top: clamp(24px, 4vw, 56px);
+}
+.col { display: grid; gap: clamp(28px, 4vw, 56px); min-width: 0; }
+.col:nth-child(2) { margin-top: clamp(40px, 10vw, 160px); }
+.col:nth-child(3) { margin-top: clamp(80px, 20vw, 320px); }
+.group { display: grid; gap: clamp(20px, 2.6vw, 36px); min-width: 0; }
+.group h2 { margin: 0; }
+.fig { margin: 0; min-width: 0; }
+.fig svg { display: block; }
+@media (max-width: 820px) {
+  .stair { grid-template-columns: minmax(0, 1fr); }
+  .col:nth-child(2), .col:nth-child(3) { margin-top: 0; }
+}
