@@ -9,7 +9,7 @@ import { ScaleDotsG } from '@/components/art/KeyArt';
 import { Line } from '@/components/ui/Card';
 import { CONTACT, DOCUMENT, LINES, MODES, SCALES, TAGLINE } from '@/lib/brand';
 import { tLock } from '@/lib/motion';
-import { AreaBar, Bar, Frond, Mark, Rise, RiseLi, ScreenCtx, StatusBar, Stag, StagUl } from './parts';
+import { AreaBar, Bar, Frond, Mark, Rise, RiseLi, ScreenCtx, StatusBar, Stag, StagUl, useScreenName } from './parts';
 import s from './mobile-a.module.css';
 
 /* 6. Financeiro ledger: square checkboxes and a thick running bar that grows with the ticked rows. */
@@ -20,7 +20,7 @@ export function ScreenLedger() {
   const n = ticked.filter(Boolean).length;
   const flip = (i) => setTicked((a) => a.map((v, k) => (k === i ? !v : v)));
   return (
-    <div className={`${s.board} ${s.s6}`} data-screen="mobile-a-06">
+    <div className={`${s.board} ${s.s6}`} data-screen={useScreenName(6)}>
       <StatusBar />
       <div className={s.s6Head}>
         <h3 className={`t-wide ${s.s2Title}`}>Financeiro</h3>
@@ -50,7 +50,7 @@ export function ScreenLedger() {
 export function ScreenInvoice() {
   const [bank, invoice, total] = DOCUMENT.invoice;
   return (
-    <div className={`${s.board} ${s.s7}`} data-screen="mobile-a-07">
+    <div className={`${s.board} ${s.s7}`} data-screen={useScreenName(7)}>
       <StatusBar />
       <Stag className={s.s7Sheet}>
         <Rise className={s.s7Top}>
@@ -91,7 +91,7 @@ export function ScreenModes() {
   const { calm } = useContext(ScreenCtx);
   const [grow, setGrow] = useState(false);
   return (
-    <div className={`${s.board} ${s.s8}`} data-screen="mobile-a-08">
+    <div className={`${s.board} ${s.s8}`} data-screen={useScreenName(8)}>
       <StatusBar />
       <h3 className={`t-h2 ${s.s8Title}`} lang="pt-BR"><Line text={LINES.level} strong="nível." /></h3>
       <button type="button" role="switch" aria-checked={grow} className={s.s8Switch} onClick={() => setGrow((v) => !v)}>
@@ -119,7 +119,7 @@ export function ScreenModes() {
 export function ScreenBrand() {
   const parts = LINES.control.split('. ');
   return (
-    <div className={`${s.board} ${s.s9}`} data-screen="mobile-a-09">
+    <div className={`${s.board} ${s.s9}`} data-screen={useScreenName(9)}>
       <Frond tone="onDark" opacity={0.42} cx={420} cy={900} r={300} a0={180} a1={275} count={32} len={230} lean={-62} />
       <StatusBar dark />
       <Mark size={40} className={s.s9Mark} />

@@ -24,6 +24,7 @@
 .capOn :global(.t-label) { color: var(--navy-muted); }
 .big { font-family: var(--font-wide); font-weight: 500; font-size: clamp(88px, 12vw, 190px); letter-spacing: -0.06em; line-height: 0.85; font-variant-numeric: tabular-nums; }
 .capOn .big { color: var(--green); }
+@media (max-width: 600px) { .cap { min-height: 0; } .big { font-size: 72px; } }
 .capFoot { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
 
 .stripBox { overflow-x: auto; padding: 0 0 24px; scrollbar-width: thin; }
@@ -38,7 +39,8 @@
 
 .plates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); align-items: end; }
 .plate { margin: 0; display: grid; gap: 10px; background: var(--slide); padding: 18px; }
-.plate svg { width: 100%; height: auto; max-height: 460px; }
+/* The box keeps the artwork's own ratio (no letterbox), so nothing outside the 390 x 844 viewBox shows. */
+.plate svg { width: auto; height: 460px; max-width: 100%; margin-inline: auto; }
 @media (max-width: 1200px) { .plates { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .plates { grid-template-columns: minmax(0, 1fr); } }
 

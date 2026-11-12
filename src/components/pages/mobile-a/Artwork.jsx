@@ -79,13 +79,16 @@ function LedgerScreen() {
       <rect y="120" width="390" height="22" fill={NAVY} />
       <rect y="120" width={(390 * ticked) / 9} height="22" fill={GREEN} className="grow-x" />
       {Array.from({ length: 9 }, (_, i) => (
-        <g key={i} transform={`translate(24 ${160 + i * 54})`} className="slide-up" style={{ '--i': i }}>
+        // the animation class sits on an inner group: its CSS transform would override the translate attribute
+        <g key={i} transform={`translate(24 ${160 + i * 54})`}>
+          <g className="slide-up" style={{ '--i': i }}>
           <rect x="1" y="12" width="26" height="26" fill={i < ticked ? GREEN : '#FFFFFF'} stroke={NAVY} strokeWidth="2" />
           {i < ticked && <path d="M7 25l5 5 10-11" fill="none" stroke={NAVY} strokeWidth="2" />}
           <Ph x={42} y={14} w={140 - (i % 4) * 18} h={12} />
           <Ph x={42} y={32} w={70 + (i % 3) * 20} h={7} />
           <Ph x={290 - (i % 2) * 12} y={16} w={52 + (i % 2) * 12} h={14} />
           <rect y="52" width="342" height="2" fill={NAVY} opacity="0.14" />
+          </g>
         </g>
       ))}
       <rect y="694" width="390" height="74" fill={NAVY} />
@@ -143,12 +146,14 @@ function ModesScreen() {
         const x = 24 + (i % 2) * 182, y = 310 + Math.floor(i / 2) * 120;
         const ink = t === NAVY || t === DARK ? '#FFFFFF' : NAVY;
         return (
-          <g key={i} transform={`translate(${x} ${y})`} className="slide-up" style={{ '--i': i }}>
-            <rect x="4" y="4" width="160" height="100" fill={NAVY} opacity="0.28" />
-            <rect width="160" height="100" fill={t} />
-            <Ph x={14} y={16} w={70} fill={ink} />
-            <Ph x={14} y={44} w={104} h={7} fill={ink} />
-            <Ph x={14} y={62} w={48} h={7} fill={ink} />
+          <g key={i} transform={`translate(${x} ${y})`}>
+            <g className="slide-up" style={{ '--i': i }}>
+              <rect x="4" y="4" width="160" height="100" fill={NAVY} opacity="0.28" />
+              <rect width="160" height="100" fill={t} />
+              <Ph x={14} y={16} w={70} fill={ink} />
+              <Ph x={14} y={44} w={104} h={7} fill={ink} />
+              <Ph x={14} y={62} w={48} h={7} fill={ink} />
+            </g>
           </g>
         );
       })}

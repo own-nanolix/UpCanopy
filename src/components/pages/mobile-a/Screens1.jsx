@@ -8,7 +8,7 @@ import { AREAS, LINES, PILLARS } from '@/lib/brand';
 import { tLock, tMove } from '@/lib/motion';
 import { clamp } from '@/lib/site';
 import { AREA_SCREEN, DAYS, STAGES } from './data';
-import { AreaBar, Bar, Frond, Mark, Rise, RiseBtn, RiseLi, ScreenCtx, StatusBar, Stag, StagUl } from './parts';
+import { AreaBar, Bar, Frond, Mark, Rise, RiseBtn, RiseLi, ScreenCtx, StatusBar, Stag, StagUl, useScreenName } from './parts';
 import s from './mobile-a.module.css';
 
 /* 1. Home: the brand gradient, the line, three area rows, the frond, the word-mark (as ScreenHomeG). */
@@ -16,7 +16,7 @@ export function ScreenHome() {
   const { go } = useContext(ScreenCtx);
   const rows = LINES.bridge.rows;
   return (
-    <div className={`${s.board} ${s.s1}`} data-screen="mobile-a-01">
+    <div className={`${s.board} ${s.s1}`} data-screen={useScreenName(1)}>
       <Frond cx={-40} cy={520} r={330} a0={285} a1={395} />
       <StatusBar dark />
       <Mark size={44} className={s.s1Mark} />
@@ -50,7 +50,7 @@ export function ScreenCrmList() {
   const cycle = (i) => setStage((a) => a.map((v, k) => (k === i ? (v + 1) % 3 : v)));
   const shown = stage.map((v, i) => ({ v, i })).filter((r) => filter === 'All' || STAGES[r.v] === filter);
   return (
-    <div className={`${s.board} ${s.s2}`} data-screen="mobile-a-02">
+    <div className={`${s.board} ${s.s2}`} data-screen={useScreenName(2)}>
       <StatusBar />
       <div className={s.s2Head}>
         <h3 className={`t-wide ${s.s2Title}`}>CRM</h3>
@@ -99,7 +99,7 @@ export function ScreenCrmRecord({ idp }) {
     { id: 'financeiro', label: 'Financeiro', content: <Stag className={s.s3Fields}>{[0, 1, 2].map((i) => <Rise key={i} className={s.s3Slot}><Bar w={120 - i * 20} h={14} /><Bar w={56} h={14} /></Rise>)}</Stag> },
   ];
   return (
-    <div className={`${s.board} ${s.s3}`} data-screen="mobile-a-03">
+    <div className={`${s.board} ${s.s3}`} data-screen={useScreenName(3)}>
       <div className={s.s3Head}>
         <StatusBar dark />
         <button type="button" className={s.s3Back} onClick={() => go(2)} aria-label="Back to the CRM list"><Icon name="arrow-left" size={22} /></button>
@@ -127,7 +127,7 @@ export function ScreenAgendaWeek() {
   const [day, setDay] = useState(2);
   const [pick, setPick] = useState(4);
   return (
-    <div className={`${s.board} ${s.s4}`} data-screen="mobile-a-04">
+    <div className={`${s.board} ${s.s4}`} data-screen={useScreenName(4)}>
       <StatusBar />
       <div className={s.s4Head}>
         <h3 className={`t-wide ${s.s2Title}`}>Agenda</h3>
@@ -166,7 +166,8 @@ export function ScreenAgendaDay() {
   const [y, setY] = useState(240);
   const box = useRef(null);
   const drag = useRef(false);
-  const mins = Math.round(((480 + (y / TL) * 600) / 5)) * 5;
+  // The rule shows no clock: the hour axis is the only reading, so nothing looks like a real appointment.
+  const mins = Math.round(((480 + (y / TL) * 600) / 15)) * 15;
   const label = `${String(Math.floor(mins / 60)).padStart(2, '0')}:${String(mins % 60).padStart(2, '0')}`;
   const move = (e) => {
     if (!drag.current || !box.current) return;
@@ -181,7 +182,7 @@ export function ScreenAgendaDay() {
     setY((v) => clamp(v + d, 0, TL));
   };
   return (
-    <div className={`${s.board} ${s.s5}`} data-screen="mobile-a-05">
+    <div className={`${s.board} ${s.s5}`} data-screen={useScreenName(5)}>
       <StatusBar dark />
       <div className={s.s5Head}>
         <button type="button" className={s.s5Round} onClick={() => go(4)} aria-label="Back to the week"><Icon name="arrow-left" size={22} /></button>
@@ -204,8 +205,8 @@ export function ScreenAgendaDay() {
           onPointerDown={(e) => { drag.current = true; e.currentTarget.setPointerCapture(e.pointerId); move(e); }}
           onPointerMove={move} onPointerUp={() => { drag.current = false; }} onPointerCancel={() => { drag.current = false; }}>
           <span className={s.s5Rule} />
-          <span className={s.s5Handle} role="slider" tabIndex={0} aria-label="Now rule" aria-orientation="vertical" aria-valuemin={0} aria-valuemax={TL} aria-valuenow={Math.round(y)} aria-valuetext={label} onKeyDown={key}>
-            NOW {label}
+          <span className={s.s5Handle} role="slider" tabIndex={0} aria-label="Now rule" aria-orientation="vertical" aria-valuemin={0} aria-valuemax={TL} aria-valuenow={Math.round(y)} aria-valuetext={`${label} on the hour axis`} onKeyDown={key}>
+            NOW
           </span>
         </div>
       </div>

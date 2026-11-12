@@ -2,7 +2,7 @@
 
 // The page body: live phone on the right (Green Park field), component sets, the nine as a 3 x 3 contact sheet,
 // exportable graphics and the seven interaction lanes. The selected screen is shared by phone, list and sheet.
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion, MotionConfig } from 'framer-motion';
 import Reveal from '@/components/site/Reveal';
 import Icon from '@/components/site/Icon';
@@ -11,6 +11,7 @@ import { Phone } from '@/components/ui/Devices';
 import { LockupG } from '@/components/art/Mark';
 import { DESCRIPTOR } from '@/lib/brand';
 import { tEnter } from '@/lib/motion';
+import { still } from '@/lib/site';
 import Artboard from './Artboard';
 import Sets from './Sets';
 import Lanes from './Lanes';
@@ -50,10 +51,19 @@ export default function Studio() {
     setI(c);
   };
   const go = (n) => pick(n - 10);
+  // On narrow screens the phone sits above the page: a pick from the contact sheet brings it back into view.
+  const rail = useRef(null);
+  const show = (k) => {
+    pick(k);
+    const el = rail.current;
+    if (el && window.innerWidth <= 1000 && el.getBoundingClientRect().bottom < window.innerHeight * 0.5) el.scrollIntoView({ behavior: still() ? 'auto' : 'smooth', block: 'start' });
+  };
   const cur = SCREEN_LIST[i];
   const Live = cur.C;
   const onKey = (e) => {
-    if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    // Shift + arrows belong to the presenter dock; fields, the sheet and radio groups keep their own keys.
+    if (e.defaultPrevented || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.closest('[role="radiogroup"], [role="dialog"], [role="tablist"]')) return;
     if (e.key === 'ArrowRight') { e.preventDefault(); pick(i + 1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); pick(i - 1); }
   };
@@ -80,7 +90,7 @@ export default function Studio() {
                     <Artboard name={`mobile-b-${sc.n}`} label={`Screen ${sc.n}, ${sc.title}`} fallback={0.28}>
                       <div inert style={{ width: '100%', height: '100%' }}><sc.C p="mobile-b-sheet" /></div>
                     </Artboard>
-                    <button type="button" className={s.thumbBtn} aria-pressed={k === i} aria-label={`Show screen ${sc.n}, ${sc.title}, on the phone`} onClick={() => pick(k)} />
+                    <button type="button" className={s.thumbBtn} aria-pressed={k === i} aria-label={`Show screen ${sc.n}, ${sc.title}, on the phone`} onClick={() => show(k)} />
                   </div>
                   <p className={s.thumbCap}><b>{sc.n}</b> {sc.title}</p>
                 </li>
@@ -104,11 +114,11 @@ export default function Studio() {
           </Section>
         </div>
 
-        <aside className={`${s.rail} field-green`} aria-label="Live phone">
+        <aside ref={rail} className={`${s.rail} field-green`} aria-label="Live phone" onKeyDown={onKey}>
           <motion.div className={s.phoneBox} initial={{ y: 48, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={tEnter}>
-            <div onKeyDown={onKey} tabIndex={0} role="group" aria-label={`Live phone, screen ${cur.n}, ${cur.title}. Left and Right arrow keys change the screen`} className={s.phoneFocus}>
+            <div tabIndex={0} role="group" aria-label={`Live phone, screen ${cur.n}, ${cur.title}. Left and Right arrow keys change the screen`} className={s.phoneFocus}>
               <Phone exportName="mobile-b-phone-frame">
-                <Artboard name={`mobile-b-${cur.n}`} label={`Screen ${cur.n}, ${cur.title}`} fill fallback={0.9}>
+                <Artboard name={`mobile-b-${cur.n}-live`} label={`Screen ${cur.n}, ${cur.title}`} fill fallback={0.9}>
                   <motion.div key={cur.n} style={{ position: 'absolute', inset: 0 }} initial={{ x: dir * 56, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={tEnter}>
                     <Live p="mobile-b-live" go={go} />
                   </motion.div>
@@ -121,6 +131,7 @@ export default function Studio() {
             <p className="t-caps" aria-live="polite"><b>{cur.n}</b> {cur.title}</p>
             <button type="button" className="btn btn-navy btn-icon btn-sm" aria-label="Next screen" disabled={i === SCREEN_LIST.length - 1} onClick={() => pick(i + 1)}><Icon name="arrow-right" size={18} /></button>
           </div>
+          <p className={`t-label ${s.railHint}`}>Left / Right keys</p>
           <nav className={s.railList} aria-label="Screens 10 to 18">
             {SCREEN_LIST.map((sc, k) => (
               <button key={sc.n} type="button" className={`${s.railNo} ${k === i ? s.railNoOn : ''}`} aria-label={`Screen ${sc.n}, ${sc.title}`} aria-current={k === i ? 'page' : undefined} onClick={() => pick(k)}>{sc.n}</button>

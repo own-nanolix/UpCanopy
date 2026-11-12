@@ -2,7 +2,7 @@
 
 // The mobile component set of the app: status bar, nav, tab bar, list row, menu row, card, stat card, input,
 // accordion and sheet. All fluid (width 100%), so the same parts sit in a 390 px screen and in a specimen.
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useDragControls } from 'framer-motion';
 import Icon from '@/components/site/Icon';
 import Field from '@/components/ui/Field';
@@ -15,7 +15,7 @@ export const Bar = ({ w = 6 }) => <span className="ph" aria-hidden="true" style=
 export function StatusBar({ tone = 'light' }) {
   return (
     <div className={`${s.status} ${tone === 'navy' ? s.statusNavy : ''}`} aria-hidden="true">
-      <Bar w={2.4} />
+      <b className={s.clock}>9:41</b>
       <svg width="48" height="14" viewBox="0 0 48 14" fill="currentColor">
         {[0, 1, 2, 3].map((i) => <rect key={i} x={i * 6} y={10 - i * 3} width="4" height={4 + i * 3} />)}
         <rect x="28" y="1" width="18" height="12" fill="none" stroke="currentColor" strokeWidth="2" />
@@ -153,6 +153,14 @@ export function Accordion({ idp, items, defaultOpen = 0, lang }) {
 export function Sheet({ title, open, onOpenChange, children, scrim = true }) {
   const dc = useDragControls();
   const moved = useRef(false);
+  const handle = useRef(null);
+  const was = useRef(open);
+  // When the visitor opens the sheet, focus moves to its handle (so Escape and Tab work inside it); it does not
+  // steal focus when a screen first shows with the sheet already open.
+  useEffect(() => {
+    if (open && !was.current) requestAnimationFrame(() => handle.current && handle.current.focus({ preventScroll: true }));
+    was.current = open;
+  }, [open]);
   return (
     <AnimatePresence>
       {open && scrim && (
@@ -167,7 +175,7 @@ export function Sheet({ title, open, onOpenChange, children, scrim = true }) {
           onDragEnd={(_, info) => { if (info.offset.y > 70 || info.velocity.y > 500) onOpenChange(false); setTimeout(() => { moved.current = false; }, 0); }}
           onKeyDown={(e) => { if (e.key === 'Escape') onOpenChange(false); }}
         >
-          <button type="button" className={s.handle} aria-label="Close sheet" onPointerDown={(e) => dc.start(e)} onClick={() => { if (!moved.current) onOpenChange(false); }}>
+          <button ref={handle} type="button" className={s.handle} aria-label="Close sheet" onPointerDown={(e) => dc.start(e)} onClick={() => { if (!moved.current) onOpenChange(false); }}>
             <span aria-hidden="true" />
           </button>
           {children}

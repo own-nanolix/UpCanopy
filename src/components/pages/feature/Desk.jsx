@@ -145,6 +145,38 @@ export default function Desk() {
   const count = ticked.filter(Boolean).length;
   const caption = step >= DONE ? LINES.control : step >= 0 ? STEPS[step].caption : null;
 
+  // ---- pointer drag of an agenda block: it follows the pointer, then snaps to the nearest cell ----
+  const track = useRef(null);
+  const drag = useRef(null);
+  const [ghost, setGhost] = useState(null);
+  const dragStart = (e, b) => {
+    if (e.button !== 0) return;
+    drag.current = { id: b.id, x: e.clientX, y: e.clientY };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+  const dragMove = (e) => {
+    const d = drag.current;
+    if (d) setGhost({ id: d.id, dx: e.clientX - d.x, dy: e.clientY - d.y });
+  };
+  const dragEnd = (e) => {
+    const d = drag.current;
+    drag.current = null;
+    setGhost(null);
+    if (!d || !track.current) return;
+    const r = track.current.getBoundingClientRect();
+    const me = demo.blocks.find((b) => b.id === d.id);
+    const dSlot = Math.round((e.clientX - d.x) / (r.width / SLOTS));
+    const dDay = Math.round((e.clientY - d.y) / (r.height / DAYS.length));
+    if (!me || (!dSlot && !dDay)) return;
+    const slot = Math.min(SLOTS - 1, Math.max(0, me.slot + dSlot));
+    const day = Math.min(DAYS.length - 1, Math.max(0, me.day + dDay));
+    shift(d.id, slot - me.slot, day - me.day);
+  };
+  const dragCancel = () => {
+    drag.current = null;
+    setGhost(null);
+  };
+
   const onBlockKey = (e, id) => {
     const keys = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
     const k = keys[e.key];
@@ -206,13 +238,14 @@ export default function Desk() {
             <ul className={s.days} aria-hidden="true">
               {DAYS.map((d) => <li key={d} className="t-label">{d}</li>)}
             </ul>
-            <div className={s.track}>
+            <div className={s.track} ref={track}>
               <div className={s.cells} aria-hidden="true">
                 {DAYS.flatMap((d, di) => Array.from({ length: SLOTS }, (_, si) => <span key={`${di}-${si}`} />))}
               </div>
               {demo.blocks.map((b) => {
                 const mine = b.client === demo.client;
                 const isActive = b.id === demo.block;
+                const g = ghost && ghost.id === b.id ? ghost : null;
                 return (
                   <button
                     key={b.id}
@@ -220,10 +253,15 @@ export default function Desk() {
                     className={s.block}
                     data-mine={mine || undefined}
                     data-active={isActive || undefined}
-                    aria-label={`Client ${pad2(b.client)}, ${DAYS[b.day]}, slot ${b.slot + 1}. Arrow keys move it.`}
-                    style={{ '--d': b.day, '--sl': b.slot, '--tilt': `${SCATTER[b.client].tilt}deg` }}
+                    data-drag={g ? '' : undefined}
+                    aria-label={`Client ${pad2(b.client)}, ${DAYS[b.day]}, slot ${b.slot + 1}. Drag it, or use the arrow keys.`}
+                    style={{ '--d': b.day, '--sl': b.slot, '--tilt': `${SCATTER[b.client].tilt}deg`, '--dx': `${g ? g.dx : 0}px`, '--dy': `${g ? g.dy : 0}px` }}
                     onClick={() => pickBlock(b)}
                     onKeyDown={(e) => onBlockKey(e, b.id)}
+                    onPointerDown={(e) => dragStart(e, b)}
+                    onPointerMove={dragMove}
+                    onPointerUp={dragEnd}
+                    onPointerCancel={dragCancel}
                   >
                     <span className={s.blockFace}>
                       <span className="ph" style={{ width: '70%' }} />

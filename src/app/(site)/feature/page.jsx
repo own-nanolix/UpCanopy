@@ -32,7 +32,7 @@ export default function Page() {
         <Reveal>
           <div className={s.sig}>
             <div className={s.sigArt}><SigFrond /></div>
-            <p className="t-label on-navy" style={{ position: 'relative', zIndex: 1 }}>Modo</p>
+            <p className="t-label on-navy" style={{ position: 'relative', zIndex: 1 }}>Mode</p>
             <p className={s.sigLine} lang="pt-BR">
               <Line text={MANIFESTO[7]} strong={['"sobrevivência"', '"expansão"']} className="hl" />
             </p>

@@ -12,7 +12,8 @@ const GREEN = '#26CF7B';
 // Screen 10: navy field, the gradient rising from below, the frond from the right edge, the stacked lockup.
 export function SignInArtG({ idp }) {
   return (
-    <g>
+    <g clipPath={`url(#${idp}-box)`}>
+      <clipPath id={`${idp}-box`}><rect width="390" height="844" /></clipPath>
       <BrandDefs idp={idp} />
       <linearGradient id={`${idp}-veil`} x1="0" y1="0" x2="0" y2="1">
         <stop offset="0.25" stopColor={NAVY} stopOpacity="1" />
@@ -28,9 +29,11 @@ export function SignInArtG({ idp }) {
 
 // Screen 18 and the badge: green card behind with the word set vertically, the navy card in front.
 export function BadgeScreenG({ idp }) {
-  const cx = 86, cy = 40, cw = 258, ch = 440;
+  // Card proportions, mark, word-mark and the name / role (same size, light) measured from m09.
+  const cx = 86, cy = 48, cw = 280, ch = 422;
   return (
-    <g>
+    <g clipPath={`url(#${idp}-box)`}>
+      <clipPath id={`${idp}-box`}><rect width="390" height="560" /></clipPath>
       <rect width="390" height="560" fill={GREEN} />
       <WordmarkVerticalG x={-6} y={556} size={150} fill="#FFFFFF" opacity="0.92" />
       <rect x={cx + 10} y={cy + 12} width={cw} height={ch} fill="#052E25" opacity="0.28" />
@@ -41,28 +44,35 @@ export function BadgeScreenG({ idp }) {
       <g clipPath={`url(#${idp}-card)`}>
         <FrondG cx={cx + cw / 2} cy={cy + 400} r={150} a0={196} a1={344} count={34} len={190} width={7} lean={58} tone="onNavy" fan />
       </g>
-      <MarkG x={cx + 18} y={cy + 14} size={44} fill={GREEN} />
-      <WordmarkG x={cx + cw - 18} y={cy + 46} size={19} fill="#FFFFFF" anchor="end" />
-      <text x={cx + 20} y={cy + 392} fontSize="28" fontWeight="300" fill="#FFFFFF">{PEOPLE.badge.name}</text>
-      <text x={cx + 20} y={cy + 420} fontSize="18" fontWeight="300" fill="#FFFFFF">{PEOPLE.badge.role}</text>
+      <MarkG x={cx + 16} y={cy + 14} size={30} fill={GREEN} />
+      <WordmarkG x={cx + cw - 16} y={cy + 34} size={12} fill="#FFFFFF" anchor="end" />
+      <text x={cx + 18} y={cy + 368} fontSize="24" fontWeight="300" fill="#FFFFFF">{PEOPLE.badge.name}</text>
+      <text x={cx + 18} y={cy + 400} fontSize="24" fontWeight="300" fill="#FFFFFF">{PEOPLE.badge.role}</text>
     </g>
   );
 }
 
 // Screen 17 and the specimen: the back of the business card, small and flat.
+// As in m23: no mark on the back; name (first name bold) and role top left, the word-mark top right in white,
+// then three groups of small dark lines: handle, phone and email; the address on two lines; the web address bold.
 export function BusinessCardG() {
-  const lines = [CONTACT.handle, CONTACT.phone, CONTACT.hello, CONTACT.address, CONTACT.webCased];
+  const [first, ...rest] = PEOPLE.founder.name.split(' ');
+  const [studio, ...city] = CONTACT.address.split(', ');
+  const groups = [[CONTACT.handle, CONTACT.phone, CONTACT.hello], [studio, city.join(', ')]];
+  const ink = '#052E25';
   return (
     <g>
       <rect width="340" height="200" fill={GREEN} />
-      <WordmarkG x={322} y={34} size={15} fill="#052E25" anchor="end" />
-      <MarkG x={18} y={14} size={34} fill="#052E25" />
-      <text x="20" y="104" fontSize="13" fontWeight="700" fill="#052E25" letterSpacing="0.6">{PEOPLE.founder.name}</text>
-      <text x="20" y="122" fontSize="10.5" fontWeight="400" fill="#052E25" letterSpacing="0.6">{PEOPLE.founder.role}</text>
-      {lines.map((t, i) => (
-        <text key={i} x="20" y={r2(146 + i * 10.4)} fontSize="9" fill="#052E25">{t}</text>
-      ))}
-      <rect x="0" y="196" width="340" height="4" fill={NAVY} />
+      <WordmarkG x={318} y={34} size={10} fill="#FFFFFF" anchor="end" />
+      <text x="22" y="34" fontSize="10" fill={ink} letterSpacing="0.5">
+        <tspan fontWeight="700">{first}</tspan>
+        <tspan fontWeight="400"> {rest.join(' ')}</tspan>
+      </text>
+      <text x="22" y="47" fontSize="7.5" fontWeight="400" fill={ink} letterSpacing="0.5">{PEOPLE.founder.role}</text>
+      {groups.map((g, k) => g.map((t, i) => (
+        <text key={`${k}-${i}`} x="22" y={r2(80 + k * 46 + i * 11)} fontSize="8" fill={ink}>{t}</text>
+      )))}
+      <text x="22" y="170" fontSize="9" fontWeight="700" fill={ink}>{CONTACT.webCased}</text>
     </g>
   );
 }
@@ -90,7 +100,7 @@ export function StepperG() {
       <rect width="400" height="110" fill="#F0F0F0" />
       <text x="24" y="34" fontSize="11" fontWeight="700" fill={NAVY} letterSpacing="1.2" lang="pt-BR">{sc.left}</text>
       <text x="376" y="34" fontSize="11" fontWeight="700" fill={NAVY} letterSpacing="1.2" textAnchor="end" lang="pt-BR">{sc.right}</text>
-      <ScaleDotsG x={34} y={72} w={332} r={12} chosen={sc.chosen} off="#22272B" on={GREEN} lock />
+      <ScaleDotsG x={34} y={72} w={332} r={12} chosen={sc.chosen} off="#1D1D1B" on={GREEN} lock />
     </g>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Icon from '@/components/site/Icon';
 import { Phone } from '@/components/ui/Devices';
@@ -18,19 +18,27 @@ const MINI_SCALE = 133.56 / 390;
 function isTyping(el) {
   if (!el) return false;
   const t = el.tagName;
-  return t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT' || el.getAttribute('role') === 'slider' || el.getAttribute('role') === 'tab';
+  return t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT' || !!el.closest?.('[role="slider"], [role="tablist"], [role="dialog"]');
 }
 
 export default function Studio({ plates }) {
   const [idx, setIdx] = useState(0);
   const calm = useReducedMotion();
   const go = (n) => setIdx(((n % 9) + 9) % 9);
+  // On phones the live phone sits above the list: picking from the list or the row brings it back into view.
+  const rail = useRef(null);
+  const show = (n) => {
+    go(n);
+    const el = rail.current;
+    if (el && window.innerWidth <= 900 && el.getBoundingClientRect().bottom < window.innerHeight * 0.5) el.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+  };
   const Board = BOARDS[idx];
   const cur = SCREENS[idx];
 
   useEffect(() => {
     const onKey = (e) => {
-      if (e.altKey || e.ctrlKey || e.metaKey || isTyping(e.target)) return;
+      // Shift + arrows belong to the presenter dock; controls that use the arrows themselves keep them.
+      if (e.defaultPrevented || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey || isTyping(e.target)) return;
       if (e.key === 'ArrowLeft') { e.preventDefault(); setIdx((i) => (i + 8) % 9); }
       if (e.key === 'ArrowRight') { e.preventDefault(); setIdx((i) => (i + 1) % 9); }
     };
@@ -40,7 +48,7 @@ export default function Studio({ plates }) {
 
   return (
     <div className="split">
-      <aside className={`split-rail ${s.rail}`} aria-label="Live phone">
+      <aside ref={rail} className={`split-rail ${s.rail}`} aria-label="Live phone">
         <div className={s.railTop}>
           <span className="t-caps">Mobile app</span>
           <span className="t-label">Left / Right keys</span>
@@ -48,7 +56,7 @@ export default function Studio({ plates }) {
         <div className={s.phoneWrap}>
           <Phone exportName="mobile-a-phone-frame" className={s.livePhone}>
             <Fit>
-              <ScreenCtx.Provider value={{ calm: !!calm, go: (n) => go(n - 1) }}>
+              <ScreenCtx.Provider value={{ calm: !!calm, go: (n) => go(n - 1), live: true }}>
                 <motion.div key={idx} className={s.stageIn} initial={calm ? false : { opacity: 0, y: 56 }} animate={{ opacity: 1, y: 0 }} transition={tLock}>
                   <Board idp={`mobile-a-live-${cur.n}`} />
                 </motion.div>
@@ -86,7 +94,7 @@ export default function Studio({ plates }) {
                   <p className={s.big} aria-hidden="true">{pad2(sc.n)}</p>
                   <div className={s.capFoot}>
                     <h3 className="t-h2">{sc.name}</h3>
-                    <button type="button" className={`btn btn-sm ${i === idx ? '' : 'btn-navy'}`} aria-pressed={i === idx} onClick={() => go(i)}>
+                    <button type="button" className={`btn btn-sm ${i === idx ? '' : 'btn-navy'}`} aria-pressed={i === idx} onClick={() => show(i)}>
                       {i === idx ? 'In the phone' : 'Show in phone'}
                     </button>
                   </div>
@@ -114,7 +122,7 @@ export default function Studio({ plates }) {
                         </Fit>
                       </Phone>
                     </div>
-                    <button type="button" className={s.pick} aria-pressed={i === idx} aria-label={`Show screen ${sc.n}, ${sc.name}, in the phone`} onClick={() => go(i)} />
+                    <button type="button" className={s.pick} aria-pressed={i === idx} aria-label={`Show screen ${sc.n}, ${sc.name}, in the phone`} onClick={() => show(i)} />
                     <span className={`t-caps ${s.miniNo}`}>{pad2(sc.n)} {sc.name}</span>
                   </li>
                 );

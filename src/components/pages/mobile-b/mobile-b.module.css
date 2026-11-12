@@ -11,6 +11,7 @@
 .railBar { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: min(100%, calc((100vh - 150px) * 0.4955)); }
 .railBar p { margin: 0; text-align: center; }
 .railBar b { font-weight: 700; }
+.railHint { margin: 0; color: var(--navy); text-align: center; }
 .railList { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
 .railNo { width: 34px; height: 34px; display: grid; place-items: center; border: var(--stroke) solid var(--navy); background: transparent; color: var(--navy); font-family: var(--font-wide); font-weight: 500; font-size: 11px; transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out); }
 .railNo:hover, .railNoOn { background: var(--navy); color: var(--white); }
@@ -32,6 +33,7 @@
 .bgFull { position: absolute; left: 0; top: 0; width: 390px; height: 844px; max-width: none; }
 .status { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; height: 52px; padding: 6px 32px 0; flex: none; }
 .statusNavy { color: var(--white); }
+.clock { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 10px; padding: 16px 20px 20px; overflow-y: auto; scrollbar-width: none; }
 .body::-webkit-scrollbar { display: none; }
 .stack { display: grid; gap: 10px; min-width: 0; }
@@ -106,7 +108,11 @@ button.row:active { transform: translateY(1px); }
 /* ---- Screens ---- */
 .signForm { position: absolute; left: 24px; right: 24px; top: 340px; display: grid; gap: 16px; }
 .signForm .darkField label { color: var(--navy-muted); }
-.homeLink { justify-self: center; margin-top: 8px; font-family: var(--font-wide); font-size: 12px; letter-spacing: 0.08em; }
+.signFoot { position: absolute; left: 28px; right: 28px; bottom: 34px; z-index: 2; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.signFoot > span { color: var(--green); font-size: 13px; }
+.homeLink { color: var(--white); text-decoration: none; font-family: var(--font-wide); font-size: 15px; letter-spacing: 0.22em; padding: 6px 0; border-bottom: var(--stroke) solid transparent; transition: border-color var(--dur-2) var(--ease-out); }
+.homeLink:hover { border-bottom-color: var(--green); }
+.homeLink:active { transform: translateY(1px); }
 .switchBtn { justify-content: space-between; }
 .notice { display: flex; align-items: center; gap: 14px; padding: 14px; background: var(--white); box-shadow: inset 0 -1px 0 var(--line); transition: box-shadow var(--dur-2) var(--ease-out); }
 .noticeOn { box-shadow: inset 4px 0 0 var(--green), inset 0 -1px 0 var(--line); }
@@ -150,7 +156,7 @@ button.row:active { transform: translateY(1px); }
 .gfxItem { margin: 0; display: grid; gap: 8px; min-width: 0; }
 .gfxPlate { background: var(--slide); padding: 14px; display: grid; place-items: center; }
 .gfxPlate svg { width: 100%; height: auto; }
-.gfxTall .gfxPlate svg { max-height: 460px; }
+.gfxTall .gfxPlate svg { width: auto; height: 460px; max-width: 100%; }
 
 /* ---- Specimens ---- */
 .specGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 18px; align-items: start; }
@@ -199,5 +205,4 @@ button.row:active { transform: translateY(1px); }
 @media (max-width: 1000px) {
   .lane { grid-template-columns: minmax(0, 1fr); gap: 12px; }
 }
-.signForm .homeLink { color: var(--green); }
 .sDark .nav { background: transparent; }

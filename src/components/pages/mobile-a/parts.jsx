@@ -12,7 +12,8 @@ import s from './mobile-a.module.css';
 
 // calm: render the finished state without entrance motion (reduced motion, thumbnails).
 // go(n): jump to screen n (1 to 9) in the live phone.
-export const ScreenCtx = createContext({ calm: false, go: () => {} });
+// live: this instance is the one in the live phone.
+export const ScreenCtx = createContext({ calm: false, go: () => {}, live: false });
 
 function make(T, isList) {
   return function Motion(props) {
@@ -29,7 +30,13 @@ export const RiseBtn = make(motion.button, false);
 
 // A quiet placeholder bar for facts the case study does not publish.
 export function Bar({ w = 100, h = 10, className = '', style }) {
-  return <span className={`ph ${s.bar} ${className}`} style={{ width: w, height: h, ...style }} aria-hidden="true" />;
+  return <span className={`ph ${s.bar} ${className}`} style={{ width: w, minWidth: 0, height: h, ...style }} aria-hidden="true" />;
+}
+
+// The artboard name: the row of nine holds the canonical names, the live phone adds "-live" so no name repeats.
+export function useScreenName(n) {
+  const { live } = useContext(ScreenCtx);
+  return `mobile-a-${String(n).padStart(2, '0')}${live ? '-live' : ''}`;
 }
 
 export function StatusBar({ dark = false }) {

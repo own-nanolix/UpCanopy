@@ -13,12 +13,15 @@ import { Line } from '@/components/ui/Card';
 import { copy } from '@/lib/site';
 import { tEnter } from '@/lib/motion';
 import { AREAS, SECTORS, MODES, MANIFESTO, TONE, DOCUMENT, CONTACT, SIGN } from '@/lib/brand';
-import { SignInArtG, BadgeScreenG, BusinessCardG, TAB_ICONS } from './Graphics';
+import { SignInArtG, BadgeScreenG, BusinessCardG } from './Graphics';
 import { Bar, StatusBar, NavBar, TabBar, ListRow, MenuRow, Accordion, Sheet } from './Mobile';
 import s from './mobile-b.module.css';
 
 const AREA_ICON = { CRM: 'users', Agenda: 'calendar', Financeiro: 'chart' };
-const TABS = TAB_ICONS.map(([icon, label]) => ({ id: label, icon, label }));
+// The account tab bar of screens 12 and 16: each tile opens its screen in the live phone.
+const TABS = [['user', 'Profile', 18], ['bell', 'Notifications', 12], ['folder', 'Files', 16], ['gear', 'Settings', 15]].map(([icon, label, n]) => ({ id: label, icon, label, n }));
+const openTab = (go) => (id) => { const t = TABS.find((x) => x.id === id); if (go && t) go(t.n); };
+const SOON = 'Not part of this preview';
 
 // 10 Sign in: navy, stacked lockup, two fields, a green button, the wall sign's "HOME →".
 export function SignIn({ p, go }) {
@@ -30,8 +33,12 @@ export function SignIn({ p, go }) {
         <Field id={`${p}-email`} label="Email" type="email" autoComplete="email" className={s.darkField} />
         <Field id={`${p}-password`} label="Password" type="password" autoComplete="current-password" className={s.darkField} />
         <button type="submit" className="btn btn-block">Sign in</button>
-        <Link href="/mobile-a/" className={`link link-arrow ${s.homeLink}`}>{SIGN.home}</Link>
       </form>
+      {/* The foot of the wall sign (m17): the web address lower left, "HOME →" lower right. */}
+      <div className={s.signFoot}>
+        <span>{CONTACT.web}</span>
+        <Link href="/mobile-a/" className={`link-arrow ${s.homeLink}`}>{SIGN.home}</Link>
+      </div>
     </div>
   );
 }
@@ -84,7 +91,7 @@ export function Notifications({ go }) {
         ))}
         <button type="button" className="btn btn-ghost btn-block" onClick={() => setOn({ CRM: !all, Agenda: !all, Financeiro: !all })} style={{ marginTop: 'auto' }}>{all ? 'Mute all' : 'Turn all on'}</button>
       </div>
-      <TabBar items={TABS} value="Agenda" />
+      <TabBar items={TABS} value="Notifications" onChange={openTab(go)} label="Account" />
     </div>
   );
 }
@@ -174,22 +181,22 @@ export function Files({ p, go }) {
   return (
     <div className={s.screen}>
       <StatusBar />
-      <NavBar title="Files" lead="back" onLead={() => go && go(15)} trail={[{ name: 'share', label: 'Share' }]} onTrail={() => toast('Share')} />
+      <NavBar title="Files" lead="back" onLead={() => go && go(15)} trail={[{ name: 'share', label: 'Share' }]} onTrail={() => toast(SOON)} />
       <div className={s.body}>
         <Field id={`${p}-search`} label="Search" type="search" value={q} onChange={(e) => setQ(e.target.value)} />
         {hit && <ListRow icon="note" title={DOCUMENT.title} lang="pt-BR" selected={sel === 'doc'} onClick={() => setSel(sel === 'doc' ? 0 : 'doc')} trail={null} />}
         <AnimatePresence initial={false}>
           {sel === 'doc' && hit && (
             <motion.div className={s.fileActions} initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={tEnter}>
-              <button type="button" className="btn btn-sm" onClick={() => toast('Share')}><Icon name="share" size={16} />Share</button>
-              <button type="button" className="btn btn-sm btn-ghost"><Icon name="download" size={16} />Download</button>
+              <button type="button" className="btn btn-sm" onClick={() => toast(SOON)}><Icon name="share" size={16} />Share</button>
+              <button type="button" className="btn btn-sm btn-ghost" onClick={() => toast(SOON)}><Icon name="download" size={16} />Download</button>
             </motion.div>
           )}
         </AnimatePresence>
         {!q && rows.map((r) => <ListRow key={r} icon="folder" label={`Folder ${r + 1}`} line={9 - r} selected={sel === r + 1} onClick={() => setSel(sel === r + 1 ? 0 : r + 1)} />)}
         {q && !hit && <p className="t-small">No match</p>}
       </div>
-      <TabBar items={TABS} value="Files" />
+      <TabBar items={TABS} value="Files" onChange={openTab(go)} label="Account" />
     </div>
   );
 }
@@ -236,7 +243,7 @@ export function Profile({ p, go }) {
       <StatusBar />
       <svg className={s.badgeSvg} viewBox="0 0 390 560" aria-hidden="true"><BadgeScreenG idp={`${p}-badge`} /></svg>
       <div className={s.profileActions}>
-        <button type="button" className="btn btn-navy btn-block" onClick={() => toast('Share')}><Icon name="share" size={18} />Share</button>
+        <button type="button" className="btn btn-navy btn-block" onClick={() => toast(SOON)}><Icon name="share" size={18} />Share</button>
         <button type="button" className="btn btn-ghost btn-block" onClick={() => go && go(10)}><Icon name="logout" size={18} />Log out</button>
       </div>
     </div>
