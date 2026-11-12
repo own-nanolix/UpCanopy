@@ -43,3 +43,32 @@
 .joinR { transform-box: fill-box; animation: strategy-join-r var(--dur-4) var(--ease-lock) 200ms both; }
 @keyframes strategy-join-l { from { transform: translateX(-44px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes strategy-join-r { from { transform: translateX(44px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ---- extra figures: a brand phrase beside the diagram that draws it ---- */
+.extra { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 48px); align-items: center; border-top: var(--stroke) solid var(--navy); padding-top: clamp(18px, 2.4vw, 32px); }
+.extra svg { width: 100%; height: auto; display: block; }
+.extraText { display: grid; gap: 12px; align-content: start; }
+.extraLabel { font-family: var(--font-wide); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-ink); font-weight: 500; }
+.phrase { font-size: clamp(20px, 2.2vw, 30px); line-height: 1.22; font-weight: 400; max-width: 24ch; margin: 0; }
+.cap { font-size: 13px; line-height: 1.4; color: var(--muted); margin: 0; }
+.extraFlip > :first-child { order: 2; }
+@media (max-width: 760px) { .extra { grid-template-columns: minmax(0, 1fr); } .extraFlip > :first-child { order: 0; } }
+
+/* ---- scale readout: the five scales as steps ---- */
+.readout { background: #fff; padding: clamp(16px, 2.4vw, 32px); display: grid; gap: 16px; margin-top: clamp(16px, 2vw, 28px); }
+.readList { list-style: none; margin: 0; padding: 0; display: grid; }
+.readRow { display: grid; grid-template-columns: minmax(0, 120px) minmax(0, 1fr) minmax(0, 120px) 48px; gap: 14px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); font-size: 13px; letter-spacing: 0.06em; }
+.readEnd { text-align: right; color: var(--navy); }
+.readRight { text-align: left; }
+.readNo { font-family: var(--font-wide); font-size: 12px; font-variant-numeric: tabular-nums; text-align: right; }
+.readSteps { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; }
+.step, .stepOn { display: block; height: 16px; background: var(--gray); transform-origin: 50% 100%; animation: strategy-step var(--dur-3) var(--ease-lock) both; animation-delay: calc(var(--i) * 45ms + 120ms); }
+.stepOn { background: var(--green); }
+@keyframes strategy-step { from { transform: scaleY(0.2); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (max-width: 600px) {
+  .readRow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 44px; row-gap: 6px; }
+  .readSteps { grid-column: 1 / -1; grid-row: 2; }
+  .readEnd { text-align: left; }
+  .readRight { text-align: right; }
+  .readNo { grid-row: 1; grid-column: 3; }
+}

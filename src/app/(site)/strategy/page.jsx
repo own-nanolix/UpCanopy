@@ -1,9 +1,12 @@
 import { pageMeta } from '@/lib/pages';
 import Reveal from '@/components/site/Reveal';
-import { INTRO, CHALLENGE, STRATEGY, NAMING, VISUAL_IDENTITY, TONE, VALUES, DIRECTION } from '@/lib/brand';
+import { INTRO, CHALLENGE, STRATEGY, NAMING, VISUAL_IDENTITY, TONE, VALUES, DIRECTION, LINES, MANIFESTO } from '@/lib/brand';
+import { Line } from '@/components/ui/Card';
 import ChapterRail from '@/components/pages/strategy/ChapterRail';
 import ScalesSlide from '@/components/pages/strategy/ScalesSlide';
+import ScaleReadout from '@/components/pages/strategy/ScaleReadout';
 import * as D from '@/components/pages/strategy/Diagrams';
+import * as E from '@/components/pages/strategy/Diagrams2';
 import s from '@/components/pages/strategy/strategy.module.css';
 
 export const metadata = pageMeta('strategy');
@@ -42,7 +45,21 @@ function Slide({ n, children, flush }) {
   );
 }
 
-const Points = ({ list }) => (
+// A figure under a slide's text: the brand phrase it draws on one side, the exportable diagram on the other.
+function Extra({ label, caption, flip, children, phrase }) {
+  return (
+    <div className={`${s.extra} ${flip ? s.extraFlip : ''}`}>
+      <div className={s.extraText}>
+        <span className={s.extraLabel}>{label}</span>
+        <p className={s.phrase} lang="pt-BR">{phrase}</p>
+        <p className={s.cap}>{caption}</p>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+const Points =({ list }) => (
   <ol className={s.points}>
     {list.map((p) => (
       <li key={p.title}>
@@ -72,6 +89,9 @@ export default function Page() {
               </div>
               <D.IntroDiagram />
             </div>
+            <Extra label="Two modes" phrase={MANIFESTO[7]} caption="Six blocks scatter in the first mode and lock into one grid in the second.">
+              <E.ModesDiagram />
+            </Extra>
           </Slide>
 
           <Slide n={1}>
@@ -82,6 +102,9 @@ export default function Page() {
               </div>
               <D.ChallengeDiagram />
             </div>
+            <Extra label="Three pillars" flip phrase={MANIFESTO[5]} caption="Each pillar rises under the arch of the mark and locks onto the base.">
+              <E.PillarsDiagram />
+            </Extra>
           </Slide>
 
           <Slide n={2}>
@@ -92,6 +115,9 @@ export default function Page() {
               </div>
               <D.StrategyDiagram />
             </div>
+            <Extra label="The bridge" phrase={<Line text={LINES.bridge.text} strong={LINES.bridge.strong} className="hl-ink" />} caption="An arch rises between the two banks and carries the name.">
+              <E.BridgeDiagram />
+            </Extra>
           </Slide>
 
           <Slide n={3}>
@@ -102,6 +128,9 @@ export default function Page() {
               </div>
               <D.NamingDiagram />
             </div>
+            <Extra label="Two words, one name" flip phrase="UpCanopy" caption="Up and Canopy slide together and set the name.">
+              <E.NamingJoinDiagram />
+            </Extra>
           </Slide>
 
           <Slide n={4}>
@@ -118,6 +147,7 @@ export default function Page() {
             <section id="strategy-escalas" aria-labelledby="strategy-escalas-h">
               <h2 id="strategy-escalas-h" className="sr-only" lang="pt-BR">{DIRECTION.label}</h2>
               <ScalesSlide />
+              <ScaleReadout />
             </section>
           </Reveal>
 
@@ -128,6 +158,9 @@ export default function Page() {
             </div>
             <Points list={TONE.points} />
             <div className={s.diagramWide}><D.ToneDiagram /></div>
+            <Extra label="Two columns" phrase={TONE.points[2].text[1].replace(/^•\s*/, '').split(', mas')[0]} caption="Serious in the doing, warm in the relationship: the two columns rise side by side.">
+              <E.BalanceDiagram />
+            </Extra>
           </Slide>
 
           <Slide n={7}>
@@ -137,6 +170,9 @@ export default function Page() {
             </div>
             <Points list={VALUES.points} />
             <div className={s.diagramWide}><D.ValuesDiagram /></div>
+            <Extra label="Summary of the dynamics" flip phrase={VALUES.summary.text[0].replace(/^•\s*/, '')} caption="Each value leads to one outcome; the bar closes the sentence.">
+              <E.DynamicsDiagram />
+            </Extra>
             <div className={s.summary} lang="pt-BR">
               <h3 className="t-caps-lg">{VALUES.summary.title}</h3>
               <ul className={s.bullets}>
