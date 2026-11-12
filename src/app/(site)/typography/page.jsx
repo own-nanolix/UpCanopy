@@ -8,6 +8,8 @@ import { TextVoice, LogotypeVoice } from '@/components/pages/typography/Voices';
 import { Ladder, LadderArt } from '@/components/pages/typography/Scale';
 import { CharsetText, CharsetLogotype } from '@/components/pages/typography/Charset';
 import Poster from '@/components/pages/typography/Poster';
+import Tester from '@/components/pages/typography/Tester';
+import { HabitLines, Tracking, VerticalStudy, CardStudy } from '@/components/pages/typography/Studies';
 import { MetricsArt, HabitWordmark } from '@/components/pages/typography/Metrics';
 import s from '@/components/pages/typography/typography.module.css';
 
@@ -74,13 +76,19 @@ export default function Page() {
           </section>
 
           <section className={s.sec}>
-            <Reveal><Head n="05" title="Construction and metrics" /></Reveal>
+            <Reveal><Head n="05" title="Hierarchy on a business card" /></Reveal>
+            <p className={`t-small ${s.note}`}>The back of the card, rebuilt from the stack on the navy table, with the front beside it. Four sizes of one voice and a single bold name.</p>
+            <Reveal><div className={s.plateSlide}><CardStudy /></div></Reveal>
+          </section>
+
+          <section className={s.sec}>
+            <Reveal><Head n="06" title="Construction and metrics" /></Reveal>
             <p className={`t-small ${s.note}`}>Guides measured on the two free faces, as fractions of the font size.</p>
             <Reveal><div className={s.plate}><MetricsArt /></div></Reveal>
           </section>
 
           <section className={s.sec}>
-            <Reveal><Head n="06" title="Habits" /></Reveal>
+            <Reveal><Head n="07" title="Habits" /></Reveal>
             <div className={s.habits}>
               <div className={`card-navy ${s.habit}`}>
                 <h3 className="t-caps">One bold word closes a line</h3>
@@ -98,6 +106,20 @@ export default function Page() {
                 <HabitWordmark />
               </div>
             </div>
+            <Reveal><div className={s.plateNavy}><HabitLines /></div></Reveal>
+            <Reveal><div className={s.plate}><Tracking /></div></Reveal>
+          </section>
+
+          <section className={s.sec}>
+            <Reveal><Head n="08" title="The vertical word-mark" /></Reveal>
+            <p className={`t-small ${s.note}`}>As on the letter: the word turned a quarter turn, reading from the bottom to the top, cropped by the edge of the sheet.</p>
+            <Reveal><div className={s.plate}><VerticalStudy /></div></Reveal>
+          </section>
+
+          <section className={s.sec}>
+            <Reveal><Head n="09" title="Try a line" /></Reveal>
+            <p className={`t-small ${s.note}`}>Type a line, switch the voice, the weight and the size. The weights are the ones listed in section 01.</p>
+            <Reveal><Tester /></Reveal>
           </section>
         </div>
       </div>
