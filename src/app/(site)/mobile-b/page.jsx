@@ -1,11 +1,12 @@
 import { pageMeta } from '@/lib/pages';
+import Studio from '@/components/pages/mobile-b/Studio';
 
 export const metadata = pageMeta('mobile-b');
 
 export default function Page() {
   return (
-    <section className="page" id="p-mobile-b" aria-label="Mobile app, screens 10 to 18" data-stub="">
-      <h1 tabIndex={-1} className="t-h1 wrap" style={{ paddingTop: 'var(--pad)' }}>Mobile app, screens 10 to 18</h1>
+    <section className="page" id="p-mobile-b" aria-label="Mobile app, screens 10 to 18">
+      <Studio />
     </section>
   );
 }
