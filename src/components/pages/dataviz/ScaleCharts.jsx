@@ -17,40 +17,40 @@ export function ScaleDots() {
         const cy = 42 + rowH * i;
         return (
           <g key={sc.left}>
-            <Lbl x={x - 10} y={cy - 18} size={15} ls={0.05}>{sc.left}</Lbl>
-            <Lbl x={x + w + 10} y={cy - 18} size={15} ls={0.05} anchor="end">{sc.right}</Lbl>
+            <Lbl x={x - 10} y={cy - 18} size={15} ls={0.05} lang="pt-BR">{sc.left}</Lbl>
+            <Lbl x={x + w + 10} y={cy - 18} size={15} ls={0.05} anchor="end" lang="pt-BR">{sc.right}</Lbl>
             <ScaleDotsG x={x} y={cy} w={w} r={10.5} chosen={sc.chosen} lock />
             <Hit cx={x + ((sc.chosen - 1) * w) / 9} cy={cy} r={14} text={say(sc)} />
           </g>
         );
       })}
       <rect x="0" y="304" width="440" height="2" fill={INK} opacity="0.9" />
-      <Lbl x="0" y="332" size={15} weight={700} ls={0.02}>{DIRECTION.label}</Lbl>
-      <Lbl x="0" y="358" size={15} weight={700} ls={0.02}>{`${DIRECTION.words[0]} • ${DIRECTION.words[1]}`}</Lbl>
-      <Lbl x="0" y="380" size={15} weight={700} ls={0.02}>{`${DIRECTION.words[2]} • ${DIRECTION.words[3]}`}</Lbl>
+      <Lbl x="0" y="332" size={15} weight={700} ls={0.02} lang="pt-BR">{DIRECTION.label}</Lbl>
+      <Lbl x="0" y="358" size={15} weight={700} ls={0.02} lang="pt-BR">{`${DIRECTION.words[0]} • ${DIRECTION.words[1]}`}</Lbl>
+      <Lbl x="0" y="380" size={15} weight={700} ls={0.02} lang="pt-BR">{`${DIRECTION.words[2]} • ${DIRECTION.words[3]}`}</Lbl>
     </Art>
   );
 }
 
 // Chart 2: radar drawn with thick bands cut with straight ends. Radius = chosen step of ten.
 export function ScaleRadar() {
-  const cx = 190, cy = 160, rIn = 18, R = 88;
+  const cx = 210, cy = 172, rIn = 20, R = 112;
   const rad = (v) => r2(rIn + (v / 10) * (R - rIn));
   return (
-    <Art viewBox="0 0 380 292" title="Radar of the five scales as thick bands, one band per scale" exportName="dataviz-scale-radar">
+    <Art viewBox="24 20 396 280" title="Radar of the five scales as thick bands, one band per scale" exportName="dataviz-scale-radar">
       {[5, 10].map((v) => (
         <circle key={v} cx={cx} cy={cy} r={rad(v)} fill="none" stroke={HEX.muted} strokeWidth="1" strokeDasharray="2 4" />
       ))}
       {SCALES.map((sc, k) => {
         const a = k * 72;
-        const [lx, ly] = polar(cx, cy, R + 26, a);
-        const [vx, vy] = polar(cx, cy, rad(sc.chosen) + 13, a);
+        const [lx, ly] = polar(cx, cy, R + 18, a);
+        const [vx, vy] = polar(cx, cy, rad(sc.chosen) + 14, a);
         return (
           <g key={sc.left}>
             <path d={bandPath(cx, cy, rIn, R, a - 22, a + 22)} fill={QUIET} />
             <path d={bandPath(cx, cy, rIn, rad(sc.chosen), a - 22, a + 22)} fill={k === 2 ? HEX.green : HEX.navy} className="lock" style={{ '--i': k }} {...tip(say(sc))} />
-            <Lbl x={vx} y={vy + 5} anchor="middle" size={13} weight={700}>{sc.chosen}</Lbl>
-            <Lbl x={lx} y={ly + 4} size={13} ls={0.04} anchor={k === 0 ? 'middle' : k < 3 ? 'start' : 'end'}>{sc.right}</Lbl>
+            <Lbl x={vx} y={vy + 5} anchor="middle" size={15} weight={700}>{sc.chosen}</Lbl>
+            <Lbl x={lx} y={k === 0 ? ly - 2 : ly + (k === 1 || k === 4 ? 2 : 12)} size={15} ls={0.03} anchor={k === 0 ? 'middle' : k < 3 ? 'start' : 'end'} lang="pt-BR">{sc.right}</Lbl>
           </g>
         );
       })}
@@ -65,7 +65,7 @@ export function ScaleRanked() {
     <Art viewBox="0 0 320 262" title="The five scales ranked by chosen step, as rows of ten square blocks" exportName="dataviz-scale-ranked">
       {rows.map((sc, i) => (
         <g key={sc.left} {...tip(say(sc))}>
-          <Lbl x="0" y={16 + 52 * i} size={13}>{name(sc)}</Lbl>
+          <Lbl x="0" y={16 + 52 * i} size={13} lang="pt-BR">{name(sc)}</Lbl>
           <Lbl x="320" y={16 + 52 * i} size={15} weight={700} anchor="end">{sc.chosen}</Lbl>
           {segments(10, 320, sc.chosen, 4).map((b, j) => (
             <rect key={j} x={b.x} y={24 + 52 * i} width={b.w} height="22" fill={!b.on ? QUIET : j === sc.chosen - 1 ? HEX.green : HEX.navy} className="rise" style={{ '--i': j + i }} />
@@ -86,8 +86,8 @@ export function ScalePoles() {
         const p = ((sc.chosen - 0.5) / 10) * W;
         return (
           <g key={sc.left}>
-            <Lbl x="0" y={ty - 12} size={15} ls={0.05}>{sc.left}</Lbl>
-            <Lbl x={W} y={ty - 12} size={15} ls={0.05} anchor="end">{sc.right}</Lbl>
+            <Lbl x="0" y={ty - 12} size={15} ls={0.05} lang="pt-BR">{sc.left}</Lbl>
+            <Lbl x={W} y={ty - 12} size={15} ls={0.05} anchor="end" lang="pt-BR">{sc.right}</Lbl>
             <rect x="0" y={ty} width={W} height="4" fill={QUIET} />
             {Array.from({ length: 10 }, (_, k) => (
               <rect key={k} x={((k + 0.5) / 10) * W - 1} y={ty - 5} width="2" height="14" fill={INK} opacity="0.3" />
@@ -135,8 +135,8 @@ export function ScaleGauge() {
       ))}
       <Lbl x="160" y="148" size={48} weight={500} anchor="middle" wide ls={-0.04}>{sc.chosen}</Lbl>
       <Lbl x="160" y="184" size={13} anchor="middle" ls={0.12}>OF 10</Lbl>
-      <Lbl x="53" y="184" size={13} anchor="middle">{sc.left}</Lbl>
-      <Lbl x="267" y="184" size={13} anchor="middle">{sc.right}</Lbl>
+      <Lbl x="53" y="184" size={13} anchor="middle" lang="pt-BR">{sc.left}</Lbl>
+      <Lbl x="267" y="184" size={13} anchor="middle" lang="pt-BR">{sc.right}</Lbl>
     </Art>
   );
 }
@@ -152,7 +152,7 @@ export function ScaleRings() {
           <g key={sc.left}>
             <path d={arcPath(160, 160, m, 0, 270)} fill="none" stroke={HEX.muted} strokeWidth="1" strokeDasharray="2 4" />
             <path d={bandPath(160, 160, m - 7, m + 7, 0, sc.chosen * 27)} fill={i === 2 ? HEX.green : HEX.navy} className="lock" style={{ '--i': i * 2 }} {...tip(say(sc))} />
-            <Lbl x="152" y={160 - m + 5} anchor="end" size={13} ls={0.03}>{`${sc.right} ${sc.chosen}`}</Lbl>
+            <Lbl x="152" y={160 - m + 5} anchor="end" size={13} ls={0.03} lang="pt-BR">{`${sc.right} ${sc.chosen}`}</Lbl>
           </g>
         );
       })}

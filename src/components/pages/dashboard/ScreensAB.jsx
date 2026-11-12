@@ -30,7 +30,7 @@ export function ScreenA({ b, up }) {
       <div className={s.aLow}>
         <section aria-label="Scales">
           <p className={s.cap}>Scales<span>{SCALES.length} scales</span></p>
-          <svg viewBox="0 0 1000 350" className={s.aScales} aria-hidden="false" role="group" aria-label="The five attribute scales">
+          <svg viewBox="0 0 1000 350" className={s.aScales} role="group" aria-label="The five attribute scales">
             <ScaleRows tip lock />
           </svg>
         </section>

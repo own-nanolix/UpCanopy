@@ -2,7 +2,7 @@
 // where labels would stand, and a plain caption. Nothing here is a number the case study published.
 import Art from '@/components/art/Art';
 import { HEX } from '@/lib/brand';
-import { stepPath, linePath, areaPath, seeded } from '@/lib/charts';
+import { stepPath, seeded } from '@/lib/charts';
 import { INK, QUIET, Lbl, Ph, tip } from './kit';
 
 const SHAPE = 'Shape only: no published data';
@@ -54,29 +54,6 @@ export function WeekShape() {
           )),
         )}
       </g>
-    </Art>
-  );
-}
-
-// Sparklines (shape only), four small forms for the stat cards.
-const SPARK = [[4, 40], [32, 36], [60, 28], [88, 24], [116, 14], [144, 6]];
-export function Spark({ n }) {
-  const base = <rect x="0" y="44" width="160" height="2" fill={INK} opacity="0.5" />;
-  const title = `Sparkline ${n}. ${SHAPE}`;
-  return (
-    <Art viewBox="0 0 160 50" title={title} exportName={`dataviz-spark-${n}`}>
-      {base}
-      {n === 1 && <path d={stepPath(SPARK)} fill="none" stroke={HEX.navy} strokeWidth="3" strokeLinejoin="miter" className="draw" style={{ '--len': 400 }} />}
-      {n === 2 && <path d={linePath(SPARK.map(([x, y], i) => [x, y + (i === 2 ? 8 : 0)]))} fill="none" stroke={HEX.navy} strokeWidth="3" strokeLinejoin="miter" className="draw" style={{ '--len': 400 }} />}
-      {n === 3 && (
-        <g>
-          <path d={areaPath(SPARK, 44)} fill={HEX.navy} opacity="0.18" className="fade-in" />
-          <path d={linePath(SPARK)} fill="none" stroke={HEX.navy} strokeWidth="3" strokeLinejoin="miter" className="draw" style={{ '--len': 400 }} />
-        </g>
-      )}
-      {n === 4 && [10, 16, 14, 24, 30, 28, 38, 42].map((h, i) => (
-        <rect key={i} x={4 + i * 19.5} y={44 - h} width="14" height={h} fill={i === 7 ? HEX.green : HEX.navy} className="rise" style={{ '--i': i }} />
-      ))}
     </Art>
   );
 }

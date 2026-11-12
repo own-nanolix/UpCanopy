@@ -64,7 +64,7 @@ export default function Page() {
               <Chart title="Manifesto" kind="Sequence" size="l" caption={<>The ten paragraphs in order; paragraph 4 is the turning point, <span lang="pt-BR">&ldquo;chega.&rdquo;</span></>}><ManifestoStrip /></Chart>
               <Chart title="Counts" kind="Pictogram" caption="Everything the text names, counted in square blocks."><CountPictogram /></Chart>
 
-              <Chart title="Two modes" kind="Flow" caption="From the survival mode to the expansion mode, as two bands of one arch."><ModesFlow /></Chart>
+              <Chart title="Two modes" kind="Flow" caption={<>The manifesto&apos;s two modes, from <span lang="pt-BR">&ldquo;sobrevivência&rdquo;</span> to <span lang="pt-BR">&ldquo;expansão&rdquo;</span>, as two bands of one arch.</>}><ModesFlow /></Chart>
               <Chart title="Three areas" kind="Place" size="l" caption="CRM, Agenda and Financeiro placed under the arch of the mark."><AreasPlace /></Chart>
 
               <Chart title="Week" kind="Time" size="l" note="shape" caption="A calendar week grid. Cells and fills are a shape, not a schedule."><WeekShape /></Chart>
@@ -83,7 +83,7 @@ export default function Page() {
 
           <section className={s.sec} aria-labelledby="dataviz-numbers-h">
             <h2 id="dataviz-numbers-h" className="t-h2">Counters, tiles and <span className="hl-ink">table</span></h2>
-            <p className="t-small" style={{ margin: '8px 0 var(--gap)' }}>Counts are taken from the case study text (project year 2026). Sparklines draw a shape only.</p>
+            <p className="t-small" style={{ margin: '8px 0 var(--gap)' }}>Every figure here is counted from the case study: its scales, its palette, its manifesto and its pillars.</p>
             <StatCards />
             <KpiTiles />
             <PaletteTable />

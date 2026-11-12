@@ -25,7 +25,10 @@ export function visible(b, ignoreStage = false) {
     (ignoreStage || b.f === 'All' || r.stage === b.f) && (b.area === 'All' || r.area === b.area)
     && (!q || `client ${pad(r.id)} ${r.area} ${r.stage}`.toLowerCase().includes(q)));
   const k = b.key === 'client' ? 'id' : b.key;
-  return rows.sort((a, c) => (k === 'id' ? a.id - c.id : String(a[k]).localeCompare(String(c[k])) || a.id - c.id) * b.dir);
+  // Stages sort in pipeline order (New, In progress, Done), not alphabetically.
+  const val = (r) => (k === 'stage' ? STAGES.indexOf(r.stage) : r[k]);
+  return rows.sort((a, c) => (k === 'id' ? a.id - c.id
+    : (k === 'stage' ? val(a) - val(c) : String(a[k]).localeCompare(String(c[k]))) || a.id - c.id) * b.dir);
 }
 
 export const nextSort = (b, key) => (b.key === key ? { dir: -b.dir } : { key, dir: 1 });

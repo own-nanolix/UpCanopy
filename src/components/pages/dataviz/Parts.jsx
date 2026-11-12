@@ -5,58 +5,142 @@ import Tabs from '@/components/ui/Tabs';
 import Icon from '@/components/site/Icon';
 import CountUp from '@/components/site/CountUp';
 import Reveal from '@/components/site/Reveal';
-import { PALETTE, HEX, SCALES, DIRECTION } from '@/lib/brand';
-import { segments } from '@/lib/charts';
-import { Spark } from './ShapeCharts';
+import { PALETTE, HEX, SCALES, DIRECTION, MANIFESTO, PILLARS } from '@/lib/brand';
+import { segments, linePath, r2 } from '@/lib/charts';
+import ChartFrame from './ChartFrame';
+import { tip } from './kit';
 import s from './dataviz.module.css';
 
-// Four stat cards: live counters on real counts, each with a sparkline that draws only a shape.
-const STATS = [
-  { n: 10, label: 'Dots on every scale' },
-  { n: 6, label: 'Colours in the palette' },
-  { n: 5, label: 'Attribute scales' },
-  { n: 3, label: 'Brand pillars' },
-];
+const scaleName = (sc) => `${sc.left}–${sc.right}`;
+// Words per manifesto paragraph, counted from the text itself.
+const WORDS = MANIFESTO.map((p) => p.split(/\s+/).filter(Boolean).length);
+
+// Sparkline 1: the chosen step of each scale, in slide order (8, 7, 9, 8, 7).
+function SparkScales() {
+  const pts = SCALES.map((sc, i) => [r2(10 + i * 35), r2(46 - sc.chosen * 4)]);
+  return (
+    <Art viewBox="0 0 160 52" title="Sparkline: chosen step of each of the five scales, in slide order" exportName="dataviz-spark-scales">
+      <rect x="0" y="48" width="160" height="2" fill={HEX.asphalt} opacity="0.5" />
+      <path d={linePath(pts)} fill="none" stroke={HEX.navy} strokeWidth="3" strokeLinejoin="miter" className="draw" style={{ '--len': 220 }} />
+      {pts.map(([x, y], i) => (
+        <rect key={SCALES[i].left} x={x - 5} y={y - 5} width="10" height="10" fill={SCALES[i].chosen === 9 ? HEX.green : HEX.navy} className="lock" style={{ '--i': i + 4 }} {...tip(`${scaleName(SCALES[i])}: ${SCALES[i].chosen} of 10`)} />
+      ))}
+    </Art>
+  );
+}
+
+// Sparkline 2: words per manifesto paragraph; paragraph 4, the turning point, is green.
+function SparkWords() {
+  const max = Math.max(...WORDS);
+  return (
+    <Art viewBox="0 0 160 52" title="Sparkline: words in each of the ten manifesto paragraphs, counted" exportName="dataviz-spark-words">
+      {WORDS.map((n, i) => {
+        const h = r2((n / max) * 44);
+        return <rect key={i} x={r2(i * 16.2)} y={r2(48 - h)} width="12" height={h} fill={i === 3 ? HEX.green : HEX.navy} className="rise" style={{ '--i': i }} {...tip(`Paragraph ${i + 1}: ${n} words`)} />;
+      })}
+      <rect x="0" y="48" width="160" height="2" fill={HEX.asphalt} opacity="0.5" />
+    </Art>
+  );
+}
+
+// Four stat cards with live counters on real counts. Each card is built differently.
 export function StatCards() {
   return (
     <div className={s.statGrid}>
-      {STATS.map((t, i) => (
-        <Reveal key={t.label} delay={i * 60}>
-          <div className={`card ${s.stat}`}>
-            <p className="t-label">{t.label}</p>
-            <CountUp as="p" value={String(t.n)} className={s.statFig} />
-            <Spark n={i + 1} />
-            <p className="t-small">Shape only: no published data.</p>
+      <Reveal>
+        <div className={`card ${s.stat}`}>
+          <p className="t-label">Attribute scales</p>
+          <div className={s.statRow}>
+            <CountUp as="p" value={String(SCALES.length)} className={s.statFig} />
+            <ChartFrame className={s.sparkBox}><SparkScales /></ChartFrame>
           </div>
-        </Reveal>
-      ))}
+          <p className="t-small">Chosen step per scale: 8, 7, 9, 8, 7.</p>
+        </div>
+      </Reveal>
+      <Reveal delay={60}>
+        <div className={`card ${s.stat}`}>
+          <ChartFrame><SparkWords /></ChartFrame>
+          <div className={s.statFoot}>
+            <p className="t-label">Manifesto paragraphs</p>
+            <CountUp as="p" value={String(MANIFESTO.length)} className={s.statFig} />
+          </div>
+          <p className="t-small">{`${WORDS.reduce((a, b) => a + b, 0)} words in all, counted per paragraph.`}</p>
+        </div>
+      </Reveal>
+      <Reveal delay={120}>
+        <div className={`card ${s.stat}`}>
+          <div className={s.statSide}>
+            <CountUp as="p" value={String(PALETTE.length)} className={`${s.statFig} ${s.statBox}`} />
+            <p className="t-label">Colours in the palette</p>
+          </div>
+          <div className={s.swRow} role="img" aria-label={`The six colours: ${PALETTE.map((p) => p.name).join(', ')}`}>
+            {PALETTE.map((p) => <span key={p.name} style={{ background: p.hex }} title={p.name} />)}
+          </div>
+          <p className="t-small">Two primary, four secondary.</p>
+        </div>
+      </Reveal>
+      <Reveal delay={180}>
+        <div className={`card-navy ${s.stat}`}>
+          <div className={s.statTop}>
+            <p className="t-label on-navy">Brand pillars</p>
+            <CountUp as="p" value={String(PILLARS.length)} className={`${s.statFig} hl`} />
+          </div>
+          <ol className={s.pillars} lang="pt-BR">
+            {PILLARS.map((p) => <li key={p}>{p}</li>)}
+          </ol>
+        </div>
+      </Reveal>
     </div>
   );
 }
 
-// Three KPI tiles: a real step of ten, shown as ten square segments.
-const KPIS = [
-  { fig: '9', label: 'NATURAL–URBANA', note: 'Highest of the five scales', n: 10, on: 9 },
-  { fig: '7', label: 'CLÁSSICA–FUTURISTA, CONCEITUAL–DIRETA', note: 'Lowest of the five scales (two of them)', n: 10, on: 7 },
-  { fig: '4', label: DIRECTION.label, note: 'Direction words', n: 4, on: 4 },
-];
+// Three KPI tiles on the five scales and the direction line, each with its own structure.
+const HIGH = SCALES[2];
+const LOW = SCALES.filter((sc) => sc.chosen === Math.min(...SCALES.map((x) => x.chosen)));
 export function KpiTiles() {
   return (
     <div className={s.kpiGrid}>
-      {KPIS.map((k, i) => (
-        <Reveal key={k.label} delay={i * 60}>
-          <div className={`card-navy ${s.kpi}`}>
-            <p className="t-caps on-navy" lang="pt-BR">{k.label}</p>
-            <p className={`${s.kpiFig} hl`}>{k.fig}</p>
-            <Art viewBox="0 0 240 18" title={`${k.note}: ${k.on} of ${k.n}`} exportName={`dataviz-kpi-${i + 1}`}>
-              {segments(k.n, 240, k.on, k.n === 10 ? 4 : 8).map((b, j) => (
-                <rect key={j} x={b.x} y="0" width={b.w} height="18" fill={b.on ? (j === k.on - 1 ? HEX.green : '#FFFFFF') : '#FFFFFF'} opacity={b.on ? 1 : 0.18} className="rise" style={{ '--i': j }} />
+      <Reveal>
+        <div className={`card-navy ${s.kpi}`}>
+          <p className="t-caps on-navy" lang="pt-BR">{scaleName(HIGH)}</p>
+          <p className={`${s.kpiFig} hl`}>{HIGH.chosen}</p>
+          <Art viewBox="0 0 240 18" title={`Highest of the five scales: ${scaleName(HIGH)}, ${HIGH.chosen} of 10`} exportName="dataviz-kpi-high">
+            {segments(10, 240, HIGH.chosen, 4).map((b, j) => (
+              <rect key={j} x={b.x} y="0" width={b.w} height="18" fill={b.on && j === HIGH.chosen - 1 ? HEX.green : '#FFFFFF'} opacity={b.on ? 1 : 0.18} className="rise" style={{ '--i': j }} />
+            ))}
+          </Art>
+          <p className="t-small on-navy">Highest of the five scales</p>
+        </div>
+      </Reveal>
+      <Reveal delay={60}>
+        <div className={`card ${s.kpi} ${s.kpiSplit}`}>
+          <div className={s.kpiLow}>
+            <p className="t-label">{`Lowest step, ${LOW.length} scales`}</p>
+            <Art viewBox="0 0 186 100" title={`Lowest step of the five scales: ${LOW.map(scaleName).join(' and ')}, ${LOW[0].chosen} of 10`} exportName="dataviz-kpi-low">
+              {LOW.map((sc, k) => (
+                <g key={sc.left}>
+                  <text x="0" y={13 + k * 52} fontSize="12" letterSpacing="0.6" fill={HEX.navy} lang="pt-BR">{scaleName(sc)}</text>
+                  {Array.from({ length: 10 }, (_, j) => (
+                    <circle key={j} cx={r2(7.5 + j * 19)} cy={32 + k * 52} r="7" fill={j === sc.chosen - 1 ? HEX.green : j < sc.chosen ? HEX.navy : 'none'} stroke={j < sc.chosen ? 'none' : HEX.muted} strokeWidth="1.5" className="lock" style={{ '--i': j + k * 3 }} />
+                  ))}
+                </g>
               ))}
             </Art>
-            <p className="t-small on-navy">{k.note}</p>
           </div>
-        </Reveal>
-      ))}
+          <p className={`${s.kpiFig} ${s.kpiInk}`}>{LOW[0].chosen}</p>
+        </div>
+      </Reveal>
+      <Reveal delay={120}>
+        <div className={`card-green ${s.kpi}`}>
+          <div className={s.kpiHead}>
+            <p className={s.kpiFig}>{DIRECTION.words.length}</p>
+            <p className="t-caps" lang="pt-BR">{DIRECTION.label}</p>
+          </div>
+          <ul className={s.kpiWords} lang="pt-BR">
+            {DIRECTION.words.map((w) => <li key={w}>{w}</li>)}
+          </ul>
+        </div>
+      </Reveal>
     </div>
   );
 }
@@ -80,10 +164,10 @@ export function PaletteTable() {
           {PALETTE.map((p) => (
             <tr key={p.name}>
               <td><span className={s.sw} style={{ background: p.hex }} aria-hidden="true" /></td>
-              <th scope="row" style={{ textAlign: 'left', fontWeight: 500, fontSize: 14, padding: '10px 12px', borderBottom: '1px solid var(--gray)' }}>{p.name}</th>
+              <th scope="row" className={s.rowHead}>{p.name}</th>
               <td className={s.mono}>{p.hex.slice(1).toLowerCase()}</td>
               <td className={s.mono}>{p.no}</td>
-              <td className="t-caps">{p.role}</td>
+              <td className="t-caps" lang="pt-BR">{p.role}</td>
             </tr>
           ))}
         </tbody>

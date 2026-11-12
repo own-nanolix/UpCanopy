@@ -62,13 +62,13 @@ export function ManifestoStrip() {
 export function ModesFlow() {
   return (
     <Art viewBox="0 0 320 240" title="Flow from the survival mode to the expansion mode as two thick bands" exportName="dataviz-modes-flow">
-      <path d={bandPath(160, 206, 86, 130, -72, -3)} fill={HEX.navy} className="rise" style={{ '--i': 0 }} {...tip(`modo ${MODES[0]}`)} />
-      <path d={bandPath(160, 206, 86, 130, 3, 72)} fill={HEX.green} className="rise" style={{ '--i': 4 }} {...tip(`modo ${MODES[1]}`)} />
-      <Lbl x="6" y="190" size={15} weight={500} ls={0.02}>{MODES[0]}</Lbl>
-      <Lbl x="314" y="190" size={15} weight={500} anchor="end" ls={0.02}>{MODES[1]}</Lbl>
+      <path d={bandPath(160, 206, 86, 130, -72, -3)} fill={HEX.navy} className="rise" style={{ '--i': 0 }} lang="pt-BR" {...tip(`modo "${MODES[0]}"`)} />
+      <path d={bandPath(160, 206, 86, 130, 3, 72)} fill={HEX.green} className="rise" style={{ '--i': 4 }} lang="pt-BR" {...tip(`modo "${MODES[1]}"`)} />
+      <Lbl x="6" y="194" size={13} weight={500} ls={0.02} lang="pt-BR">{`modo "${MODES[0]}"`}</Lbl>
+      <Lbl x="314" y="194" size={13} weight={500} anchor="end" ls={0.02} lang="pt-BR">{`modo "${MODES[1]}"`}</Lbl>
       <rect x="6" y="206" width="308" height="2" fill={INK} opacity="0.9" />
       <ArrowG x="266" y="218" size={16} stroke={INK} strokeWidth={2} />
-      <Lbl x="6" y="231" size={13} ls={0.1}>MODO</Lbl>
+      <Lbl x="6" y="231" size={13} ls={0.1}>MANIFESTO, PARAGRAPH 08</Lbl>
     </Art>
   );
 }
@@ -86,7 +86,7 @@ export function AreasPlace() {
             <path d={stepPath([[220, 158], [220, 178], [cx, 178], [cx, 196]])} fill="none" stroke={INK} strokeWidth="2" strokeLinejoin="miter" className="draw" style={{ '--len': 400, '--i': i }} />
             <g className="rise" style={{ '--i': i * 2 }} {...tip(`Area ${i + 1} of 3: ${a}`)}>
               <rect x={x} y="196" width={w} height="84" fill={HEX.navy} />
-              <Lbl x={x + 14} y="228" size={18} weight={500} fill="#FFFFFF" ls={0.01}>{a}</Lbl>
+              <Lbl x={x + 14} y="228" size={18} weight={500} fill="#FFFFFF" ls={0.01} lang="pt-BR">{a}</Lbl>
               <Ph x={x + 14} y={246} w={80} fill="#FFFFFF" op={0.3} />
               <Ph x={x + 14} y={260} w={52} fill="#FFFFFF" op={0.3} />
             </g>

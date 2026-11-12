@@ -2,7 +2,7 @@ import Art from '@/components/art/Art';
 import { MarkG, MarkCropG } from '@/components/art/Mark';
 import { FrondG, BrandDefs } from '@/components/art/KeyArt';
 import { IconUse } from '@/components/site/Icon';
-import { AREAS, HEX } from '@/lib/brand';
+import { AREAS, HEX, SCALES } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { ScaleRows } from './Parts';
 import { ROWS, SLOTS, DAYS, LINES_N, countBy } from './data';
@@ -21,25 +21,26 @@ export function ArtScales() {
   );
 }
 
-// Block summary chart: one square per row, filled squares are the rows of that area.
+// Block summary chart: the twelve rows as squares, in row order; each area fills the squares of its own rows.
 export function ArtBlocks() {
-  const areas = AREAS.map((a) => [a, countBy(a), a === 'Financeiro' ? LINES_N : countBy(a)]);
   return (
-    <Art viewBox="0 0 600 300" title="Block summary: rows per area" exportName="dashboard-blocks">
+    <Art viewBox="0 0 600 300" title="Block summary: the twelve rows, and which area each belongs to" exportName="dashboard-blocks">
       <rect width="600" height="300" fill={M} />
-      {areas.map(([a, n], k) => (
-        <g key={a} transform={`translate(${40 + k * 180} 30)`}>
-          {Array.from({ length: 12 }, (_, i) => {
-            const on = i < countBy(a);
+      {AREAS.map((a, k) => (
+        <g key={a} transform={`translate(${40 + k * 186} 28)`}>
+          {ROWS.map((r, i) => {
+            const on = r.area === a;
             return (
-              <g key={i} tabIndex={0} className="lock" style={{ '--i': i + k * 3 }}>
-                <rect x={(i % 3) * 44} y={150 - Math.floor(i / 3) * 44} width="38" height="38" fill={on ? (k === 0 ? G : N) : N} opacity={on ? 1 : 0.12} />
-                <title>{`${a}: row ${i + 1} of ${n}`}</title>
+              <g key={r.id} className="lock" style={{ '--i': i + k * 3 }}>
+                <rect x={(i % 4) * 36} y={Math.floor(i / 4) * 36} width="30" height="30" fill={on ? (k === 0 ? G : N) : N} opacity={on ? 1 : 0.12} />
+                <title>{on ? `Row ${String(r.id).padStart(2, '0')}: ${a}` : `Row ${String(r.id).padStart(2, '0')}: ${r.area}`}</title>
               </g>
             );
           })}
-          <text x="0" y="200" fontSize="14" fontWeight="500" letterSpacing="1.4" fill={N} className="wide" style={{ fontFamily: 'var(--font-wide)' }}>{a.toUpperCase()}</text>
-          <text x="0" y="232" fontSize="26" fill={N} className="wide" style={{ fontFamily: 'var(--font-wide)' }}>{n}</text>
+          <rect x="0" y="126" width="138" height="2" fill={N} />
+          <text x="0" y="158" fontSize="14" fontWeight="500" letterSpacing="1.4" fill={N} className="wide" style={{ fontFamily: 'var(--font-wide)' }} lang="pt-BR">{a.toUpperCase()}</text>
+          <text x="0" y="214" fontSize="44" letterSpacing="-2" fill={N} className="wide" style={{ fontFamily: 'var(--font-wide)' }}>{countBy(a)}</text>
+          <text x="138" y="214" fontSize="13" letterSpacing="1" fill={N} textAnchor="end" className="wide" style={{ fontFamily: 'var(--font-wide)' }}>{`OF ${ROWS.length} ROWS`}</text>
         </g>
       ))}
     </Art>
@@ -50,8 +51,8 @@ export function ArtBlocks() {
 export function ArtWeek() {
   const x0 = 70, w = 100, h = 36;
   return (
-    <Art viewBox="0 0 800 460" title="Week grid with slots" exportName="dashboard-week-grid">
-      <rect width="800" height="460" fill="#FFFFFF" />
+    <Art viewBox="0 0 800 420" title="Week grid with slots" exportName="dashboard-week-grid">
+      <rect width="800" height="420" fill="#FFFFFF" />
       {DAYS.map((d, i) => (
         <text key={d} x={x0 + i * w + 8} y="30" fontSize="13" letterSpacing="1.3" fontWeight="500" fill={N} className="wide" style={{ fontFamily: 'var(--font-wide)' }}>{d.toUpperCase()}</text>
       ))}
@@ -138,7 +139,7 @@ function Thumb({ kind }) {
       <>
         <MarkG x={16} y={14} size={22} fill={N} />
         {[0, 1, 2].map((i) => <g key={i}><rect x={20 + i * 122} y="62" width="62" height="40" fill={N} /><rect x={20 + i * 122} y="112" width="104" height="2" fill={N} />{bars(20 + i * 122, 124, 90, 2, N, 10, 4)}</g>)}
-        {[0, 1, 2, 3, 4].map((k) => Array.from({ length: 10 }, (_, i) => <circle key={`${k}-${i}`} cx={26 + i * 14} cy={168 + k * 14} r="4.2" fill={i === 6 + (k % 3) ? G : N} />))}
+        {SCALES.map((sc, k) => Array.from({ length: 10 }, (_, i) => <circle key={`${k}-${i}`} cx={26 + i * 14} cy={168 + k * 14} r="4.2" fill={i === sc.chosen - 1 ? G : N} />))}
         {bars(200, 160, 160, 5, N, 14, 5)}
       </>
     );

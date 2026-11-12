@@ -75,7 +75,7 @@ export function PaletteSwatches() {
               <Lbl x={x + 12} y={y + 24} size={14} weight={500} fill={ink} ls={0.01}>{p.name}</Lbl>
               <Lbl x={x + w - 12} y={y + 24} size={14} weight={500} fill={ink} anchor="end" ls={0}>{p.no}</Lbl>
               <Lbl x={x + 12} y={y + 43} size={12} fill={ink} ls={0.03}>{p.hex.slice(1).toLowerCase()}</Lbl>
-              <Lbl x={x + w - 12} y={y + (w > 150 ? 43 : 60)} size={11} fill={ink} anchor="end" ls={0.03}>{p.role}</Lbl>
+              <Lbl x={x + w - 12} y={y + (w > 150 ? 43 : 60)} size={11} fill={ink} anchor="end" ls={0.03} lang="pt-BR">{p.role}</Lbl>
             </g>
           );
         }),
@@ -110,8 +110,8 @@ export function PaletteRanks() {
 // Chart 17: flow of the six colours into their two ranks.
 export function PaletteFlow() {
   const bars = [
-    { name: 'PRIMARY', n: 2, x: 24, w: 88, fill: HEX.green, ink: HEX.navy, from: 0 },
-    { name: 'SECONDARY', n: 4, x: 190, w: 226, fill: HEX.navy, ink: '#FFFFFF', from: 2 },
+    { name: 'PRIMARY', n: 2, x: 0, w: 140, fill: HEX.green, ink: HEX.navy, from: 0 },
+    { name: 'SECONDARY', n: 4, x: 152, w: 288, fill: HEX.navy, ink: '#FFFFFF', from: 2 },
   ];
   return (
     <Art viewBox="0 0 440 214" title="Flow of the six colours into two ranks: 2 primary, 4 secondary" exportName="dataviz-palette-flow">
@@ -141,7 +141,7 @@ export function PaletteFlow() {
 export function DirectionWords() {
   return (
     <Art viewBox="0 0 440 190" title="The four direction words as four blocks" exportName="dataviz-direction-words">
-      <Lbl x="0" y="16" size={14} weight={700} ls={0.02}>{DIRECTION.label}</Lbl>
+      <Lbl x="0" y="16" size={14} weight={700} ls={0.02} lang="pt-BR">{DIRECTION.label}</Lbl>
       {DIRECTION.words.map((w, i) => {
         const x = (i % 2) * 224, y = 30 + 80 * Math.floor(i / 2);
         const hi = i === 1;
@@ -149,7 +149,7 @@ export function DirectionWords() {
         return (
           <g key={w} className="rise" style={{ '--i': i * 2 }} {...tip(`${pad2(i + 1)} ${w}`)}>
             <rect x={x} y={y} width="216" height="72" fill={hi ? HEX.green : HEX.navy} />
-            <Lbl x={x + 14} y={y + 32} size={17} weight={700} fill={ink} ls={0.04}>{w}</Lbl>
+            <Lbl x={x + 14} y={y + 32} size={17} weight={700} fill={ink} ls={0.04} lang="pt-BR">{w}</Lbl>
             <Lbl x={x + 202} y={y + 32} size={14} fill={ink} anchor="end" ls={0}>{pad2(i + 1)}</Lbl>
           </g>
         );

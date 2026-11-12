@@ -126,7 +126,7 @@ export function ScaleRows({ tip = false, lock = false, ink = '#162557', off = '#
         const y = 35 + k * 70;
         return (
           <g key={sc.left}>
-            <text x="190" y={y + 6} textAnchor="end" fontSize="17" letterSpacing="1.5" fill={ink}>{sc.left}</text>
+            <text x="190" y={y + 6} textAnchor="end" fontSize="17" letterSpacing="1.5" fill={ink} lang="pt-BR">{sc.left}</text>
             {Array.from({ length: 10 }, (_, i) => {
               const on = i + 1 === sc.chosen, cx = r2(x0 + i * step);
               const dot = <circle cx={cx} cy={y} r={r} fill={on ? '#26CF7B' : off} className={lock ? 'lock' : undefined} style={lock ? { '--i': i + k * 3 } : undefined} />;
@@ -144,7 +144,7 @@ export function ScaleRows({ tip = false, lock = false, ink = '#162557', off = '#
                 <g key={i}>{dot}<title>{txt}</title></g>
               );
             })}
-            <text x={x0 + 9 * step + 40} y={y + 6} fontSize="17" letterSpacing="1.5" fill={ink}>{sc.right}</text>
+            <text x={x0 + 9 * step + 40} y={y + 6} fontSize="17" letterSpacing="1.5" fill={ink} lang="pt-BR">{sc.right}</text>
           </g>
         );
       })}

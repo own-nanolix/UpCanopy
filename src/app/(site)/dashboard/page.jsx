@@ -33,9 +33,11 @@ export default function Page() {
             <div className={s.gfxWide}><ArtWeek /></div>
             <div><ArtBlocks /></div>
             <div><ArtKpi /></div>
-            <div className={s.gfxNarrow}><ArtRail /></div>
-            <div className={s.gfxNarrow}><ArtFrond /></div>
-            <div className={s.gfxNarrow}><ArtCrop /></div>
+            <div className={s.gfxTrio}>
+              <div><ArtRail /></div>
+              <div><ArtFrond /></div>
+              <div><ArtCrop /></div>
+            </div>
           </div>
         </Reveal>
       </div>
