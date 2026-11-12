@@ -1,14 +1,12 @@
 /* lp-agenda: the live week, full-bleed on navy */
 .hero { position: relative; overflow: hidden; padding-bottom: 0; }
 .stage { position: relative; }
-.headline { position: absolute; z-index: 4; left: 0; top: 0; width: 55%; padding: clamp(24px, 3vw, 48px) var(--pad) 0 calc(var(--pad) + 56px); pointer-events: none; background: linear-gradient(90deg, var(--navy) 62%, rgba(22, 37, 87, 0)); }
+/* the headline sits above the grid and never covers a cell */
+.headline { position: relative; padding: clamp(20px, 3vw, 44px) var(--pad) clamp(24px, 3vw, 40px); max-width: 1180px; }
 .h1 { font-size: clamp(26px, 2.6vw, 42px); }
 .problem { font-weight: 300; animation: lp-agenda-rise var(--dur-4) var(--ease-out) 200ms both; display: inline-block; }
 .answer { display: inline-block; margin-top: 10px; animation: lp-agenda-rise var(--dur-4) var(--ease-out) 700ms both; }
 @keyframes lp-agenda-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-@media (max-width: 1000px) {
-  .headline { position: relative; width: auto; padding: 8px var(--pad) 24px; background: none; }
-}
 
 .weekWrap { position: relative; }
 .scroll { overflow-x: auto; scrollbar-width: thin; }
@@ -73,3 +71,5 @@
 .sumWide { grid-column: 1 / -1; }
 @media (max-width: 700px) { .sum { grid-template-columns: minmax(0, 1fr); } }
 .cta { padding-block: clamp(64px, 9vw, 140px); margin-top: clamp(56px, 8vw, 120px); }
+.drawBand { padding-block: clamp(56px, 8vw, 120px); margin-top: clamp(56px, 8vw, 120px); }
+.drawFrame { margin-top: 28px; max-width: 1100px; border-top: var(--stroke) solid var(--green); }

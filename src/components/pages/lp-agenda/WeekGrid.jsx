@@ -12,8 +12,6 @@ const FIRST = 7;
 const ROWS = 12;
 const TODAY = 2;
 const hour = (r) => `${String(FIRST + r).padStart(2, '0')}:00`;
-// The headline overlays these cells on wide screens: nothing is placed there.
-const reserved = (d, r) => d <= 2 && r <= 2;
 
 const START = [
   { id: 1, d: 0, r: 4, n: 2, w: 6 },
@@ -36,7 +34,6 @@ export default function WeekGrid() {
     if (!b) return;
     const d = b.d + dd, r = b.r + dr;
     let ok = d >= 0 && d < 7 && r >= 0 && r + b.n <= ROWS;
-    for (let k = 0; ok && k < b.n; k++) if (reserved(d, r + k)) ok = false;
     if (ok && blocks.some((o) => o.id !== id && o.d === d && r < o.r + o.n && o.r < r + b.n)) ok = false;
     if (!ok) { setNote(`Block ${id} cannot move there.`); return; }
     setBlocks((bs) => bs.map((x) => (x.id === id ? { ...x, d, r } : x)));

@@ -6,11 +6,16 @@ import LandingFooter from '@/components/ui/LandingFooter';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/site/Icon';
 import { Line } from '@/components/ui/Card';
-import { LINES, MANIFESTO, VALUES } from '@/lib/brand';
+import { LINES, MANIFESTO, VALUES, PILLARS, AREAS } from '@/lib/brand';
 import WeekGrid from '@/components/pages/lp-agenda/WeekGrid';
 import DayTimeline from '@/components/pages/lp-agenda/DayTimeline';
 import { StepArt, WeekOutlineArt, CalmScaleArt } from '@/components/pages/lp-agenda/AgendaArt';
+import MonthWeek from '@/components/pages/lp-agenda/MonthWeek';
+import DayNow from '@/components/pages/lp-agenda/DayNow';
+import { AppointmentCard, ReminderRows } from '@/components/pages/lp-agenda/AppointmentCard';
+import { WeekGridArt, DayLaneArt } from '@/components/pages/lp-agenda/ExportArt';
 import s from '@/components/pages/lp-agenda/lp-agenda.module.css';
+import m from '@/components/pages/lp-agenda/modules.module.css';
 
 export const metadata = pageMeta('lp-agenda');
 
@@ -22,6 +27,12 @@ const STEPS = [
   { kind: 'evening', label: 'Evening', text: SENT[2] + '.', dark: false },
 ];
 const DISC = VALUES.points[0];
+// MANIFESTO paragraph 6: one sentence per pillar. Paragraph 7 names the three areas.
+const PSENT = MANIFESTO[5].split('. ');
+const PILLAR_TEXT = [PSENT[1] + '.', PSENT[2] + '.', PSENT[3]];
+const AREA_LINK = { CRM: '/lp-crm/', Agenda: '/lp-agenda/', Financeiro: '/lp-financeiro/' };
+const AREA_ICON = { CRM: 'users', Agenda: 'calendar', Financeiro: 'chart' };
+const CARE = MANIFESTO[6].split('. ')[1];
 
 export default function Page() {
   return (
@@ -60,7 +71,35 @@ export default function Page() {
         </ol>
       </section>
 
-      {/* 3. Scrub the day */}
+      {/* 3. Modular product cards that reflow */}
+      <section className={`wrap ${s.sec}`} aria-labelledby="lp-agenda-h-cards">
+        <Reveal>
+          <p className="t-caps" style={{ color: 'var(--green-ink)' }}>Agenda</p>
+          <h2 id="lp-agenda-h-cards" className="t-h1" style={{ marginTop: 10 }}>Week, month, one card</h2>
+        </Reveal>
+        <div className={m.bento}>
+          <Reveal className={`${m.bentoWide} card`}><MonthWeek /></Reveal>
+          <div className={m.bentoSide}>
+            <Reveal delay={80}><AppointmentCard /></Reveal>
+            <Reveal delay={160} className="card-navy">
+              <h3 className="t-caps-lg" style={{ marginBottom: 8 }}>Reminders</h3>
+              <ReminderRows />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. The week as a drawing, exportable */}
+      <section className={`${s.sec} field-navy ${s.drawBand}`} aria-labelledby="lp-agenda-h-draw">
+        <div className="wrap">
+          <Reveal>
+            <h2 id="lp-agenda-h-draw" className="t-h1" lang="pt-BR">{LINES.control.split('. ')[1]}</h2>
+          </Reveal>
+          <Reveal delay={100}><div className={s.drawFrame}><WeekGridArt /></div></Reveal>
+        </div>
+      </section>
+
+      {/* 5. Scrub the day */}
       <section className={`${s.sec} ${s.scrubBand}`} aria-labelledby="lp-agenda-h-scrub">
         <div className="wrap">
           <Reveal>
@@ -71,7 +110,19 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 4. Disciplina as a card pair */}
+      {/* 6. The now rule beside its drawing */}
+      <section className={`wrap ${s.sec}`} aria-labelledby="lp-agenda-h-now">
+        <Reveal>
+          <p className="t-caps" style={{ color: 'var(--green-ink)' }}>Day</p>
+          <h2 id="lp-agenda-h-now" className="t-h1" style={{ marginTop: 10 }}>Step through the day</h2>
+        </Reveal>
+        <div className={m.nowGrid}>
+          <Reveal><DayNow /></Reveal>
+          <Reveal delay={100} className={m.nowArt}><DayLaneArt /></Reveal>
+        </div>
+      </section>
+
+      {/* 7. Disciplina as a card pair */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-agenda-h-disc">
         <Reveal>
           <p className="t-caps" style={{ color: 'var(--green-ink)' }}>{VALUES.title}</p>
@@ -89,7 +140,41 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 5. The level band */}
+      {/* 8. The three pillars, one sentence each */}
+      <section className={`wrap ${s.sec}`} aria-labelledby="lp-agenda-h-pillars">
+        <Reveal><h2 id="lp-agenda-h-pillars" className="t-caps-lg" lang="pt-BR">{PILLARS.join(' · ')}</h2></Reveal>
+        <ul className={m.pillars} style={{ listStyle: 'none', padding: 0 }}>
+          {PILLARS.map((p, i) => (
+            <li key={p}>
+              <Reveal delay={i * 90} className={`${m.pillar} ${i === 1 ? 'card-navy' : 'card'}`}>
+                <span className={m.pillarBar} style={{ animationDelay: `${i * 120}ms` }} aria-hidden="true" />
+                <h3 className="t-h2" lang="pt-BR">{p}</h3>
+                <p className="t-body" lang="pt-BR">{PILLAR_TEXT[i]}</p>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 9. Agenda among the three areas */}
+      <section className={`wrap ${s.sec}`} aria-labelledby="lp-agenda-h-areas">
+        <Reveal>
+          <h2 id="lp-agenda-h-areas" className="t-h1" lang="pt-BR">{AREAS.join(', ')}</h2>
+          <p className="t-lead" lang="pt-BR" style={{ marginTop: 14, maxWidth: '38em' }}>{CARE}</p>
+        </Reveal>
+        <div className={m.areas}>
+          {AREAS.map((a, i) => (
+            <Reveal key={a} delay={i * 90}>
+              <Link href={AREA_LINK[a]} className={`${m.area} ${a === 'Agenda' ? m.areaHere : ''}`} aria-current={a === 'Agenda' ? 'page' : undefined}>
+                <span className={m.areaTop}><Icon name={AREA_ICON[a]} size={28} /><Icon name="arrow-up-right" size={22} /></span>
+                <span className="t-h2" lang="pt-BR">{a}</span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* 10. The level band */}
       <section className={`${s.sec} ${s.levelBand} field-dark`} aria-labelledby="lp-agenda-h-level">
         <div className="wrap">
           <Reveal>
@@ -101,7 +186,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 6. The dynamic of the two values */}
+      {/* 11. The dynamic of the two values */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-agenda-h-sum">
         <Reveal><h2 id="lp-agenda-h-sum" className="t-caps-lg" lang="pt-BR">{VALUES.summary.title}</h2></Reveal>
         <div className={s.sum}>
@@ -111,7 +196,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 7. CTA band */}
+      {/* 12. CTA band */}
       <section className={`${s.cta} field-green`} aria-labelledby="lp-agenda-h-cta">
         <div className="wrap">
           <Reveal>
