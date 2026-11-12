@@ -6,9 +6,11 @@ import { MANIFESTO } from '@/lib/brand';
 import { ease, dur } from '@/lib/motion';
 import { still } from '@/lib/site';
 import Button from '@/components/ui/Button';
+import { Segmented } from '@/components/ui/Toggle';
 import s from './lp-manifesto.module.css';
 
 const LAST = MANIFESTO.length - 1;
+const VIEWS = ['One by one', 'All ten'];
 const widthOf = (k) => Math.round(44 + (56 * k) / LAST);
 
 // The ten manifesto paragraphs as cards of growing width. Previous / Next, Left / Right keys and a ten-dot row
@@ -16,6 +18,8 @@ const widthOf = (k) => Math.round(44 + (56 * k) / LAST);
 export default function Steps() {
   const [i, setI] = useState(0);
   const [moved, setMoved] = useState(false);
+  const [view, setView] = useState(VIEWS[0]);
+  const all = view === VIEWS[1];
 
   const go = (n) => {
     const next = Math.max(0, Math.min(LAST, n));
@@ -24,6 +28,7 @@ export default function Steps() {
     setI(next);
   };
   const onKey = (e) => {
+    if (all) return;
     if (e.key === 'ArrowRight') { e.preventDefault(); go(i + 1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); go(i - 1); }
   };
@@ -31,8 +36,29 @@ export default function Steps() {
   const navy = i === 3;
   const long = MANIFESTO[i].length > 150;
 
+  if (all) {
+    return (
+      <div className={s.steps}>
+        <div className={s.viewRow}>
+          <Segmented id="lp-manifesto-view" label="Reader view" options={VIEWS} value={view} onChange={setView} />
+        </div>
+        <ol className={s.allList}>
+          {MANIFESTO.map((para, k) => (
+            <li key={para} className={`${s.allCard} ${k === 3 ? s.stepNavy : ''}`} style={{ '--w': `${widthOf(k)}%` }}>
+              <p className={`t-label ${s.stepNo}`}>{String(k + 1).padStart(2, '0')} / {MANIFESTO.length}</p>
+              <p lang="pt-BR" className="t-lead">{para}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    );
+  }
+
   return (
     <div className={s.steps} role="group" aria-roledescription="carousel" aria-label="Manifesto, ten cards" onKeyDown={onKey}>
+      <div className={s.viewRow}>
+        <Segmented id="lp-manifesto-view" label="Reader view" options={VIEWS} value={view} onChange={setView} />
+      </div>
       <div className={s.stripStack} aria-hidden="true">
         {MANIFESTO.slice(0, i).map((_, k) => (
           <span key={k} className={s.strip} style={{ '--w': `${widthOf(k)}%` }} />

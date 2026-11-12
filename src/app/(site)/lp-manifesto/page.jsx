@@ -1,5 +1,5 @@
 import { pageMeta } from '@/lib/pages';
-import { LINES, MANIFESTO } from '@/lib/brand';
+import { LINES, MANIFESTO, TONE, VALUES } from '@/lib/brand';
 import Reveal from '@/components/site/Reveal';
 import Button from '@/components/ui/Button';
 import { Line } from '@/components/ui/Card';
@@ -8,6 +8,10 @@ import Hero from '@/components/pages/lp-manifesto/Hero';
 import Steps from '@/components/pages/lp-manifesto/Steps';
 import Pillars from '@/components/pages/lp-manifesto/Pillars';
 import Level from '@/components/pages/lp-manifesto/Level';
+import Measure from '@/components/pages/lp-manifesto/Measure';
+import Tone from '@/components/pages/lp-manifesto/Tone';
+import Values from '@/components/pages/lp-manifesto/Values';
+import Posters from '@/components/pages/lp-manifesto/Posters';
 import Closing from '@/components/pages/lp-manifesto/Closing';
 import s from '@/components/pages/lp-manifesto/lp-manifesto.module.css';
 
@@ -18,12 +22,31 @@ export default function Page() {
     <section className="page" id="p-lp-manifesto" aria-label="Landing: Manifesto" style={{ paddingBottom: 0 }}>
       <Hero />
 
+      <section className={`field-navy ${s.measure}`} aria-labelledby="lp-manifesto-measure-h">
+        <div className="wrap">
+          <Reveal>
+            <Measure />
+          </Reveal>
+        </div>
+      </section>
+
       <section className={`band ${s.stepsBand}`} aria-labelledby="lp-manifesto-steps-h">
         <div className="wrap">
           <Reveal>
             <h2 id="lp-manifesto-steps-h" className="t-caps-lg" style={{ marginBottom: 28 }}>The manifesto, card by card</h2>
           </Reveal>
           <Steps />
+        </div>
+      </section>
+
+      <section className={`band ${s.toneBand}`} aria-labelledby="lp-manifesto-tone-h">
+        <div className="wrap">
+          <Reveal>
+            <h2 id="lp-manifesto-tone-h" lang="pt-BR" className="t-caps-lg" style={{ marginBottom: 28 }}>{TONE.title}</h2>
+          </Reveal>
+          <Reveal delay={80}>
+            <Tone />
+          </Reveal>
         </div>
       </section>
 
@@ -44,6 +67,29 @@ export default function Page() {
           </Reveal>
           <Reveal delay={80}>
             <Pillars />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className={`band ${s.valuesBand}`} aria-labelledby="lp-manifesto-values-h">
+        <div className="wrap">
+          <Reveal>
+            <h2 id="lp-manifesto-values-h" lang="pt-BR" className="t-caps-lg" style={{ marginBottom: 28 }}>{VALUES.title}</h2>
+          </Reveal>
+          <Reveal delay={80}>
+            <Values />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className={`band ${s.postersBand}`} aria-labelledby="lp-manifesto-posters-h">
+        <div className="wrap">
+          <Reveal>
+            <h2 id="lp-manifesto-posters-h" className="t-caps-lg" style={{ marginBottom: 12 }}>Three manifesto posters</h2>
+            <p className="t-small" style={{ marginBottom: 28 }}>1080 x 1350, one sentence each.</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <Posters />
           </Reveal>
         </div>
       </section>
