@@ -32,3 +32,6 @@
 
 .draw { display: grid; gap: 16px; justify-items: start; max-width: 720px; }
 .draw svg { display: block; width: 100%; height: auto; }
+.rail { background: var(--slide); padding-bottom: 96px; }
+.h1 { margin-bottom: 12px; }
+.primary { margin-top: clamp(32px, 4vw, 64px); }

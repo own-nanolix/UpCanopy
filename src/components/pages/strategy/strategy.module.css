@@ -5,7 +5,7 @@
 .railBtn { display: grid; grid-template-columns: 36px minmax(0, 1fr); width: 100%; text-align: left; padding: 11px 10px 11px 12px; border: 0; border-top: 1px solid var(--line); border-left: 4px solid transparent; background: transparent; color: var(--navy); font-size: 15px; font-weight: 400; line-height: 1.25; transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out), padding var(--dur-2) var(--ease-out); }
 .railBtn:hover { background: rgba(22, 37, 87, 0.08); padding-left: 18px; }
 .railBtn:active { background: rgba(22, 37, 87, 0.16); }
-.railBtn[aria-current="true"] { background: var(--navy); color: #fff; border-left-color: var(--green); font-weight: 700; padding-left: 18px; }
+.railBtn[aria-current="true"] { background: var(--navy); color: var(--white); border-left-color: var(--green); font-weight: 700; padding-left: 18px; }
 .railNo { font-family: var(--font-wide); font-size: 10px; align-self: center; font-variant-numeric: tabular-nums; }
 .railBtn[aria-current="true"] .railNo { color: var(--green); }
 .railBar { height: 6px; background: rgba(22, 37, 87, 0.14); }
@@ -27,7 +27,7 @@
 
 .intro { display: grid; gap: 12px; max-width: 70ch; }
 .points { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--gap); }
-.points li { border-top: var(--stroke) solid var(--navy); padding-top: 14px; display: grid; gap: 10px; align-content: start; }
+.points > li { border-top: var(--stroke) solid var(--navy); padding-top: 14px; display: grid; gap: 10px; align-content: start; }
 .lead { font-weight: 400; }
 .bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 15px; line-height: 1.5; }
 .bullets li { position: relative; padding-left: 18px; }
@@ -55,7 +55,7 @@
 @media (max-width: 760px) { .extra { grid-template-columns: minmax(0, 1fr); } .extraFlip > :first-child { order: 0; } }
 
 /* ---- scale readout: the five scales as steps ---- */
-.readout { background: #fff; padding: clamp(16px, 2.4vw, 32px); display: grid; gap: 16px; margin-top: clamp(16px, 2vw, 28px); }
+.readout { background: var(--white); padding: clamp(16px, 2.4vw, 32px); display: grid; gap: 16px; margin-top: clamp(16px, 2vw, 28px); }
 .readList { list-style: none; margin: 0; padding: 0; display: grid; }
 .readRow { display: grid; grid-template-columns: minmax(0, 120px) minmax(0, 1fr) minmax(0, 120px) 48px; gap: 14px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); font-size: 13px; letter-spacing: 0.06em; }
 .readEnd { text-align: right; color: var(--navy); }

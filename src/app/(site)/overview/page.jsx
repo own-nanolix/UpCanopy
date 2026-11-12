@@ -3,7 +3,7 @@ import Art from '@/components/art/Art';
 import { MarkG, WordmarkG, DescriptorG } from '@/components/art/Mark';
 import Reveal from '@/components/site/Reveal';
 import { Line } from '@/components/ui/Card';
-import { MANIFESTO, SHEET, TAGLINE, DESCRIPTOR, AREAS, SECTORS, PILLARS } from '@/lib/brand';
+import { MANIFESTO, SHEET, TAGLINE, DESCRIPTOR, AREAS, SECTORS, PILLARS, HEX } from '@/lib/brand';
 import FlatLay from '@/components/pages/overview/FlatLay';
 import ContentsNav from '@/components/pages/overview/ContentsNav';
 import Principles from '@/components/pages/overview/Principles';
@@ -49,9 +49,9 @@ export default function Page() {
           </h1>
           <div className={s.titleSide}>
             <Art viewBox="0 0 520 120" title="UpCanopy, remote back-office" exportName="overview-cover-lockup" className={s.coverLockup}>
-              <MarkG x={0} y={4} size={104} fill="#26CF7B" archClass="roof-arch" barClass="roof-bar" />
-              <WordmarkG x={140} y={66} size={52} fill="#FFFFFF" />
-              <DescriptorG x={142} y={104} size={14} fill="#A9B1D1" />
+              <MarkG x={0} y={4} size={104} fill={HEX.green} archClass="roof-arch" barClass="roof-bar" />
+              <WordmarkG x={140} y={66} size={52} fill={HEX.white} />
+              <DescriptorG x={142} y={104} size={14} fill={HEX.navyMuted} />
             </Art>
           </div>
         </div>

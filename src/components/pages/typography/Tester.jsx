@@ -69,7 +69,7 @@ export default function Tester() {
             lineHeight: wide ? 1.12 : 1.18,
             letterSpacing: wide ? (caps ? '0.06em' : '-0.04em') : caps ? '0.08em' : 0,
             textTransform: caps ? 'uppercase' : 'none',
-          }}>{text || ' '}</p>
+          }}>{text || ' '}</p>
         <p className="t-caps on-navy" style={{ marginTop: 18 }}>{face} · {used} · {size} px</p>
       </div>
     </div>

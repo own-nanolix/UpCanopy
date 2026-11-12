@@ -8,7 +8,7 @@ const S = 4.2; // px per mark unit in the construction plate
 const X0 = 290;
 const Y0 = 170;
 const px = (u, v) => [r2(X0 + u * S), r2(Y0 + v * S)];
-const INK = '#162557';
+const INK = C.navy;
 
 // One measured radius: a thin line from a centre to its arc, a tick at the arc, and the value in U.
 function Radius({ c, r, to, units, at = 0.5, side = 1 }) {
@@ -66,7 +66,7 @@ export function ConstructionPlate() {
       <Radius c={MARK.B} r={MARK.barInner} to={[72.53, 94.09]} units={RATIOS[4].units} at={0.45} side={-1} />
       <Centre c={MARK.UL} name="UL" />
       <Centre c={MARK.UR} name="UR" anchor="end" dx={-16} />
-      <Centre c={MARK.B} name="B" dx={16} dy={34} />
+      <Centre c={MARK.B} name="B" anchor="end" dx={-18} dy={34} />
       {/* ring unit ruler along the horizontal through B */}
       <g stroke={INK} strokeWidth="2" fill="none">
         <path d={`M${bx} ${by}H${r2(bx + u * 4)}`} />

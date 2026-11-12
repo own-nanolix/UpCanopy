@@ -9,12 +9,33 @@ import { C, RED, Furniture } from './Parts';
 const SQ = 600; // big squares are 600 x 600
 
 // ---------- primary lockup (slide m05, left square) ----------
+// The stacked lockup at full size with its three parts named by leader lines. Positions come from LockupStackG
+// (box 480 x 240: mark 186..294 x 0..108, word baseline 176, descriptor baseline 226), placed at scale 1.2.
+const PK = 1.2, PX = 70, PY = 150;
+const PARTS = [
+  { label: 'MARK', sub: 'ARCH AND BAR', y: 54, from: 294 + 14 },
+  { label: 'WORD-MARK', sub: 'LOGOTYPE VOICE', y: 150, from: 456 + 12 },
+  { label: 'DESCRIPTOR', sub: 'WIDE CAPS', y: 218, from: 424 + 12 },
+];
 export function PrimaryPlate() {
+  const lx = 760;
   return (
-    <Art viewBox={`0 0 ${SQ} ${SQ}`} title="Primary lockup, stacked, with the descriptor" exportName="logo-primary">
-      <rect width={SQ} height={SQ} fill={C.slide} />
-      <LockupStackG x={60} y={190} scale={0.98} fill={C.navy} />
-      <Furniture w={SQ} h={SQ} tl="PRIMARY LOCKUP" br="STACKED" />
+    <Art viewBox="0 0 1200 600" title="Primary lockup, stacked, with the descriptor, its parts named" exportName="logo-primary">
+      <rect width="1200" height="600" fill={C.slide} />
+      <LockupStackG x={PX} y={PY} scale={PK} fill={C.navy} />
+      {PARTS.map((p) => {
+        const y = PY + p.y * PK;
+        const x0 = PX + p.from * PK;
+        return (
+          <g key={p.label}>
+            <path d={`M${x0} ${y}H${lx - 16}`} stroke={C.navy} strokeWidth="1.5" fill="none" />
+            <circle cx={x0} cy={y} r="4" fill={C.navy} />
+            <text x={lx} y={y - 2} fontSize="17" fontWeight="700" letterSpacing="1" fill={C.navy} className="wide" style={{ fontFamily: 'var(--font-wide)' }}>{p.label}</text>
+            <text x={lx} y={y + 20} fontSize="13" fontWeight="500" letterSpacing="1" fill={C.muted}>{p.sub}</text>
+          </g>
+        );
+      })}
+      <Furniture w={1200} h={600} tl="PRIMARY LOCKUP" br="STACKED, ON GRAY" />
     </Art>
   );
 }
@@ -71,7 +92,7 @@ function FamilyBody({ id, dark }) {
   if (id.startsWith('horizontal')) return <LockupG x={64} y={270} scale={1.18} fill={word} />;
   if (id === 'mark') return <MarkG x={160} y={160} size={280} fill={C.green} />;
   if (id === 'wordmark') return <WordmarkG x={300} y={322} size={78} anchor="middle" fill={word} />;
-  if (id === 'wordmark-vertical') return <WordmarkVerticalG x={118} y={560} size={150} fill={C.navy} />;
+  if (id === 'wordmark-vertical') return <WordmarkVerticalG x={250} y={572} size={88} fill={C.navy} />;
   if (id === 'app-icon') return <AppIconG x={150} y={150} size={300} />;
   return <LockupStackG x={60} y={210} scale={0.98} fill={word} descriptor={false} />;
 }
@@ -103,8 +124,8 @@ const MISUSE = [
   {
     id: 'stretched', label: 'Stretched',
     body: (
-      <g transform="translate(150 150) scale(1.45 0.8) translate(-100 -15)">
-        <LockupG scale={0.5} fill={C.navy} />
+      <g transform="translate(150 150) scale(1.3 0.75) translate(-84 -13)">
+        <LockupG scale={0.42} fill={C.navy} />
       </g>
     ),
   },
@@ -119,8 +140,8 @@ const MISUSE = [
   {
     id: 'swapped', label: 'Arch and bar swapped',
     body: (
-      <g fill={C.green} transform="translate(80 70) scale(1.4)">
-        <path d={MARK_BAR} transform="translate(0 -22)" />
+      <g fill={C.green} transform="translate(80 90) scale(1.4)">
+        <path d={MARK_BAR} transform="translate(0 -80)" />
         <path d={MARK_ARCH} transform="translate(0 22)" />
       </g>
     ),
@@ -181,8 +202,8 @@ export function FrondPlate() {
   return (
     <Art viewBox="0 0 600 840" title="The frond with the mark, as on the poster" exportName="logo-secondary-frond">
       <rect width="600" height="840" fill={C.greenDark} />
-      <FrondG cx={-170} cy={420} r={330} a0={-72} a1={72} count={38} len={400} width={11} lean={22} tone="onDark" />
-      <MarkG x={48} y={668} size={110} fill={C.green} />
+      <FrondG cx={-920} cy={300} r={900} a0={-8} a1={60} count={40} len={460} width={10} lean={0} tone="onDark" />
+      <MarkG x={40} y={690} size={86} fill={C.green} />
     </Art>
   );
 }

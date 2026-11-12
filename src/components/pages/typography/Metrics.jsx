@@ -5,11 +5,11 @@ import { METRICS } from './type-data';
 
 const WIDE = { fontFamily: 'var(--font-wide)' };
 const LINES = [
-  ['asc', 'Ascender', '#8E2C9E'],
+  ['asc', 'Ascender', HEX.muted],
   ['cap', 'Cap height', HEX.navy],
   ['x', 'x-height', HEX.greenInk],
   ['base', 'Baseline', HEX.navy],
-  ['desc', 'Descender', '#B3261E'],
+  ['desc', 'Descender', HEX.muted],
 ];
 
 function Panel({ y0, face, m, size, wide, weight, tag }) {
@@ -19,15 +19,15 @@ function Panel({ y0, face, m, size, wide, weight, tag }) {
     <g>
       <text x="60" y={y0 + 40} fontSize="12" fontWeight="500" letterSpacing="1.4" fill={HEX.muted} className="wide" style={WIDE}>{tag}</text>
       <text x="60" y={y0 + 70} fontSize="22" fontWeight="700" fill={HEX.navy}>{face}</text>
-      <text x="80" y={base} fontSize={size} fontWeight={weight} fill={HEX.navy} className={wide ? 'wide' : undefined} style={wide ? WIDE : undefined}
+      <text x="380" y={base} fontSize={size} fontWeight={weight} fill={HEX.navy} className={wide ? 'wide' : undefined} style={wide ? WIDE : undefined}
         letterSpacing={wide ? -size * 0.04 : -size * 0.01}>Hxdp</text>
       {LINES.map(([k, label, c], i) => {
         const y = yOf(k);
         const v = k === 'base' ? '0' : k === 'desc' ? `−${m.desc.toFixed(2)}` : m[k].toFixed(2);
         return (
           <g key={k} className="grow-x" style={{ '--i': i * 3 }}>
-            <path d={`M50 ${y}H1300`} stroke={c} strokeWidth="2" strokeDasharray={k === 'base' ? undefined : '10 7'} />
-            <text x="1320" y={y + 6} fontSize="18" fontWeight="500" fill={c}>{label} {v} em</text>
+            <path d={`M340 ${y}H1300`} stroke={c} strokeWidth="2" strokeDasharray={k === 'base' ? undefined : '10 7'} />
+            <text x="1320" y={y + (k === 'asc' ? -6 : k === 'cap' ? 18 : 6)} fontSize="18" fontWeight="500" fill={c}>{label} {v} em</text>
           </g>
         );
       })}

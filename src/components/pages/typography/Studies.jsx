@@ -105,20 +105,20 @@ export function VerticalStudy() {
       <text x="410" y="716" fontSize="18" fill={HEX.navy}>the bottom-left corner.</text>
       <text x="410" y="740" fontSize="18" fill={HEX.navy}>Letter tops face left.</text>
 
-      <Tag x="700" y="670" fill={HEX.greenInk}>HORIZONTAL SETTING, THEN TURNED</Tag>
-      <WordmarkG x={700} y={740} size={56} fill={HEX.navy} />
-      <path d="M700 764H1040" stroke={HEX.navy} strokeWidth="2" />
-      <path d="M1040 764L1022 754V774Z" fill={HEX.navy} />
-      <text x="700" y="796" fontSize="19" fill={HEX.navy}>{`Size ${S}: the word runs about 6.1 x its size,`}</text>
-      <text x="700" y="822" fontSize="19" fill={HEX.navy}>{`so the column is about ${Math.round(S * 6.1)} units tall.`}</text>
-
       <g clipPath="url(#typography-vertical-clip)">
         <rect x="700" y="40" width="460" height="560" fill={HEX.navy} />
         <g className="slide-up"><WordmarkVerticalG x={738} y={690} size={330} fill={HEX.white} /></g>
       </g>
-      <Tag x="700" y="626" fill={HEX.greenInk}>CROPPED BY THE EDGE, AS ON THE LETTER</Tag>
-      <text x="700" y="900" fontSize="19" fill={HEX.navy}>{`${BRAND} at size 330, cut by the frame.`}</text>
-      <text x="700" y="926" fontSize="19" fill={HEX.navy}>The crop is the design.</text>
+      <Tag x="700" y="630" fill={HEX.greenInk}>CROPPED BY THE EDGE, AS ON THE LETTER</Tag>
+      <text x="700" y="660" fontSize="19" fill={HEX.navy}>{`${BRAND} at size 330, cut by the frame.`}</text>
+
+      <path d="M700 724H1160" stroke={HEX.navy} strokeOpacity="0.2" />
+      <Tag x="700" y="764" fill={HEX.greenInk}>HORIZONTAL SETTING, THEN TURNED</Tag>
+      <WordmarkG x={700} y={830} size={56} fill={HEX.navy} />
+      <path d="M700 854H1040" stroke={HEX.navy} strokeWidth="2" />
+      <path d="M1040 854L1022 844V864Z" fill={HEX.navy} />
+      <text x="700" y="890" fontSize="19" fill={HEX.navy}>{`Size ${S}: the word runs about 6.1 x its size,`}</text>
+      <text x="700" y="916" fontSize="19" fill={HEX.navy}>{`so the column is about ${Math.round(S * 6.1)} units tall.`}</text>
     </Art>
   );
 }
@@ -127,21 +127,24 @@ export function VerticalStudy() {
 const CARD = { x: 40, y: 40, w: 700, h: 400 };
 const CARD_NOTES = [
   [94, 70, 'WORD-MARK', ['Lexend Exa Medium 500,', 'top right']],
-  [125, 160, 'NAME AND ROLE', ['Bold 700 name, Regular 400 role']],
+  [125, 160, 'NAME AND ROLE', ['Bold 700 first name, Regular 400', 'surname and role']],
   [222, 250, 'CONTACT BLOCK', ['Regular 400, one line each,', 'line pitch 24 units']],
-  [318, 340, 'ADDRESS', ['Two lines, set apart']],
-  [390, 430, 'WEB ADDRESS', ['Bold 700, closes the card']],
+  [318, 350, 'ADDRESS', ['Two lines, set apart']],
+  [390, 440, 'WEB ADDRESS', ['Bold 700, closes the card']],
 ];
+// As printed on m23: the first name bold, the surname regular; the address broken after the studio name.
+const NAME = PEOPLE.founder.name.split(' ');
+const CUT = CONTACT.address.indexOf(', ');
 export function CardStudy() {
   const TX = CARD.x + 48;
   const rows = [
-    [TX, 112, 20, 700, PEOPLE.founder.name],
+    [TX, 112, 20, 700, NAME[0], NAME.slice(1).join(' ')],
     [TX, 138, 16, 400, PEOPLE.founder.role],
     [TX, 198, 16, 400, CONTACT.handle],
     [TX, 222, 16, 400, CONTACT.phone],
     [TX, 246, 16, 400, CONTACT.hello],
-    [TX, 306, 16, 400, 'HERO Studio,'],
-    [TX, 330, 16, 400, 'NY, New York 3875'],
+    [TX, 306, 16, 400, CONTACT.address.slice(0, CUT)],
+    [TX, 330, 16, 400, CONTACT.address.slice(CUT + 2)],
     [TX, 390, 16, 700, CONTACT.webCased],
   ];
   return (
@@ -150,8 +153,11 @@ export function CardStudy() {
       <rect x={CARD.x} y={CARD.y} width={CARD.w} height={CARD.h} fill={HEX.green} />
       <g className="slide-up">
         <WordmarkG x={CARD.x + CARD.w - 48} y={100} size={20} fill={HEX.mint} anchor="end" />
-        {rows.map(([x, y, size, w, t]) => (
-          <text key={t} x={x} y={y} fontSize={size} fontWeight={w} fill={HEX.greenDark}>{t}</text>
+        {rows.map(([x, y, size, w, t, rest]) => (
+          <text key={t} x={x} y={y} fontSize={size} fontWeight={w} fill={HEX.greenDark}>
+            {t}
+            {rest ? <tspan fontWeight="400">{` ${rest}`}</tspan> : null}
+          </text>
         ))}
       </g>
       <rect x={CARD.x} y="500" width={CARD.w} height={CARD.h} fill={HEX.navy} />

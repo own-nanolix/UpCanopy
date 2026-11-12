@@ -17,7 +17,7 @@ export default function Signature() {
         <rect width="1600" height="640" fill={`url(#${IDP}-rise)`} filter={`url(#${IDP}-grain)`} />
         <ConstructionG x={150} y={70} size={500} rings={8} stroke="#FFFFFF" strokeWidth={0.3} draw style={{ opacity: 0.28 }} />
         <MarkG x={190} y={110} size={420} fill={HEX.green} archClass="roof-arch" barClass="roof-bar" />
-        <FrondG cx={1700} cy={720} r={430} a0={-150} a1={-62} count={38} len={560} width={11} lean={70} tone="onNavy" fan opacity={0.9} />
+        <FrondG cx={1830} cy={720} r={430} a0={-150} a1={-62} count={38} len={560} width={11} lean={70} tone="onNavy" fan opacity={0.9} />
         <WordmarkG x={780} y={300} size={92} fill="#FFFFFF" />
         <DescriptorG x={784} y={352} size={22} fill="#C9CEF0" />
         <text x="784" y="430" fontSize="30" fontWeight="300" fill="#FFFFFF" lang="pt-BR">{TAGLINE}</text>

@@ -46,7 +46,7 @@ export default function Tester() {
         <Pick id="color-tester-ground" label="Ground" value={bg} onChange={setBg} />
       </div>
       <motion.div className={s.testerSample} animate={{ backgroundColor: bg, color: fg }} transition={tMove} aria-label="Sample of the chosen pairing">
-        <span className={s.sampleLarge}>Organização</span>
+        <span className={s.sampleLarge} lang="pt-BR">Organização</span>
         <span className={s.sampleSmall} lang="pt-BR">Organização que gera crescimento</span>
       </motion.div>
       <div className={s.testerResult} aria-live="polite">

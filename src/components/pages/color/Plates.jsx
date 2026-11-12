@@ -35,12 +35,12 @@ export function GradientPlate() {
     <Art viewBox="0 0 960 420" title="The brand gradient, Blue Ocean rising to Green Park, with fine print grain" exportName="color-gradient">
       <BrandDefs idp="color-grad" />
       <rect width="960" height="420" fill="url(#color-grad-rise)" filter="url(#color-grad-grain)" />
-      <rect x="40" y="338" width="14" height="42" fill={HEX.navy} className="grow-x" />
-      <text x="70" y="358" fontSize="15" fontWeight="700" fill={HEX.white}>{HEX.navy}</text>
-      <text x="70" y="378" fontSize="13" fontWeight="400" fill={HEX.white}>Blue Ocean, lower left</text>
-      <rect x="906" y="40" width="14" height="42" fill={HEX.green} className="grow-x" />
-      <text x="890" y="58" fontSize="15" fontWeight="700" textAnchor="end" fill={HEX.navy}>{HEX.green}</text>
-      <text x="890" y="78" fontSize="13" fontWeight="400" textAnchor="end" fill={HEX.navy}>Green Park, upper right</text>
+      <rect x="40" y="322" width="16" height="58" fill={HEX.navy} stroke={HEX.white} strokeOpacity="0.5" className="grow-x" />
+      <text x="72" y="346" fontSize="22" fontWeight="700" fill={HEX.white}>{HEX.navy}</text>
+      <text x="72" y="374" fontSize="18" fontWeight="400" fill={HEX.white}>Blue Ocean, lower left</text>
+      <rect x="904" y="40" width="16" height="58" fill={HEX.green} stroke={HEX.navy} strokeOpacity="0.4" className="grow-x" />
+      <text x="888" y="64" fontSize="22" fontWeight="700" textAnchor="end" fill={HEX.navy}>{HEX.green}</text>
+      <text x="888" y="92" fontSize="18" fontWeight="400" textAnchor="end" fill={HEX.navy}>Green Park, upper right</text>
     </Art>
   );
 }

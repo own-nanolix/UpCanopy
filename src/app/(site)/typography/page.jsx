@@ -5,7 +5,7 @@ import Reveal from '@/components/site/Reveal';
 import Chip from '@/components/ui/Chip';
 import { HEX, LINES, DESCRIPTOR, DIRECTION } from '@/lib/brand';
 import { TextVoice, LogotypeVoice } from '@/components/pages/typography/Voices';
-import { Ladder, LadderArt } from '@/components/pages/typography/Scale';
+import { Ladder } from '@/components/pages/typography/Scale';
 import { CharsetText, CharsetLogotype } from '@/components/pages/typography/Charset';
 import Poster from '@/components/pages/typography/Poster';
 import Tester from '@/components/pages/typography/Tester';
@@ -60,7 +60,6 @@ export default function Page() {
             <Reveal><Head n="02" title="Type scale" /></Reveal>
             <p className={`t-small ${s.note}`}>Each step is a shared class. Samples are the brand&apos;s own lines and labels.</p>
             <Ladder />
-            <Reveal><div className={s.plate}><LadderArt /></div></Reveal>
           </section>
 
           <section className={s.sec}>

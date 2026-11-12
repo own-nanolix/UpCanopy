@@ -46,8 +46,9 @@ export function StrategyDiagram() {
       <circle className="draw" style={{ '--len': 817 }} cx="240" cy="160" r="130" fill="none" stroke={N} strokeWidth="14" />
       <circle className="draw" style={{ '--len': 817, '--i': 4 }} cx="360" cy="160" r="130" fill="none" stroke={G} strokeWidth="14" />
       <text x="300" y="166" textAnchor="middle" fontSize="14" fontWeight="700" fill={N} lang="pt-BR">ecossistema</text>
-      <text x="170" y="166" textAnchor="middle" fontSize="16" fill={N} lang="pt-BR">naming</text>
-      <text x="430" y="166" textAnchor="middle" fontSize="16" fill={N} lang="pt-BR">identidade visual</text>
+      <text x="172" y="166" textAnchor="middle" fontSize="18" fill={N} lang="pt-BR">naming</text>
+      <text x="425" y="156" textAnchor="middle" fontSize="18" fill={N} lang="pt-BR">identidade</text>
+      <text x="425" y="178" textAnchor="middle" fontSize="18" fill={N} lang="pt-BR">visual</text>
       <g className="fade-in" style={{ '--i': 14 }} lang="pt-BR">
         <rect x="60" y="352" width="480" height="8" fill={N} />
         <circle cx="60" cy="356" r="16" fill={N} />

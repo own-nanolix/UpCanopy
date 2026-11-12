@@ -16,7 +16,7 @@ function Sheet({ exportName, title, role, face, weights, samples, sizes, wide, g
       <text x="36" y="104" fontSize="40" fontWeight={wide ? 500 : 700} fill={ink} className={wide ? 'wide' : undefined} style={wide ? WIDE : undefined} letterSpacing={wide ? -2 : 0}>{face}</text>
       <g className="slide-up">
         <text x="30" y="330" fontSize="250" fontWeight={wide ? 500 : 300} fill={ink} className={wide ? 'wide' : undefined} style={wide ? WIDE : undefined} letterSpacing={wide ? -17 : -8}>Aa</text>
-        <text x="420" y="330" fontSize="250" fontWeight={wide ? 600 : 700} fill={accent} className={wide ? 'wide' : undefined} style={wide ? WIDE : undefined}>&amp;</text>
+        <text x="566" y="330" textAnchor="end" fontSize="250" fontWeight={wide ? 600 : 700} fill={accent} className={wide ? 'wide' : undefined} style={wide ? WIDE : undefined}>&amp;</text>
       </g>
       {weights.map(([w, name], i) => {
         const y = 392 + i * (wide ? 112 : 92);

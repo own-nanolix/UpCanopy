@@ -24,7 +24,7 @@ export default function ScalesSlide() {
     return () => io.disconnect();
   }, []);
 
-  const ink = '#22272B';
+  const ink = HEX.asphalt;
   return (
     <div ref={ref} className={`${s.slideSvg} ${go ? '' : s.hold}`}>
       <Art viewBox="0 0 1600 900" title="Attribute scales: five rows of ten dots, one green dot each" exportName="strategy-scales">
@@ -37,7 +37,6 @@ export default function ScalesSlide() {
           <text x="1075" y="52">CLIENTE: EDERSON DEVENS</text>
           <text x="1075" y="66">PROJETO: UPCANOPY</text>
           <text x="1334" y="52">JONAS NICACIO</text>
-          <text x="1334" y="66">NICACIOBRANDS©</text>
           <text x="1573" y="52" textAnchor="end">→(26)</text>
         </g>
         {SCALES.map((sc, r) => (
@@ -51,7 +50,7 @@ export default function ScalesSlide() {
         ))}
         <g lang="pt-BR" fontWeight="700" fill={ink} fontSize="26">
           <text x="222" y="782">{DIRECTION.label}</text>
-          <rect x="711" y="750" width="1.5" height="46" fill="#B7B9BA" />
+          <rect x="711" y="750" width="1.5" height="46" fill={HEX.muted} opacity="0.4" />
           <text x="724" y="780">{DIRECTION.words.join(' • ')}</text>
         </g>
       </Art>

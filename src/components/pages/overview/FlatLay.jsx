@@ -68,7 +68,7 @@ export default function FlatLay() {
       <SweepG idp={IDP} w={1600} h={900} horizon={0.7} />
 
       {/* envelope */}
-      <StepG i={0} x={-80} y={130}>
+      <StepG i={0} x={-160} y={190}>
         <Slab id="env" w={520} h={300} top={NAVY} edges={[{ t: 10, fill: '#0C1445' }]}>
           <rect width="520" height="46" fill="#0E1A4A" />
           <rect y="46" width="520" height="3" fill="#0C1445" />

@@ -23,7 +23,7 @@ export default function Page() {
   return (
     <section className="page" id="p-logo" aria-label="Logo">
       <div className="split split-right">
-        <aside className="split-rail split-rail-light" aria-label="The mark">
+        <aside className={`split-rail split-rail-light ${s.rail}`} aria-label="The mark">
           <p className="t-label">Logo</p>
           <div className={s.railWrap}>
             <Art viewBox="0 0 100 100" title="The mark" exportName="logo-rail-mark" className={s.railMark}>
@@ -35,11 +35,11 @@ export default function Page() {
 
         <div className="split-main">
           <section className={s.sec} aria-labelledby="logo-h-primary">
-            <h1 className="t-h1" tabIndex={-1}>Logo</h1>
+            <h1 className={`t-h1 ${s.h1}`} tabIndex={-1}>Logo</h1>
             <p className={`t-lead ${s.intro}`}>
               The mark is two pieces, an arch and a bar, cut from three families of circles that share one ring unit.
             </p>
-            <div className="stack">
+            <div className={`stack ${s.primary}`}>
               <h2 className="t-h2" id="logo-h-primary">Primary lockup</h2>
               <PrimaryPlate />
             </div>

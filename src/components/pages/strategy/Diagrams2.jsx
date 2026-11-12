@@ -87,7 +87,7 @@ export function PillarsDiagram() {
       {PILLARS.map((p, i) => (
         <g key={p} className="rise" style={{ '--i': 3 + i * 3 }} lang="pt-BR">
           <rect x={30 + i * 187} y={206} width="170" height="170" fill={fills[i][0]} />
-          <text x={115 + i * 187} y={262} textAnchor="middle" fontSize="13" fill={fills[i][1]}>nossa {WORDS[i]}</text>
+          <text x={115 + i * 187} y={262} textAnchor="middle" fontSize="16" fill={fills[i][1]}>nossa {WORDS[i]}</text>
           <text x={115 + i * 187} y={304} textAnchor="middle" fontSize="20" fontWeight="500" fill={fills[i][1]} className="wide" style={wide}>{p}</text>
         </g>
       ))}
