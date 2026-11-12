@@ -99,7 +99,8 @@ export function ToteNavy() {
       {(ids) => (
         <>
           <StepG i={1} x={-195} y={150}>
-            <g transform="scale(1)"><Tote ids={ids} {...GREEN} id="g2" /></g>
+            {/* a second navy tote: the green one is not repeated at the edge next to its own plate */}
+            <g transform="scale(1)"><Tote ids={ids} {...NAVY} id="n3" /></g>
           </StepG>
           <StepG i={0} x={190} y={250}>
             <g transform="scale(1.2)"><Tote ids={ids} {...NAVY} /></g>

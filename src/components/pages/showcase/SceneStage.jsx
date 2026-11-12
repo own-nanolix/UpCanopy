@@ -55,10 +55,10 @@ export default function SceneStage() {
   // the counter stands in front of the green wall
   const cT0 = 1000, cT1 = 1300, cH = 250, cz = -84;
   const k = sc((cT0 + cT1) / 2);
-  const cSkew = [26 * k, -48 * k];
+  const cD = 64; // the counter's depth: in this camera depth reads as height on the page, as on the deck
 
   const stool = (t, f = 1) => {
-    const s = sc(t), x = PX(t), yb = PY(t, 0, -170), y = yb - 118 * s;
+    const s = sc(t), x = PX(t), yb = PY(t, 0, -100), y = yb - 118 * s;
     return (
       <g key={t}>
         <ShadowG idp={`${P}-st${t}`} cx={x} cy={yb + 3} rx={30 * s * f} ry={4 * s} opacity={0.35} blur={3} />
@@ -72,7 +72,7 @@ export default function SceneStage() {
     );
   };
   const tT = 1700;
-  const ts = sc(tT), tx = PX(tT), tyb = PY(tT, 0, -140), tyTop = tyb - 215 * ts;
+  const ts = sc(tT), tx = PX(tT), tyb = PY(tT, 0, -50), tyTop = tyb - 215 * ts;
 
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Event stage with the brand on screen: navy panel, green wall, navy side wall and counter" exportName="showcase-event-stage">
@@ -134,7 +134,8 @@ export default function SceneStage() {
       <StepG i={4} x={0} y={0}>
         <CastG d={quad(cT0, cT1, cH, cz)} depth={34} opacity={0.24} />
         <ShadowG idp={`${P}-ct`} cx={PX((cT0 + cT1) / 2)} cy={PY((cT0 + cT1) / 2, 0, cz) + 4} rx={150 * k} ry={9 * k} opacity={0.4} blur={6} />
-        <path d={`M${pt(cT0, cH, cz)}l${r2(cSkew[0])} ${r2(cSkew[1])}H${r2(PX(cT1) + cSkew[0])}L${pt(cT1, cH, cz)}Z`} fill="#3D52A8" />
+        <path d={`M${pt(cT0, cH, cz)}L${pt(cT1, cH, cz)}L${pt(cT1, cH, cz + cD)}L${pt(cT0, cH, cz + cD)}Z`} fill="#3D52A8" />
+        <path d={`M${pt(cT0, cH, cz + cD)}L${pt(cT1, cH, cz + cD)}`} stroke="#FFFFFF" strokeOpacity="0.3" strokeWidth="1.5" />
         <path d={quad(cT0, cT1, cH, cz)} fill="#162557" />
         <g clipPath={`url(#${P}-ct-clip)`}>
           <clipPath id={`${P}-ct-clip`}><path d={quad(cT0, cT1, cH, cz)} /></clipPath>

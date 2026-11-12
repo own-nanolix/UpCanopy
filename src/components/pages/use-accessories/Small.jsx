@@ -29,16 +29,21 @@ function Sticker({ s, ids, i }) {
       <path d={rectD(0, 0, w, h)} fill={s.bg} />
       <g clipPath={`url(#${clip})`}>
         {s.kind === 'lock' && <LockupG x={w * 0.07} y={(h - 60 * (w * 0.86) / 400) / 2} scale={(w * 0.86) / 400} fill={s.fg} markFill={s.mk} />}
-        {s.kind === 'desc' && <DescriptorG x={w / 2} y={h / 2 + 5} size={w / 14} fill={s.fg} anchor="middle" />}
+        {/* sized to sit inside the sticker with a margin (the descriptor runs about 14.5 x its size) */}
+        {s.kind === 'desc' && <DescriptorG x={w / 2} y={h / 2 + w / 50} size={w / 17} fill={s.fg} anchor="middle" />}
         {s.kind === 'home' && (
           <g>
             <text x={w * 0.13} y={h / 2 + 8} fontSize={h * 0.4} fontWeight="700" fill={s.fg} letterSpacing="2" className="wide" style={{ fontFamily: 'var(--font-wide)' }}>HOME</text>
-            <ArrowG x={w * 0.66} y={h / 2 - h * 0.14} size={h * 0.3} stroke={s.fg} strokeWidth={4} />
+            <ArrowG x={w * 0.74} y={h / 2 - h * 0.14} size={h * 0.28} stroke={s.fg} strokeWidth={4} />
           </g>
         )}
         {s.kind === 'frond' && <FrondG cx={w * 0.2} cy={h * 1.1} r={h * 0.9} a0={250} a1={350} count={22} len={h * 0.7} width={3.4} lean={-8} tone="onGreen" />}
         {s.kind === 'dots' && <ScaleDotsG x={w * 0.09} y={h / 2} w={w * 0.82} r={h * 0.13} chosen={s.chosen} off={s.off} on={s.on} />}
-        {s.kind === 'stack' && <LockupStackG x={w * 0.5 - 240 * (h * 0.0036)} y={h * 0.08} scale={h * 0.0036} fill={s.fg} markFill={s.mk} />}
+        {s.kind === 'stack' && (() => {
+          // fit the 480 x 230 stacked lockup inside the sticker with a margin
+          const sc = Math.min(h / 280, (w * 0.7) / 480);
+          return <LockupStackG x={w * 0.5 - 240 * sc} y={(h - 230 * sc) / 2} scale={sc} fill={s.fg} markFill={s.mk} />;
+        })()}
       </g>
       <path d={rectD(0, 0, w, h)} fill={`url(#${ids.m}-glass)`} opacity="0.5" />
     </g>
@@ -155,8 +160,9 @@ export function PinCards() {
 const PATCHES = [
   { w: 150, h: 150, field: C.navy, rim: C.green, art: (w, h) => <MarkG x={w / 2 - 38} y={h / 2 - 38} size={76} fill={C.green} /> },
   { w: 150, h: 150, field: C.green, rim: C.navy, round: true, art: (w, h) => <MarkG x={w / 2 - 38} y={h / 2 - 38} size={76} fill={C.navy} /> },
-  { w: 132, h: 172, field: C.mint, rim: C.navy, art: (w, h) => <LockupStackG x={w / 2 - 240 * 0.25} y={h / 2 - 120 * 0.25 - 4} scale={0.25} fill={C.navy} markFill={C.navy} /> },
-  { w: 178, h: 74, field: C.navy, rim: C.green, art: (w, h) => <DescriptorG x={w / 2} y={h / 2 + 5} size={12.5} fill="#FFFFFF" anchor="middle" /> },
+  // the two text patches are sized to sit inside the embroidered border (inner field = w - 24) with a margin
+  { w: 132, h: 172, field: C.mint, rim: C.navy, art: (w, h) => <LockupStackG x={w / 2 - 240 * 0.198} y={h / 2 - 115 * 0.198} scale={0.198} fill={C.navy} markFill={C.navy} /> },
+  { w: 178, h: 74, field: C.navy, rim: C.green, art: (w, h) => <DescriptorG x={w / 2} y={h / 2 + 3.5} size={9.1} fill="#FFFFFF" anchor="middle" /> },
 ];
 
 function Patch({ ids, n, x, y, rot, id }) {

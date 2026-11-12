@@ -11,12 +11,13 @@ export function PosterBridgeG({ idp }) {
     <g>
       <BrandDefs idp={idp} />
       <Field idp={idp} w={1080} h={1350} fill={K.dark} />
-      <FrondG cx={-1790} cy={900} r={1800} a0={-13} a1={13} count={38} len={600} width={14} lean={14} tone="onDark" opacity={0.95} fan />
+      {/* measured from m06 (poster width scaled to 1080; bottom items measured from the bottom edge) */}
+      <FrondG cx={-1790} cy={900} r={1800} a0={-15} a1={13} count={42} len={660} width={14} lean={14} tone="onDark" opacity={0.95} fan />
       <g className="slide-up" style={{ '--i': 6 }}>
-        <Rows rows={LINES.bridge.rows4} x={1010} y={176} size={66} anchor="end" fill={K.mint} strong={LINES.bridge.strong} strongFill={K.green} />
+        <Rows rows={LINES.bridge.rows4} x={961} y={204} size={70} lh={1.13} anchor="end" fill={K.mint} strong={LINES.bridge.strong} strongFill={K.green} />
       </g>
-      <Mk x={100} y={1110} size={132} fill={K.green} />
-      <Contacts x={1010} y={1218} size={30} fill={K.pale} />
+      <Mk x={80} y={1095} size={148} fill={K.green} />
+      <Contacts x={961} y={1151} size={28} fill={K.pale} />
     </g>
   );
 }
@@ -33,11 +34,12 @@ export function PosterCitylightG({ idp }) {
       </radialGradient>
       <rect width="1080" height="1350" fill={`url(#${idp}-glow)`} />
       <FrondG cx={560} cy={640} r={200} a0={-185} a1={5} count={44} len={400} width={12} lean={0} tone="onNavy" opacity={0.7} fan />
-      <Mk x={84} y={80} size={112} fill={K.green} />
+      {/* measured from m24 (lightbox width scaled to 1080; the rows measured from the bottom edge) */}
+      <Mk x={69} y={58} size={96} fill={K.green} />
       <g className="slide-up" style={{ '--i': 6 }}>
-        <Rows rows={LINES.bridge.rows} x={84} y={900} size={68} fill={K.white} strong={LINES.bridge.strong} strongFill={K.green} />
+        <Rows rows={LINES.bridge.rows} x={55} y={954} size={68} lh={1.19} fill={K.white} strong={LINES.bridge.strong} strongFill={K.green} />
       </g>
-      <text x="1000" y="1262" fontSize="30" fontWeight="400" textAnchor="end" fill={K.green}>{CONTACT.web}</text>
+      <text x="1022" y="1278" fontSize="36" fontWeight="400" textAnchor="end" fill={K.green}>{CONTACT.web}</text>
     </g>
   );
 }

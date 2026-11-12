@@ -12,10 +12,11 @@ export function PostNavyG({ idp }) {
     <g>
       <BrandDefs idp={idp} />
       <Field idp={idp} w={1080} h={1080} fill={K.navy} />
-      <FrondG cx={-1500} cy={760} r={1500} a0={-12} a1={14} count={30} len={430} width={12} lean={14} tone="onNavy" opacity={0.6} fan />
-      <Mk x={72} y={64} size={128} fill={K.green} />
+      <FrondG cx={-1500} cy={760} r={1500} a0={-12} a1={14} count={34} len={560} width={12} lean={14} tone="onNavy" opacity={0.6} fan />
+      {/* measured from m15, panel 1 */}
+      <Mk x={83} y={50} size={84} fill={K.green} />
       <g className="fade-in" style={{ '--i': 14 }}>
-        <WordmarkG x={1008} y={1010} size={68} fill={K.white} anchor="end" />
+        <WordmarkG x={1036} y={1046} size={41} fill={K.white} anchor="end" />
       </g>
     </g>
   );
@@ -35,13 +36,14 @@ export function PostMintG({ idp }) {
       </defs>
       <rect width="1080" height="1080" fill={`url(#${idp}-mg)`} filter={`url(#${idp}-grain)`} />
       <rect width="1080" height="1080" fill={`url(#${idp}-dots)`} />
-      <Mk x={72} y={64} size={120} fill={K.navy} />
+      {/* measured from m15, panel 2 */}
+      <Mk x={46} y={45} size={108} fill={K.navy} />
       <g className="slide-up" style={{ '--i': 3 }}>
-        <Rows rows={LINES.bridge.rows4} x={1008} y={126} size={58} anchor="end" fill={K.navy} strong={LINES.bridge.strong} strongFill={K.navy} />
+        <Rows rows={LINES.bridge.rows4} x={1039} y={92} size={61} lh={1.07} anchor="end" fill={K.navy} strong={LINES.bridge.strong} strongFill={K.navy} />
       </g>
-      <text x="72" y="1006" fontSize="28" fontWeight="400" fill={K.navy}>{CONTACT.footer}</text>
+      <text x="46" y="1035" fontSize="30" fontWeight="400" fill={K.navy}>{CONTACT.footer}</text>
       <g className="fade-in" style={{ '--i': 10 }}>
-        <WordmarkG x={1008} y={1010} size={52} fill={K.white} anchor="end" opacity="0.8" />
+        <WordmarkG x={1039} y={1046} size={41} fill={K.white} anchor="end" opacity="0.7" />
       </g>
     </g>
   );
@@ -56,7 +58,8 @@ export function PostStackedG({ idp }) {
       <circle cx="540" cy="520" r="360" fill="none" stroke={K.white} strokeOpacity="0.07" strokeWidth="2" strokeDasharray="6 8" />
       <circle cx="540" cy="520" r="250" fill="none" stroke={K.white} strokeOpacity="0.07" strokeWidth="2" strokeDasharray="6 8" />
       <g className="slide-up">
-        <LockupStackG x={204} y={380} scale={1.4} fill={K.white} />
+        {/* m15, panel 3: the lockup centred, mark top at 41 % of the height */}
+        <LockupStackG x={319} y={441} scale={0.92} fill={K.white} />
       </g>
     </g>
   );
@@ -70,7 +73,8 @@ export function PostBrochureG({ idp }) {
       <Field idp={idp} w={1080} h={1080} fill={K.green} />
       <FrondG cx={1160} cy={560} r={400} a0={150} a1={242} count={36} len={420} width={10} lean={-52} tone="onGreen" opacity={0.9} fan />
       <g className="slide-up" style={{ '--i': 2 }}>
-        <Rows rows={LINES.bridge.rows4} x={72} y={118} size={50} fill={K.navy} strong={LINES.bridge.strong} strongFill={K.navy} />
+        {/* m16: the line is set in white on the green panel */}
+        <Rows rows={LINES.bridge.rows4} x={72} y={118} size={50} fill={K.white} strong={LINES.bridge.strong} strongFill={K.white} />
       </g>
       <rect y="470" width="1080" height="610" fill={`url(#${idp}-paper)`} filter={`url(#${idp}-grain)`} />
       <Mk x={900} y={500} size={110} fill={K.navy} />

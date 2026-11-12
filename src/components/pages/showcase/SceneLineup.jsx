@@ -14,7 +14,7 @@ const SIDE = '#1E2547';
 
 export default function SceneLineup() {
   const W = 2100, H = 700;
-  const spots = cascade(8, -140, 566, 1694, 150);
+  const spots = cascade(8, -140, 566, 1790, 130);
   const outline = isoRoundRect(430, 884, 66);
   const bodies = Array.from({ length: THICK }, (_, j) => j + 1);
   const mid = isoPt(215, 442);

@@ -1,7 +1,7 @@
 import { CastG, StepG } from '@/components/art/Mockup';
 import { Stage } from './parts';
 import { TeeG, TEE_COLOURWAYS } from './Shirts';
-import { WindbreakerG, PufferG, HoodieG, WB_COLOURWAYS, PF_COLOURWAYS, HD_COLOURWAYS } from './Jackets';
+import { WindbreakerG, PufferG, HoodieG, WB_COLOURWAYS, PF_COLOURWAYS, HD_COLOURWAYS, NECK_X } from './Jackets';
 
 const IDP = 'use-apparel-collection';
 const railY = (x) => Math.round(470 - 0.2945 * (x + 30));
@@ -10,9 +10,9 @@ const RAIL = 'M-30 470L1430 40L1430 52L-30 482Z';
 // Each item: where it hangs on the rail, its scale, the y of its shoulder line and the half-width of its hanger.
 const ITEMS = [
   { x: 40, s: 0.9, sh: 42, hw: 96, G: TeeG, props: { cw: TEE_COLOURWAYS[2], side: 'front' } },
-  { x: 360, s: 0.56, sh: 150, hw: 112, G: WindbreakerG, props: { cw: WB_COLOURWAYS[1] } },
-  { x: 700, s: 0.56, sh: 134, hw: 112, G: PufferG, props: { cw: PF_COLOURWAYS[0], lit: true } },
-  { x: 1040, s: 0.56, sh: 142, hw: 112, G: HoodieG, props: { cw: HD_COLOURWAYS[0] } },
+  { x: 360, s: 0.56, sh: 150, hw: 112, G: WindbreakerG, nx: NECK_X, props: { cw: WB_COLOURWAYS[1] } },
+  { x: 700, s: 0.56, sh: 134, hw: 112, G: PufferG, nx: NECK_X, props: { cw: PF_COLOURWAYS[0], lit: true } },
+  { x: 1040, s: 0.56, sh: 142, hw: 112, G: HoodieG, nx: NECK_X, props: { cw: HD_COLOURWAYS[0] } },
   { x: 1330, s: 0.9, sh: 42, hw: 96, G: TeeG, props: { cw: TEE_COLOURWAYS[0], side: 'back' } },
 ];
 
@@ -37,12 +37,12 @@ export default function Scene() {
       {[210, 880].map((x) => (
         <rect key={x} x={x - 8} y={railY(x) - 12} width="16" height="40" fill={`url(#${IDP}-metal)`} stroke="#000" strokeOpacity="0.25" />
       ))}
-      {ITEMS.map(({ x, s, sh, hw, G, props }, i) => {
+      {ITEMS.map(({ x, s, sh, hw, nx = 0, G, props }, i) => {
         const y = railY(x);
         return (
           <StepG key={x} i={i}>
             <Hanger x={x} y={y} hw={hw} />
-            <g transform={`translate(${x} ${y + 62}) scale(${s}) translate(0 ${-sh})`}>
+            <g transform={`translate(${x} ${y + 62}) scale(${s}) translate(${-nx} ${-sh})`}>
               <G idp={IDP} k={`i${i}`} {...props} />
             </g>
           </StepG>

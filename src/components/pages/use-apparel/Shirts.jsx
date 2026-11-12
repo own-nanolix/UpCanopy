@@ -43,7 +43,8 @@ export function TeeG({ idp, k, cw, side = 'front', lit = false }) {
           <Stitch d="M294 116L254 140" c={cw.thread} o={0.5} />
           <Stitch d="M66 250L234 250" c={cw.thread} o={0.5} />
           {back ? (
-            <LockupStackG x={126} y={56} scale={0.1} fill={cw.ink} markFill={cw.mark} filter={fab} />
+            // m18: the stacked lockup sits just under the back neck, about a third of the body's width
+            <LockupStackG x={118.8} y={43} scale={0.13} fill={cw.ink} markFill={cw.mark} filter={fab} />
           ) : (
             <MarkG x={177} y={58} size={26} fill={cw.mark} filter={fab} />
           )}

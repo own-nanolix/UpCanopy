@@ -43,6 +43,7 @@ function Mug({ ids, id, r = 96, h = 170, body, art }) {
 
 const navyArt = <MarkG x={-28} y={-28} size={56} fill={C.green} />;
 const mintArt = <LockupG x={-62} y={-9} scale={0.31} fill={C.navy} markFill={C.navy} />;
+const mintMarkArt = <MarkG x={-28} y={-28} size={56} fill={C.navy} />;
 
 export function MugNavy() {
   return (
@@ -63,7 +64,8 @@ export function MugMint() {
       {(ids) => (
         <>
           <StepG i={1} x={560} y={400}><Mug ids={ids} id="b" r={112} h={196} body={C.mint} art={mintArt} /></StepG>
-          <StepG i={0} x={140} y={600}><Mug ids={ids} id="a" r={112} h={196} body={C.navy} art={navyArt} /></StepG>
+          {/* the second unit is mint too (mark-only print), so the navy mug is not repeated beside its own plate */}
+          <StepG i={0} x={140} y={600}><Mug ids={ids} id="a" r={112} h={196} body={C.mint} art={mintMarkArt} /></StepG>
         </>
       )}
     </Scene>
@@ -71,36 +73,37 @@ export function MugMint() {
 }
 
 /* ---------- bottles ---------- */
-const BODY = 'M-28 60L28 60L28 96C28 130 48 128 48 160L48 386Q48 400 34 400L-34 400Q-48 400 -48 386L-48 160C-48 128 -28 130 -28 96Z';
+// m29: a wide-mouth steel flask, about 3.6 diameters long, neck at 0.64 of the body, a short cap
+const BODY = 'M-36 52L36 52L36 92C36 120 56 118 56 146L56 386Q56 400 42 400L-42 400Q-56 400 -56 386L-56 146C-56 118 -36 120 -36 92Z';
 
 function Bottle({ ids, id, body, ring, cap, ink }) {
   const clip = `${ids.p}-bclip-${id}`;
   return (
     <g>
       <clipPath id={clip}><path d={BODY} /></clipPath>
-      <path d="M20 8C92 -34 100 52 34 36" fill="none" stroke={cap} strokeWidth="6" />
-      <path d="M20 8C92 -34 100 52 34 36" fill="none" stroke="#fff" strokeOpacity="0.25" strokeWidth="1.5" transform="translate(-1 -1)" />
+      <path d="M26 8C100 -34 108 46 38 32" fill="none" stroke={cap} strokeWidth="6" />
+      <path d="M26 8C100 -34 108 46 38 32" fill="none" stroke="#fff" strokeOpacity="0.25" strokeWidth="1.5" transform="translate(-1 -1)" />
       <path d={BODY} fill={body} />
       <g clipPath={`url(#${clip})`}>
         <g transform="translate(0 392) rotate(-90)">
-          <MarkG x={0} y={-14} size={28} fill={C.green} />
-          <WordmarkG x={40} y={10} size={29} fill={ink} />
+          <MarkG x={92} y={-10} size={20} fill={C.green} />
+          <WordmarkG x={126} y={7} size={20} fill={ink} />
         </g>
-        <rect x="-50" y="56" width="100" height="350" fill={`url(#${ids.m}-shade)`} />
-        <rect x="-50" y="56" width="100" height="350" fill={`url(#${ids.m}-shade)`} opacity="0.7" />
-        <rect x="-38" y="170" width="7" height="210" rx="3.5" fill="#fff" opacity="0.3" />
-        <rect x="-26" y="170" width="2.5" height="200" fill="#fff" opacity="0.12" />
-        <rect x="38" y="170" width="3" height="205" fill="#fff" opacity="0.14" />
-        <rect x="-50" y="386" width="100" height="14" fill="#000" opacity="0.3" />
-        <path d="M-28 96C-28 128 -48 128 -48 160" stroke="#fff" strokeOpacity="0.25" strokeWidth="3" fill="none" />
+        <rect x="-58" y="50" width="116" height="356" fill={`url(#${ids.m}-shade)`} />
+        <rect x="-58" y="50" width="116" height="356" fill={`url(#${ids.m}-shade)`} opacity="0.7" />
+        <rect x="-45" y="158" width="8" height="222" rx="4" fill="#fff" opacity="0.3" />
+        <rect x="-31" y="158" width="2.5" height="212" fill="#fff" opacity="0.12" />
+        <rect x="45" y="158" width="3" height="217" fill="#fff" opacity="0.14" />
+        <rect x="-58" y="386" width="116" height="14" fill="#000" opacity="0.3" />
+        <path d="M-36 92C-36 118 -56 118 -56 146" stroke="#fff" strokeOpacity="0.25" strokeWidth="3" fill="none" />
       </g>
-      <rect x="-31" y="0" width="62" height="49" rx="5" fill={cap} />
-      {Array.from({ length: 9 }, (_, i) => <rect key={i} x={-27 + i * 6.6} y="3" width="1.6" height="43" fill="#000" opacity="0.16" />)}
-      <rect x="-31" y="0" width="62" height="49" rx="5" fill={`url(#${ids.m}-shade)`} />
-      <rect x="-24" y="3" width="5" height="43" fill="#fff" opacity="0.2" />
-      <rect x="-31" y="48" width="62" height="14" fill={ring} />
-      <rect x="-31" y="48" width="62" height="14" fill={`url(#${ids.m}-shade)`} />
-      <rect x="-26" y="49.5" width="52" height="2.4" fill="#fff" opacity="0.5" />
+      <rect x="-38" y="0" width="76" height="41" rx="5" fill={cap} />
+      {Array.from({ length: 11 }, (_, i) => <rect key={i} x={-34 + i * 6.8} y="3" width="1.6" height="35" fill="#000" opacity="0.16" />)}
+      <rect x="-38" y="0" width="76" height="41" rx="5" fill={`url(#${ids.m}-shade)`} />
+      <rect x="-30" y="3" width="5" height="35" fill="#fff" opacity="0.2" />
+      <rect x="-38" y="40" width="76" height="12" fill={ring} />
+      <rect x="-38" y="40" width="76" height="12" fill={`url(#${ids.m}-shade)`} />
+      <rect x="-33" y="41.5" width="66" height="2.4" fill="#fff" opacity="0.5" />
     </g>
   );
 }
@@ -110,10 +113,10 @@ function Lying({ ids, id, i, x, y, rot = 35, s = 1, ...bottle }) {
     <StepG i={i} x={x} y={y}>
       <g transform={`scale(${s})`}>
         <g transform={`rotate(${rot})`}>
-          <ShadowG idp={`${ids.p}-bsh${id}`} cx={14} cy={236} rx={34} ry={176} opacity={0.34} blur={10} />
+          <ShadowG idp={`${ids.p}-bsh${id}`} cx={14} cy={236} rx={42} ry={180} opacity={0.34} blur={10} />
         </g>
         <g transform={`translate(24 28) rotate(${rot})`} fill={C.dark} opacity="0.22">
-          <path d={BODY} /><rect x="-31" y="0" width="62" height="62" />
+          <path d={BODY} /><rect x="-38" y="0" width="76" height="52" />
         </g>
         <g transform={`rotate(${rot})`}><Bottle ids={ids} id={id} {...bottle} /></g>
       </g>
@@ -142,7 +145,7 @@ export function BottleGreen() {
     <Scene k="bottle-green" title="Green Park steel bottle with navy type and a navy ring" size="narrow">
       {(ids) => (
         <>
-          <Lying ids={ids} id="b" i={1} x={560} y={-90} s={1.05} {...NAVY_B} />
+          <Lying ids={ids} id="b" i={1} x={560} y={-90} s={1.05} {...GREEN_B} />
           <Lying ids={ids} id="a" i={0} x={330} y={70} s={1.05} {...GREEN_B} />
         </>
       )}
@@ -206,7 +209,9 @@ function Disc({ ids, id, r = 100, t = 12, side, top, mark, glow = false }) {
   const p = `${ids.p}-disc${id}`;
   const ry = r * 0.36;
   const d = cylPath(-r, 0, 2 * r, t, ry);
-  const s = r * 0.9;
+  // the puck (m11): navy face at 0.86 of the diameter, the mark turned about -35 degrees in the face's plane,
+  // green light leaking round the rim of the face
+  const s = glow ? r * 0.86 : r * 0.9;
   return (
     <g>
       <filter id={`${p}-glow`} x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7" /></filter>
@@ -215,9 +220,10 @@ function Disc({ ids, id, r = 100, t = 12, side, top, mark, glow = false }) {
       <path d={d} fill={side} />
       <path d={d} fill={`url(#${ids.m}-shade)`} />
       <ellipse cx="0" cy="0" rx={r} ry={ry} fill={glow ? `url(#${ids.m}-plastic)` : top} />
-      {glow && <ellipse cx="0" cy="0" rx={r * 0.8} ry={ry * 0.8} fill={top} />}
-      <g transform="scale(1 0.36)">
-        {glow && <MarkG x={-s / 2} y={-s / 2} size={s} fill={C.green} filter={`url(#${p}-glow)`} opacity="0.9" />}
+      {glow && <ellipse cx="0" cy="0" rx={r * 0.9} ry={ry * 0.9} fill="none" stroke={C.green} strokeWidth="9" opacity="0.75" filter={`url(#${p}-glow)`} />}
+      {glow && <ellipse cx="0" cy="0" rx={r * 0.86} ry={ry * 0.86} fill={top} />}
+      <g transform={`scale(1 0.36)${glow ? ' rotate(-35)' : ''}`}>
+        {glow && <MarkG x={-s / 2} y={-s / 2} size={s} fill={C.green} filter={`url(#${p}-glow)`} opacity="0.45" />}
         <MarkG x={-s / 2} y={-s / 2} size={s} fill={mark} />
       </g>
       <ellipse cx="0" cy="0" rx={r} ry={ry} fill={`url(#${ids.m}-glass)`} opacity="0.7" />
@@ -235,7 +241,7 @@ export function CoasterRow() {
           <StepG i={3} x={910} y={260}><Disc ids={ids} id="d" side={C.green} top={C.green} mark={C.dark} /></StepG>
           <StepG i={2} x={650} y={340}><Disc ids={ids} id="c" side={C.paper} top={C.mint} mark={C.navy} /></StepG>
           <StepG i={1} x={390} y={420}><Disc ids={ids} id="b" side={C.deep} top={C.navy} mark={C.green} /></StepG>
-          <StepG i={0} x={140} y={480}><Disc ids={ids} id="a" r={110} t={46} side="#FFFFFF" top={C.navy} mark={C.green} glow /></StepG>
+          <StepG i={0} x={140} y={480}><Disc ids={ids} id="a" r={110} t={66} side="#E6EFE3" top={C.navy} mark={C.green} glow /></StepG>
         </>
       )}
     </Scene>
