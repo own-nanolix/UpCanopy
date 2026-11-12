@@ -1,0 +1,58 @@
+/* lp-financeiro: ledger desk, invoice builder, drawings. */
+
+/* ---------- Ledger desk ---------- */
+.desk { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--gap); align-items: stretch; }
+.deskMain { background: var(--white); padding: clamp(16px, 2.2vw, 32px); display: grid; gap: 16px; align-content: start; }
+.bar { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; justify-content: space-between; }
+.colHead { display: grid; grid-template-columns: 30px minmax(0, 1fr) minmax(0, 1fr); gap: 14px; padding-bottom: 8px; border-bottom: var(--stroke) solid var(--navy); font-family: var(--font-wide); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; min-height: 280px; align-content: start; }
+.line { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 14px; align-items: center; padding: 7px 0; animation: lp-financeiro-line var(--dur-3) var(--ease-out) both; }
+.line:hover { background: var(--mint); }
+.line:has(input:focus-visible) { outline: var(--stroke) solid var(--green-ink); outline-offset: 2px; }
+.box { appearance: none; -webkit-appearance: none; width: 28px; height: 28px; margin: 0; border: var(--stroke) solid var(--navy); border-radius: 0; background: var(--white); display: grid; place-items: center; cursor: pointer; transition: background-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out); }
+.box::after { content: ""; width: 12px; height: 12px; background: var(--navy); transform: scale(0); transition: transform var(--dur-2) var(--ease-lock); }
+.box:checked { background: var(--green); }
+.box:checked::after { transform: scale(1); }
+.box:active { transform: scale(0.92); }
+.cells { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; cursor: pointer; }
+.cellA, .cellB { display: block; height: 16px; background: var(--slide); }
+.cellA span, .cellB span { display: block; height: 100%; background: var(--gray); transition: background-color var(--dur-2) var(--ease-out); }
+.lineOn .cellB span { background: var(--navy); }
+.lineOn .cellA span { background: var(--navy-muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.chartCard { background: var(--white); padding: clamp(12px, 1.6vw, 24px); display: grid; place-items: center; }
+.chartCard svg { width: 100%; max-width: 360px; height: auto; }
+@keyframes lp-financeiro-line { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (max-width: 900px) { .desk { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Invoice builder ---------- */
+.builder { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--gap); align-items: start; }
+.form { display: grid; gap: 18px; }
+.formHead { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.facts { margin: 0; display: grid; gap: 12px; }
+.facts div { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 10px; border-bottom: var(--stroke) solid var(--navy); }
+.facts dt, .invTotal span:first-child { font-family: var(--font-wide); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; }
+.facts dd { margin: 0; }
+.invLines { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.invLine { display: grid; grid-template-columns: 28px minmax(0, 3fr) minmax(0, 2fr) 36px; gap: 12px; align-items: center; animation: lp-financeiro-line var(--dur-3) var(--ease-out) both; }
+.invNo { font-family: var(--font-wide); font-size: 11px; color: var(--muted); }
+.invBar, .invBarEnd { display: block; height: 14px; background: var(--slide); }
+.invBar span, .invBarEnd span { display: block; height: 100%; background: var(--gray); transition: width var(--dur-3) var(--ease-lock); }
+.invBarEnd span { background: var(--navy); opacity: 0.6; }
+.remove { width: 36px; height: 36px; display: grid; place-items: center; border: var(--stroke) solid var(--navy); border-radius: 0; background: transparent; color: var(--navy); cursor: pointer; transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out); }
+.remove:hover { background: var(--navy); color: var(--white); }
+.remove:focus-visible { outline: var(--stroke) solid var(--green-ink); outline-offset: 2px; }
+.remove:active { transform: scale(0.92); }
+.invTotal { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: var(--stroke) solid var(--navy); }
+.sigLine { width: 9em; height: 2px; background: var(--navy); }
+.sheet { background: var(--mint-paper); padding: clamp(16px, 3vw, 40px); display: grid; place-items: center; overflow: hidden; }
+.sheet svg { width: 100%; max-width: 520px; height: auto; }
+@media (max-width: 900px) { .builder { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Drawings ---------- */
+.drawings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.drawCard { display: grid; gap: 16px; align-content: space-between; }
+.drawCard svg { width: 100%; height: auto; display: block; }
+.drawPlate { background: var(--mint-paper); padding: clamp(12px, 2vw, 24px); }
+.drawCap { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+@media (max-width: 900px) { .drawings { grid-template-columns: minmax(0, 1fr); } }

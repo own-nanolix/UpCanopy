@@ -1,5 +1,5 @@
 import { pageMeta } from '@/lib/pages';
-import { DESCRIPTOR, LINES, PERSONALITY, TAGLINE, TONE, VALUES, VISUAL_IDENTITY, CONTACT } from '@/lib/brand';
+import { DESCRIPTOR, LINES, PERSONALITY, PILLARS, DOCUMENT, TAGLINE, TONE, VALUES, VISUAL_IDENTITY, CONTACT } from '@/lib/brand';
 import Reveal from '@/components/site/Reveal';
 import Icon from '@/components/site/Icon';
 import LandingNav from '@/components/ui/LandingNav';
@@ -9,6 +9,10 @@ import Chip from '@/components/ui/Chip';
 import { Line } from '@/components/ui/Card';
 import Ledger from '@/components/pages/lp-financeiro/Ledger';
 import ColumnBoard from '@/components/pages/lp-financeiro/ColumnBoard';
+import LedgerDesk from '@/components/pages/lp-financeiro/LedgerDesk';
+import InvoiceBuilder from '@/components/pages/lp-financeiro/InvoiceBuilder';
+import { LedgerSheetArt, RowsStripArt } from '@/components/pages/lp-financeiro/Drawings';
+import d from '@/components/pages/lp-financeiro/desk.module.css';
 import { InvoiceArt, LetterArt, ScalesArt, HeroFrond, StepsArt } from '@/components/pages/lp-financeiro/FinArt';
 import s from '@/components/pages/lp-financeiro/lp-financeiro.module.css';
 
@@ -80,7 +84,25 @@ export default function Page() {
         <Reveal><ColumnBoard /></Reveal>
       </section>
 
-      {/* 4. Invoice card */}
+      {/* 4. Ledger desk: filter, sort, block chart */}
+      <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-desk-h">
+        <Reveal className={s.secHead}>
+          <h2 id="lp-financeiro-desk-h" className="t-h2">Ledger desk</h2>
+          <span className="t-small">Tick rows, filter them, sort them. The blocks follow.</span>
+        </Reveal>
+        <Reveal><LedgerDesk /></Reveal>
+      </section>
+
+      {/* 5. Invoice builder */}
+      <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-builder-h">
+        <Reveal className={s.secHead}>
+          <h2 id="lp-financeiro-builder-h" className="t-h2">Invoice builder</h2>
+          <span className={s.eyebrow}>{DOCUMENT.invoice[2]}</span>
+        </Reveal>
+        <Reveal><InvoiceBuilder /></Reveal>
+      </section>
+
+      {/* 6. Invoice card */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-invoice-h">
         <div className={s.pair}>
           <Reveal className={s.plate}><InvoiceArt /></Reveal>
@@ -144,7 +166,29 @@ export default function Page() {
         </Reveal>
       </section>
 
-      {/* 7. CTA */}
+      {/* 8. Drawings */}
+      <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-draw-h">
+        <Reveal className={s.secHead}>
+          <h2 id="lp-financeiro-draw-h" className="t-h2">Drawings</h2>
+          <span className="t-small">Each one exports as SVG.</span>
+        </Reveal>
+        <div className={d.drawings}>
+          <Reveal className={`card ${d.drawCard}`}>
+            <div className={d.drawPlate}><LedgerSheetArt /></div>
+            <div className={d.drawCap}><h3 className="t-caps-lg">Ledger sheet</h3><Chip size="sm">SVG</Chip></div>
+          </Reveal>
+          <Reveal delay={100} className={`card ${d.drawCard}`}>
+            <div className={d.drawPlate}><RowsStripArt /></div>
+            <div className={d.drawCap}><h3 className="t-caps-lg">Ten rows</h3><Chip size="sm">SVG</Chip></div>
+          </Reveal>
+          <Reveal delay={200} className={`card-navy ${d.drawCard}`}>
+            <p className="t-lead" lang="pt-BR"><Line text={LINES.credibility.text} strong={LINES.credibility.strong} className="hl" /></p>
+            <div className={d.drawCap}><h3 className="t-caps-lg">Credibility</h3><Chip size="sm" tone="mint">{PILLARS[2]}</Chip></div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 9. CTA */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-cta-h">
         <Reveal className={`field-rise ${s.cta}`}>
           <div className={s.ctaBody}>
