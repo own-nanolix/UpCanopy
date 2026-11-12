@@ -29,7 +29,7 @@ The same pipeline was run first on Tectra (`../project-2`); its fixes are applie
 - [x] 1. Check the project and the PC, tool files, `next.config` keys, `.gitignore` lines
 - [x] 2. Extract the case study
 - [x] 3. Study it and write `SOURCE.md`
-- [ ] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md`; dev server started
+- [x] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md`; dev server started
 - [ ] 5. Build team, two waves; check reports 30 of 30 `ok`
 - [ ] 6. Review team; shared fixes applied
 - [ ] 7. Verify in the browser; SVG export
@@ -56,10 +56,14 @@ The same pipeline was run first on Tectra (`../project-2`); its fixes are applie
 
 ## Dev server
 
-(not started yet; use `npx next dev -p 3103`; stop it before `npm run build`)
+http://localhost:3103 (start with `npx next dev -p 3103`; stop it before `npm run build`)
 
 ## Log
 
 - Step 1 done: tools from spec section 16, config, gitignore, playwright, baseline build passes.
 - Steps 2 and 3 done: 32 images in reference/ (headed Chrome), readable copies made, SOURCE.md written with the
   page's full Portuguese text.
+- Step 4 done: LAYOUTS.md, pages.json, shared system, 30 stub routes, BRIEF.md. Lint clean; build passes; check lists 30 stubs. Plumbing (dock, index, reveal, tools, device frames) is reused from the Tectra project; tokens, type, mark, key art, mockup kit, screens, nav and footer belong to this brand only.
+- Decision: landing ids lp-home, lp-crm, lp-agenda, lp-financeiro, lp-hardscape, lp-manifesto, lp-contato.
+- Decision: page background is Green Ligth #F2FFE4; small green text on light surfaces uses #086338 (Green Park fails 4.5:1 there).
+- Step 5 started: wave 1 launched (B1 to B12, Sonnet). If a session ends here, trust only `npm run build` and `node tools/check.mjs`.
