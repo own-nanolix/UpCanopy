@@ -1,0 +1,69 @@
+.head {
+  padding-top: var(--pad);
+  display: grid;
+  gap: 12px;
+}
+
+.block {
+  display: grid;
+  gap: 20px;
+  margin-top: clamp(40px, 6vw, 88px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.fig {
+  margin: 0;
+  min-width: 0;
+}
+
+.fig > div {
+  box-shadow: 0 1px 0 rgba(22, 37, 87, 0.06);
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* each row steps right as the page goes down */
+  .row1 {
+    margin-left: 0;
+  }
+
+  .row2 {
+    margin-left: 8%;
+  }
+
+  .row3 {
+    margin-left: 16%;
+  }
+
+  .row1 .fig:nth-child(2),
+  .row2 .fig:nth-child(2),
+  .row3 .fig:nth-child(2) {
+    margin-top: 28px;
+  }
+
+  .row1 .fig:nth-child(3),
+  .row2 .fig:nth-child(3),
+  .row3 .fig:nth-child(3) {
+    margin-top: 56px;
+  }
+}
+
+.slide {
+  background: var(--slide);
+  padding: clamp(8px, 2vw, 20px);
+  overflow: hidden;
+}
+
+.slide > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
