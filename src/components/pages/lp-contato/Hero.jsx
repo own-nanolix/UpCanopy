@@ -2,10 +2,8 @@
 
 import { useState } from 'react';
 import { CONTACT, PEOPLE } from '@/lib/brand';
-import Field from '@/components/ui/Field';
-import Button from '@/components/ui/Button';
 import LandingNav from '@/components/ui/LandingNav';
-import { toast } from '@/components/site/Toast';
+import ContactForm from './Form';
 import s from './lp-contato.module.css';
 
 const BACK = [PEOPLE.founder.name, PEOPLE.founder.role, CONTACT.handle, CONTACT.phone, CONTACT.hello, CONTACT.address, CONTACT.webCased];
@@ -14,10 +12,6 @@ const BACK = [PEOPLE.founder.name, PEOPLE.founder.role, CONTACT.handle, CONTACT.
 // flips on click or Enter, beside a simple contact form on mint. Nothing is sent.
 export default function Hero() {
   const [flipped, setFlipped] = useState(false);
-  const submit = (e) => {
-    e.preventDefault();
-    toast('Demo only: nothing is sent');
-  };
   return (
     <header className={s.hero}>
       <LandingNav current="lp-contato" tone="light" />
@@ -49,22 +43,7 @@ export default function Hero() {
           <p className="t-small" style={{ marginTop: 16 }}>Click or press Enter to flip the card.</p>
         </div>
 
-        <form className={s.form} onSubmit={submit} aria-label="Contact form">
-          <div className={`slide-up ${s.formRow}`} style={{ '--i': 2 }}>
-            <Field id="lp-contato-name" label="Name" name="name" autoComplete="name" />
-            <Field id="lp-contato-email" label="Email" name="email" type="email" autoComplete="email" />
-          </div>
-          <div className="slide-up" style={{ '--i': 4 }}>
-            <Field id="lp-contato-tel" label="Telephone" name="tel" type="tel" autoComplete="tel" />
-          </div>
-          <div className="slide-up" style={{ '--i': 6 }}>
-            <Field id="lp-contato-message" label="Message" name="message" as="textarea" rows={5} style={{ padding: 14, resize: 'vertical' }} />
-          </div>
-          <div className={`slide-up ${s.formFoot}`} style={{ '--i': 8 }}>
-            <Button type="submit" variant="navy" iconRight="arrow-right">Send</Button>
-            <p className="t-small">Demo only: nothing is sent</p>
-          </div>
-        </form>
+        <ContactForm />
       </div>
     </header>
   );

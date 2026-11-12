@@ -73,3 +73,56 @@
   .formRow { grid-template-columns: minmax(0, 1fr); }
 }
 .pillarNo { font-family: var(--font-wide); font-weight: 500; font-size: 11px; letter-spacing: 0.06em; color: inherit; }
+
+/* ---------- Form states ---------- */
+.progress { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.progressStep { height: 6px; background: var(--navy); opacity: 0.18; transform-origin: left; transition: opacity var(--dur-3) var(--ease-out), background-color var(--dur-3) var(--ease-out); }
+.progressOn { background: var(--green-ink); opacity: 1; }
+.filled .input { border-bottom-color: var(--green-ink); background: var(--white); }
+.filled label::after { content: ' \2713'; color: var(--green-ink); }
+.invalid .input { border-bottom: 6px dashed var(--navy); background: var(--white); }
+.invalid p { color: var(--navy); font-weight: 600; }
+.invalid label { color: var(--navy); }
+.form :global(.input):focus-visible { outline: 3px solid var(--green-ink); outline-offset: 2px; }
+.sentBox { background: var(--navy); color: var(--white); border-color: var(--green); animation: lp-contato-rise var(--dur-4) var(--ease-out) both; }
+.sentHead { display: flex; align-items: center; gap: 12px; }
+.sentTick { display: grid; place-items: center; width: 40px; height: 40px; background: var(--green); color: var(--navy); }
+.sentList { margin: 0; display: grid; gap: 0; }
+.sentRow { display: grid; grid-template-columns: minmax(0, 7em) minmax(0, 1fr); gap: 12px; padding-block: 10px; border-top: 1px solid var(--navy-muted); overflow-wrap: anywhere; }
+.sentRow dt { color: var(--navy-muted); }
+.sentRow dd { margin: 0; white-space: pre-wrap; }
+.sentBox :global(.btn-ghost) { color: var(--white); border-color: var(--white); }
+
+/* ---------- Channel picker ---------- */
+.pickBand { background: var(--mint); }
+.pickPanel { display: grid; gap: 18px; padding-block: clamp(20px, 3vw, 40px); }
+.pickRow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 28px; }
+.pickValue { overflow-wrap: anywhere; font-weight: 300; min-width: 0; }
+.pickCopy { font-family: var(--font-wide); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--navy); color: var(--white); padding: 12px 18px; margin: 0; box-shadow: none; min-height: 44px; transition: transform var(--dur-1) var(--ease-out), background-color var(--dur-1) var(--ease-out); }
+.pickCopy:hover { background: var(--green); color: var(--navy); transform: translateY(-3px); }
+.pickCopy:active { background: var(--green-dark); color: var(--white); transform: translateY(0); }
+.pickCopy:focus-visible { outline: 3px solid var(--green-ink); outline-offset: 3px; }
+
+/* ---------- Card plates ---------- */
+.plates { padding-block: clamp(56px, 8vw, 120px); background-image: linear-gradient(0deg, var(--navy-deep), var(--navy) 70%); }
+.plateGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 4vw, 72px); margin-top: clamp(28px, 4vw, 56px); }
+.plate figure { margin: 0; display: grid; gap: 16px; }
+.plate svg { width: 100%; height: auto; display: block; transition: transform var(--dur-3) var(--ease-out); }
+.plate:hover svg { transform: translateY(-8px) rotate(-0.6deg); }
+.plate figcaption { color: var(--navy-muted); }
+
+/* ---------- Contact strips ---------- */
+.lines { background: var(--white); }
+.stripHead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 24px; }
+.stripStack { display: grid; gap: 0; }
+.stripStack svg { width: 100%; height: auto; display: block; }
+
+@media (max-width: 900px) {
+  .plateGrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Layout habit ---------- */
+.habitGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.habitGrid svg { width: 100%; height: auto; display: block; box-shadow: 8px 10px 0 rgba(22, 37, 87, 0.15); transition: transform var(--dur-2) var(--ease-out); }
+.habitGrid svg:hover { transform: translateY(-6px); }
+@media (max-width: 900px) { .habitGrid { grid-template-columns: minmax(0, 1fr); } }
