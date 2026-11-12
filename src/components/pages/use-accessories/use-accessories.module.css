@@ -1,0 +1,26 @@
+.head { padding-top: var(--pad); padding-bottom: 8px; }
+.group { padding-top: clamp(32px, 5vw, 64px); }
+.group h2 { margin-bottom: 20px; }
+
+/* zig-zag: wide left with narrow right, then narrow left with wide right */
+.zig { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: clamp(16px, 2.4vw, 32px); align-items: start; margin-bottom: clamp(24px, 4vw, 48px); }
+.zag { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+
+/* single small squares between: a staircase, each one lower (or higher) than the one before */
+.steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 24px); align-items: start; margin-bottom: clamp(48px, 7vw, 96px); }
+.steps3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 860px; margin-left: auto; margin-right: auto; }
+.steps > div:nth-child(1) { margin-top: 0 !important; }
+.down > div:nth-child(2) { margin-top: 3vw !important; }
+.down > div:nth-child(3) { margin-top: 6vw !important; }
+.down > div:nth-child(4) { margin-top: 9vw !important; }
+.down > div:nth-child(5) { margin-top: 12vw !important; }
+.up > div:nth-child(1) { margin-top: 6vw !important; }
+.up > div:nth-child(2) { margin-top: 3vw !important; }
+.pad { height: clamp(32px, 6vw, 80px); }
+
+@media (max-width: 760px) {
+  .zig, .zag { grid-template-columns: minmax(0, 1fr); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps > div { margin-top: 0 !important; }
+}
