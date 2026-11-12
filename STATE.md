@@ -31,8 +31,8 @@ The same pipeline was run first on Tectra (`../project-2`); its fixes are applie
 - [x] 3. Study it and write `SOURCE.md`
 - [x] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md`; dev server started
 - [x] 5. Build team, two waves; check reports 30 of 30 `ok`
-- [ ] 6. Review team; shared fixes applied
-- [ ] 7. Verify in the browser; SVG export
+- [x] 6. Review team; shared fixes applied
+- [x] 7. Verify in the browser; SVG export
 - [ ] 8. `REPORT.md` and `README.md`
 - [ ] 9. Offer to publish to Vercel
 
@@ -73,3 +73,5 @@ http://localhost:3103 (start with `npx next dev -p 3103`; stop it before `npm ru
 - Standing orders (STANDING-ORDERS.md) apply from here: commit locally after each builder and fix; push once, after the final review.
 - A builder's stray screenshot (undefined/s1440.png) was moved out of the project to the session scratch folder; nothing else was removed.
 - Step 6 started: 8 reviewers launched (Opus).
+- Step 6 done: 8 reviewers (Opus) reviewed and fixed all 30 pages; each committed locally. Shared fixes applied by the lead: WordmarkVerticalG gets a top-to-bottom option (the letter reads top to bottom), MarkCropG defaults set to the crop measured on the folder cover, six icons squared, placeholder bars may shrink, landing nav links wrap under 640 px.
+- Step 7: lint clean; build passes; check --strict 30 of 30 ok; audit 30 of 30 clean at 1440 and 390 px on the built site; export-svg wrote 422 SVGs with 0 warnings.
