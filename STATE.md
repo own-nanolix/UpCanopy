@@ -30,7 +30,7 @@ The same pipeline was run first on Tectra (`../project-2`); its fixes are applie
 - [x] 2. Extract the case study
 - [x] 3. Study it and write `SOURCE.md`
 - [x] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md`; dev server started
-- [ ] 5. Build team, two waves; check reports 30 of 30 `ok`
+- [x] 5. Build team, two waves; check reports 30 of 30 `ok`
 - [ ] 6. Review team; shared fixes applied
 - [ ] 7. Verify in the browser; SVG export
 - [ ] 8. `REPORT.md` and `README.md`
@@ -69,3 +69,7 @@ http://localhost:3103 (start with `npx next dev -p 3103`; stop it before `npm ru
 - Step 5 started: wave 1 launched (B1 to B12, Sonnet). If a session ends here, trust only `npm run build` and `node tools/check.mjs`.
 - Wave 1 done: lint clean, build passes, check reports 17 of 30 ok. No builder relaunched. Shared fix: ConstructionG rings now sit at whole multiples of the ring unit (they were half a unit off). Notes for review: overview, strategy and lp-hardscape are under 600 lines; lp-home has small white text on the gradient that fails contrast at 390 px and a small overflow in the hero card; lp-agenda headline covers part of the week grid on wide screens.
 - Wave 2 launched (B13 to B24, Sonnet).
+- Wave 2 done: all 12 builders back; each committed locally. Nine pages under 600 lines (overview, strategy, color, typography, lp-agenda, lp-financeiro, lp-hardscape, lp-manifesto, lp-contato) were sent back once and now run 735 to 872 lines. Lint clean, build passes, check --strict 30 of 30 ok. Step 5 complete.
+- Standing orders (STANDING-ORDERS.md) apply from here: commit locally after each builder and fix; push once, after the final review.
+- A builder's stray screenshot (undefined/s1440.png) was moved out of the project to the session scratch folder; nothing else was removed.
+- Step 6 started: 8 reviewers launched (Opus).
