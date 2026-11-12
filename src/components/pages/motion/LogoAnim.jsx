@@ -10,12 +10,14 @@ import s from './motion.module.css';
 const label = { fontSize: 14, fill: '#FFFFFF' };
 const wide = { fontFamily: 'var(--font-wide)' };
 
-// Key frames: [arch offset in mark units, arch opacity, bar offset, bar opacity, caption]
+// Key frames sampled from the shared roof-arch / roof-bar keyframes: the arch starts 46% of its height up
+// (28.4 mark units) on ease-lock over 1400 ms, the bar 40% down (9.9 units) on ease-out over 800 ms.
+// [arch offset, arch opacity, bar offset, bar opacity, caption]. The start frame is drawn faint so it can be seen.
 const FRAMES = [
-  [-31, 0.2, 7.5, 0.2, '1  Start: both pieces hidden'],
-  [-31, 1, 0, 1, '2  Bar set, arch above (800 ms)'],
-  [-9, 1, 0, 1, '3  Arch lowering'],
-  [0, 1, 0, 1, '4  Locked (1400 ms)'],
+  [-28.4, 0.2, 9.9, 0.2, '0 ms  Start: apart, transparent'],
+  [-14.7, 0.94, 2.9, 0.7, '140 ms  Both rising into place'],
+  [-2.6, 1, 0.2, 1, '420 ms  Bar set, arch lowering'],
+  [0, 1, 0, 1, '1400 ms  Locked'],
 ];
 
 export default function LogoAnim() {
@@ -45,7 +47,7 @@ export default function LogoAnim() {
               return (
                 <g key={cap}>
                   <rect x={x} y={y} width="372" height="256" fill="#162557" />
-                  <g transform={`translate(${x + 100} ${y + 16}) scale(1.72)`} fill="#26CF7B">
+                  <g transform={`translate(${x + 120} ${y + 58}) scale(1.32)`} fill="#26CF7B">
                     <path d={MARK_ARCH} transform={`translate(0 ${ay})`} opacity={ao} />
                     <path d={MARK_BAR} transform={`translate(0 ${by})`} opacity={bo} />
                   </g>

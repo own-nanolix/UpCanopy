@@ -54,10 +54,10 @@ export default function Grain() {
           <rect width="300" height="300" fill="url(#gradients-cmp-g)" />
           <rect x="320" width="300" height="300" fill="url(#gradients-cmp-g)" filter="url(#gradients-cmp-grain)" />
           <path d="M310 0V300" stroke="#F2FFE4" strokeWidth="2" />
-          <rect x="0" y="266" width="140" height="34" fill="#F2FFE4" />
-          <text x="12" y="288" fontSize="12" fontWeight="700" letterSpacing="1.2" fill="#162557" className="wide">FLAT</text>
-          <rect x="320" y="266" width="140" height="34" fill="#F2FFE4" />
-          <text x="332" y="288" fontSize="12" fontWeight="700" letterSpacing="1.2" fill="#162557" className="wide">GRAIN</text>
+          <rect x="0" y="256" width="150" height="44" fill="#F2FFE4" />
+          <text x="12" y="285" fontSize="20" fontWeight="700" letterSpacing="1.2" fill="#162557" className="wide">FLAT</text>
+          <rect x="320" y="256" width="150" height="44" fill="#F2FFE4" />
+          <text x="332" y="285" fontSize="20" fontWeight="700" letterSpacing="1.2" fill="#162557" className="wide">GRAIN</text>
         </Art>
         <figcaption className={s.cap}>
           <strong>With and without grain</strong>

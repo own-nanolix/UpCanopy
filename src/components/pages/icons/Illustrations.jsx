@@ -14,7 +14,7 @@ const wide = { fontFamily: 'var(--font-wide)' };
 
 // Two grounds per subject: light (slide grey or Green Ligth) and dark (navy or Green Dark).
 function theme(dark, ground) {
-  if (!dark) return { bg: ground === 'mint' ? '#F2FFE4' : '#F0F0F0', ink: '#162557', accent: '#26CF7B', soft: '#DADADA', ring: '#0FA05C', on: '#162557' };
+  if (!dark) return { bg: ground === 'mint' ? '#F2FFE4' : '#F0F0F0', ink: '#162557', accent: '#26CF7B', soft: '#DADADA', ring: '#086338', on: '#162557' };
   return { bg: ground === 'dark' ? '#052E25' : '#162557', ink: '#FFFFFF', accent: '#26CF7B', soft: ground === 'dark' ? '#8FC9B5' : '#6F78B8', ring: '#8FC9B5', on: '#162557' };
 }
 
@@ -55,8 +55,8 @@ function Rise({ t }) {
         )),
       )}
       <path d="M430 470H776" stroke={t.ink} strokeWidth="6" />
-      <text x="60" y="520" fontSize="15" fontWeight="500" letterSpacing="1.5" fill={t.ink} className="wide" style={wide}>{MODES[0].toUpperCase()}</text>
-      <text x="776" y="520" fontSize="15" fontWeight="500" letterSpacing="1.5" fill={t.ink} textAnchor="end" className="wide" style={wide}>{MODES[1].toUpperCase()}</text>
+      <text x="60" y="520" fontSize="15" fontWeight="500" letterSpacing="1.5" fill={t.ink} className="wide" style={wide} lang="pt-BR">{MODES[0].toUpperCase()}</text>
+      <text x="776" y="520" fontSize="15" fontWeight="500" letterSpacing="1.5" fill={t.ink} textAnchor="end" className="wide" style={wide} lang="pt-BR">{MODES[1].toUpperCase()}</text>
       <ScaleDotsG x={70} y={60} w={300} r={6} chosen={8} on={t.accent} off={t.soft} />
     </>
   );
@@ -84,15 +84,16 @@ function Desks({ t }) {
 
 const SCENES = [
   { key: 'canopy', name: 'The canopy', Scene: Canopy, light: 'slide', dark: 'navy', note: 'The arch as a treetop, blocks sheltered beneath it.' },
-  { key: 'rise', name: 'From sobrevivência to expansão', Scene: Rise, light: 'mint', dark: 'dark', note: 'Scattered blocks become one ordered, rising stack.', pt: true },
+  { key: 'rise', name: 'From sobrevivência to expansão', Scene: Rise, light: 'mint', dark: 'dark', note: 'Scattered blocks become one ordered, rising stack.',
+    head: <>From <span lang="pt-BR">{MODES[0]}</span> to <span lang="pt-BR">{MODES[1]}</span></> },
   { key: 'desks', name: 'The three desks', Scene: Desks, light: 'slide', dark: 'navy', note: 'CRM, Agenda and Financeiro, linked, under one arch.' },
 ];
 
-function Pair({ sc, i }) {
+function Pair({ sc }) {
   return (
     <Reveal delay={60} className={s.pair}>
       <div className={s.pairHead}>
-        <h3 className="t-caps-lg" lang={sc.pt ? 'pt-BR' : undefined}>{sc.name}</h3>
+        <h3 className="t-caps-lg">{sc.head || sc.name}</h3>
         <p className="t-small">{sc.note}</p>
       </div>
       <div className={s.pairArts}>
@@ -104,7 +105,7 @@ function Pair({ sc, i }) {
                 <rect width={W} height={H} fill={t.bg} />
                 <sc.Scene t={t} />
               </Art>
-              <figcaption className="t-label">{dark ? 'Dark' : 'Light'} 0{i + 1}</figcaption>
+              <figcaption className="t-label">{dark ? 'Dark' : 'Light'}</figcaption>
             </figure>
           );
         })}
@@ -117,7 +118,6 @@ export default function Illustrations() {
   return (
     <section id="icons-illustrations" aria-labelledby="icons-illustrations-h">
       <Reveal>
-        <p className="t-label">Deliverable 04</p>
         <h2 id="icons-illustrations-h" className="t-h2">
           Illustrations, <span className="strong">light and dark</span>
         </h2>
@@ -127,8 +127,8 @@ export default function Illustrations() {
         </p>
       </Reveal>
       <div className={s.pairs}>
-        {SCENES.map((sc, i) => (
-          <Pair key={sc.key} sc={sc} i={i} />
+        {SCENES.map((sc) => (
+          <Pair key={sc.key} sc={sc} />
         ))}
       </div>
     </section>

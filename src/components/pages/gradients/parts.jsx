@@ -3,26 +3,28 @@
 import { r2 } from '@/lib/charts';
 
 // The six brand gradients, named plainly from what they are. `v` is the vector [x1, y1, x2, y2] in the unit box
-// (0,1 is the lower left corner, 1,0 the upper right one).
+// (0,1 is the lower left corner, 1,0 the upper right one). Directions are read from the references: the box lid,
+// truck and wall sign rise from lower left to upper right; the folder cover and window panel fall from green at the top
+// to pale at the bottom.
 export const GRADS = [
   { key: 'ocean-park', name: 'Ocean to Park', kind: 'linear', v: [0, 1, 1, 0], stops: [[0.1, '#162557'], [0.6, '#1C5C66'], [1, '#26CF7B']],
     seen: 'Box lid, truck, wall sign', grain: 0.16, dots: false },
   { key: 'dark-ocean', name: 'Dark Green to Ocean', kind: 'linear', v: [0.2, 1, 0.8, 0], stops: [[0, '#052E25'], [1, '#162557']],
     seen: 'Citylight', grain: 0.16, dots: false },
   { key: 'mint-paper', name: 'Mint Paper', kind: 'linear', v: [1, 0, 0, 1], stops: [[0, '#F8FFF4'], [1, '#BFEFD3']],
-    seen: 'Letter, window panel', grain: 0.06, dots: true },
-  { key: 'park-pale', name: 'Park to Pale Green', kind: 'linear', v: [0, 1, 1, 0], stops: [[0, '#26CF7B'], [0.55, '#6FE0A5'], [1, '#BFEFD3']],
-    seen: 'Folder cover', grain: 0.1, dots: false },
+    seen: 'Letter, mint folder', grain: 0.06, dots: true },
+  { key: 'park-pale', name: 'Park to Pale Green', kind: 'linear', v: [0.35, 0, 0.65, 1], stops: [[0, '#26CF7B'], [0.55, '#6FE0A5'], [1, '#BFEFD3']],
+    seen: 'Folder cover, window panel', grain: 0.1, dots: false },
   { key: 'dark-field', name: 'Dark Green Field', kind: 'radial', base: '#052E25', c: [0.72, 0.24, 0.85], stops: [[0, '#17624D'], [1, '#052E25']],
     seen: 'Poster', grain: 0.2, dots: false },
   { key: 'navy-ground', name: 'Deep Navy Ground', kind: 'radial', base: '#0C1445', c: [0.5, 0.32, 0.9], stops: [[0, '#162557'], [1, '#0C1445']],
-    seen: 'Studio sweep', grain: 0.1, dots: false },
+    seen: 'Folder and pattern grounds', grain: 0.1, dots: false },
 ];
 
 export const gradById = (key) => GRADS.find((g) => g.key === key);
 
-// Angle of a linear gradient on a square box, in degrees counter-clockwise from the right.
-export const angleOf = (g) => Math.round((Math.atan2(g.v[1] - g.v[3], g.v[2] - g.v[0]) * 180) / Math.PI);
+// Angle of a linear gradient on a square box, in degrees counter-clockwise from the right (0 to 359).
+export const angleOf = (g) => (Math.round((Math.atan2(g.v[1] - g.v[3], g.v[2] - g.v[0]) * 180) / Math.PI) + 360) % 360;
 
 export const specOf = (g) =>
   g.kind === 'linear'

@@ -10,7 +10,6 @@ export default function IconSheet() {
   return (
     <section aria-labelledby="icons-sheet-h">
       <Reveal>
-        <p className="t-label">Deliverable 01</p>
         <h2 id="icons-sheet-h" className="t-h2">
           The icon sheet, <span className="strong">32 icons</span>
         </h2>

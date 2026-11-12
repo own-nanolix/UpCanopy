@@ -24,16 +24,16 @@ const PAIRS = [
   {
     key: 'bounce',
     title: 'Rise and lock',
-    doText: 'Do: rise and lock with a tiny overshoot (ease-lock).',
-    dontText: 'Do not: bounce.',
+    doText: 'Rise and lock with a tiny overshoot (ease-lock).',
+    dontText: 'Bounce.',
     doStage: (run) => <motion.div key={run} className={s.ddBlock} initial={run ? { y: 0 } : false} animate={{ y: RISE }} transition={tr(tLock.duration, tLock.ease)} />,
     dontStage: (run) => <motion.div key={run} className={s.ddBlock} initial={run ? { y: 0 } : false} animate={{ y: [0, RISE, -30, RISE, -58, RISE] }} transition={tr(dur.d5, ease.inOut)} />,
   },
   {
     key: 'stagger',
     title: 'Stagger in order',
-    doText: 'Do: fan one by one, 45 ms apart.',
-    dontText: 'Do not: animate everything at once.',
+    doText: 'Fan one by one, 45 ms apart.',
+    dontText: 'Animate everything at once.',
     doStage: (run) =>
       range(10).map((i) => (
         <motion.div key={`${run}-${i}`} className={s.ddBar} initial={run ? { scaleY: 0 } : false} animate={{ scaleY: 1 }} transition={tr(dur.d4, ease.out, i * stagger)} />
@@ -46,8 +46,8 @@ const PAIRS = [
   {
     key: 'axis',
     title: 'Straight axes',
-    doText: 'Do: move on a straight axis.',
-    dontText: 'Do not: spin the mark.',
+    doText: 'Move on a straight axis.',
+    dontText: 'Spin the mark.',
     doStage: (run) => (
       <motion.div key={run} style={{ alignSelf: 'center' }} initial={run ? { opacity: 0, y: 24 } : false} animate={{ opacity: 1, y: 0 }} transition={tr(tEnter.duration, tEnter.ease)}>
         <Mini id="do" />

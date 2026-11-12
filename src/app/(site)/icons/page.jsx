@@ -19,9 +19,8 @@ export default function Page() {
         <div className="split-main">
           <section className={s.intro} aria-labelledby="icons-intro-h">
             <Reveal>
-              <p className="t-label">Icons and illustration</p>
               <h1 id="icons-intro-h" tabIndex={-1} className="t-h1">
-                Thick lines, <span className="strong">defined angles</span>
+                Icons and <span className="strong">illustration</span>
               </h1>
               <p className="t-lead" style={{ maxWidth: 680, marginTop: 14 }}>
                 The set is drawn in the language of the mark: <span lang="pt-BR">linhas grossas e ângulos bem definidos</span>.

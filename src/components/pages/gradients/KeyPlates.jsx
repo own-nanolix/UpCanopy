@@ -1,9 +1,9 @@
 // Six key-art plates built only from the brand's own geometry: the frond, the mark and its crop, the
 // construction circles, thick cut bands, the ten-dot row and the giant word-mark.
 import Art from '@/components/art/Art';
-import { FrondG, ConstructionG, ScaleDotsG } from '@/components/art/KeyArt';
+import { FrondG, ConstructionG, ScaleDotsG, FROND_TONES } from '@/components/art/KeyArt';
 import { MarkG, MarkCropG, WordmarkG, WordmarkVerticalG, DescriptorG } from '@/components/art/Mark';
-import { LINES } from '@/lib/brand';
+import { LINES, CONTACT, HEX } from '@/lib/brand';
 import { bandPath, r2 } from '@/lib/charts';
 import { gradById, GradDef, GrainDef, DotsDef, GradRect } from './parts';
 import s from './gradients.module.css';
@@ -33,7 +33,7 @@ function Rising() {
   const idp = 'gradients-k1';
   return (
     <Plate n={1} ratio="0 0 800 1000" title="Rising frond on the navy to green gradient with the vertical word-mark" exportName="gradients-key-rising-frond"
-      caption="Rising frond" spec="4:5. Frond on Blue Ocean, vertical word-mark, mark top right" className={s.k1}>
+      caption="Rising frond" spec="4:5. Frond on Blue Ocean, vertical word-mark, mark bottom right" className={s.k1}>
       <defs>
         <GradDef idp={idp} g={G.rise} />
         <GrainDef idp={idp} amt={0.16} />
@@ -41,9 +41,9 @@ function Rising() {
       </defs>
       <g clipPath={`url(#${idp}-clip)`}>
         <GradRect idp={idp} g={G.rise} w={800} h={1000} />
-        <FrondG cx={860} cy={560} r={470} a0={100} a1={262} count={38} len={400} width={14} lean={52} tone="onNavy" />
+        <FrondG cx={860} cy={520} r={470} a0={104} a1={258} count={38} len={330} width={14} lean={52} tone="onNavy" />
         <WordmarkVerticalG x={44} y={960} size={150} fill={MINT} />
-        <MarkG x={684} y={44} size={72} fill="#26CF7B" />
+        <MarkG x={684} y={900} size={72} fill="#26CF7B" />
       </g>
     </Plate>
   );
@@ -52,11 +52,9 @@ function Rising() {
 // 2. Landscape 16:9. The frond entering from the left edge on Green Dark, with a brand line.
 function Poster() {
   const idp = 'gradients-k2';
-  const w = LINES.level.split(' ');
-  const last = w.pop();
   return (
     <Plate n={2} ratio="0 0 1600 900" title="Pale frond sweeping in from the left on dark green with a brand line" exportName="gradients-key-poster-frond"
-      caption="Poster frond" spec="16:9. Frond on Green Dark, brand line top right" className={s.k2}>
+      caption="Poster frond" spec="16:9. As the poster: frond down the left on Green Dark, brand line top right, mark lower left, contacts lower right" className={s.k2}>
       <defs>
         <GradDef idp={idp} g={G.dark} />
         <GrainDef idp={idp} amt={0.2} />
@@ -64,11 +62,17 @@ function Poster() {
       </defs>
       <g clipPath={`url(#${idp}-clip)`}>
         <GradRect idp={idp} g={G.dark} w={1600} h={900} />
-        <FrondG cx={150} cy={1060} r={760} a0={250} a1={352} count={40} len={560} width={17} lean={38} tone="onDark" />
-        <text x="1500" y="150" fontSize="58" fontWeight="300" textAnchor="end" fill={MINT} lang="pt-BR">
-          {w.join(' ')} <tspan fontWeight="700" fill="#26CF7B">{last}</tspan>
+        <FrondG cx={150} cy={1060} r={760} a0={252} a1={336} count={40} len={470} width={17} lean={38} tone="onDark" />
+        <text x="1510" y="120" fontSize="50" fontWeight="300" textAnchor="end" fill={MINT} lang="pt-BR">
+          {LINES.bridge.rows4.map((row, i) => (
+            <tspan key={row} x="1510" dy={i ? 60 : 0} fontWeight={row === LINES.bridge.strong ? 700 : 300} fill={row === LINES.bridge.strong ? HEX.green : MINT}>{row}</tspan>
+          ))}
         </text>
-        <MarkG x={1450} y={780} size={60} fill="#26CF7B" />
+        <MarkG x={80} y={770} size={80} fill={HEX.green} />
+        <text x="1510" y="802" fontSize="24" textAnchor="end" fill={MINT}>
+          <tspan x="1510">{CONTACT.phone}</tspan>
+          <tspan x="1510" dy="30">{CONTACT.web}</tspan>
+        </text>
       </g>
     </Plate>
   );
@@ -106,7 +110,7 @@ function Banner() {
       <g clipPath={`url(#${idp}-clip)`}>
         <GradRect idp={idp} g={G.deep} w={1500} h={500} />
         <WordmarkG x={-70} y={330} size={330} fill="#26CF7B" />
-        <ScaleDotsG x={60} y={452} w={1380} r={11} chosen={8} off="#2B397F" on="#26CF7B" />
+        <ScaleDotsG x={60} y={452} w={1380} r={11} chosen={8} off={FROND_TONES.onNavy.a} on="#26CF7B" />
       </g>
     </Plate>
   );
@@ -141,10 +145,10 @@ function Canopy() {
 // 6. Landscape 3:2. The whole mark over its own construction circles on the rising gradient.
 function Construction() {
   const idp = 'gradients-k6';
-  const close = LINES.close.replace('UpCanopy. ', '');
+  const strong = LINES.ceo.strong;
   return (
     <Plate n={6} ratio="0 0 1200 800" title="The mark over its construction circles on the rising gradient" exportName="gradients-key-construction"
-      caption="Construction" spec="3:2. Whole mark in Green Ligth over the dashed construction circles" className={s.k6}>
+      caption="Construction" spec="3:2. Whole mark in Green Ligth over the dashed construction circles, the folder line bottom left" className={s.k6}>
       <defs>
         <GradDef idp={idp} g={G.rise} />
         <GrainDef idp={idp} amt={0.16} />
@@ -154,8 +158,14 @@ function Construction() {
         <GradRect idp={idp} g={G.rise} w={1200} h={800} />
         <ConstructionG x={330} y={-30} size={840} rings={9} stroke={MINT} strokeWidth={0.35} opacity={0.55} />
         <MarkG x={510} y={150} size={480} fill={MINT} />
-        <text x="60" y="720" fontSize="36" fontWeight="300" fill={MINT} lang="pt-BR">
-          <tspan fontWeight="700">UpCanopy.</tspan> {close}
+        <text x="60" y="594" fontSize="34" fontWeight="300" fill={MINT} lang="pt-BR">
+          {LINES.ceo.rows.map((row, i) => (
+            <tspan key={row} x="60" dy={i ? 42 : 0}>
+              {row.split(' ').map((w, k) => (
+                <tspan key={k} fontWeight={strong.includes(w) ? 700 : 300}>{(k ? ' ' : '') + w}</tspan>
+              ))}
+            </tspan>
+          ))}
         </text>
       </g>
     </Plate>

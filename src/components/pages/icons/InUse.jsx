@@ -90,7 +90,6 @@ function SignArt() {
 function Card({ n, title, note, art, live }) {
   return (
     <Reveal delay={n * 80} className={s.useCard}>
-      <p className="t-label">Example 0{n}</p>
       <h3 className="t-caps-lg">{title}</h3>
       <div className={s.useStage}>{art}</div>
       <div className={s.useLive}>
@@ -108,7 +107,6 @@ export default function InUse() {
   return (
     <section id="icons-use" aria-labelledby="icons-use-h">
       <Reveal>
-        <p className="t-label">Deliverable 03</p>
         <h2 id="icons-use-h" className="t-h2">
           Icons <span className="strong">in use</span>
         </h2>

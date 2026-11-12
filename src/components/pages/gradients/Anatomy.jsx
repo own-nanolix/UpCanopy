@@ -19,7 +19,7 @@ function Drawing({ gkey, exportName }) {
   const rad = (ang * Math.PI) / 180;
   const R = 74;
   const stops = g.stops.map(([o, c], i) => ({ o, c, i, px: r2(sx + o * (ex - sx)), py: r2(sy + o * (ey - sy)), ly: r2(sy + o * (ey - sy) - 8) }));
-  const barY = Y0 + S + 38;
+  const barY = Y0 + S + 46;
   return (
     <figure className={s.fig}>
       <Art viewBox="0 0 900 540" title={`Anatomy of ${g.name}: stops, offsets and angle`} exportName={exportName} className={s.wide}>
@@ -48,7 +48,7 @@ function Drawing({ gkey, exportName }) {
         <path d={`M${sx} ${sy}H${r2(sx + R + 34)}`} stroke={INK} strokeWidth="1.4" strokeDasharray="5 4" />
         <path d={`M${r2(sx + R)} ${sy}A${R} ${R} 0 0 0 ${r2(sx + R * Math.cos(rad))} ${r2(sy - R * Math.sin(rad))}`} fill="none" stroke="#fff" strokeWidth="4" />
         <path d={`M${r2(sx + R)} ${sy}A${R} ${R} 0 0 0 ${r2(sx + R * Math.cos(rad))} ${r2(sy - R * Math.sin(rad))}`} fill="none" stroke={INK} strokeWidth="1.6" />
-        <text x={r2(sx + (R + 22) * Math.cos(rad / 2))} y={r2(sy - (R + 22) * Math.sin(rad / 2) + 5)} fontSize="15" fontWeight="700" fill={INK} stroke="#fff" strokeWidth="4" paintOrder="stroke" textAnchor="middle">{ang}°</text>
+        <text x={r2(sx + (R + 30) * Math.cos(rad / 2))} y={r2(sy - (R + 30) * Math.sin(rad / 2) + 5)} fontSize="15" fontWeight="700" fill={INK} stroke="#fff" strokeWidth="4" paintOrder="stroke" textAnchor="middle">{ang}°</text>
 
         {/* stops: points, leaders, labels */}
         {stops.map((t) => (
@@ -69,8 +69,8 @@ function Drawing({ gkey, exportName }) {
         <text x={X0 + S / 2} y={barY + 62} fontSize="12" textAnchor="middle" fill="#4A5568">Offset along the gradient line, 0% to 100%</text>
         {[0, ...g.stops.map(([o]) => o), 1].filter((o, i, a) => a.indexOf(o) === i).map((o) => (
           <g key={o}>
-            <path d={`M${r2(X0 + o * S)} ${barY}V${barY + 32}`} stroke={INK} strokeWidth="1.4" />
-            <text x={r2(X0 + o * S)} y={barY + 14} fontSize="11" fontWeight="700" textAnchor="middle" fill="#fff" stroke={INK} strokeWidth="3" paintOrder="stroke">{Math.round(o * 100)}%</text>
+            <path d={`M${r2(X0 + o * S)} ${barY - 4}V${barY + 32}`} stroke={INK} strokeWidth="1.4" />
+            <text x={r2(X0 + o * S)} y={barY - 8} fontSize="12" fontWeight="700" textAnchor={o === 0 ? 'start' : o === 1 ? 'end' : 'middle'} fill={INK}>{Math.round(o * 100)}%</text>
           </g>
         ))}
       </Art>

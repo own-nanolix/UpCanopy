@@ -61,7 +61,7 @@ function Toasts() {
   return (
     <Bcard title="Toasts" spec="Slide in 24 px with tEnter, leave with tMove.">
       <div className={s.btns}>
-        <Button size="sm" variant="navy" onClick={() => toast('Locked in place')}>Show toast</Button>
+        <Button size="sm" variant="navy" onClick={() => toast('Toast')}>Show toast</Button>
       </div>
     </Bcard>
   );

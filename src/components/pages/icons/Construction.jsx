@@ -3,6 +3,7 @@ import { ConstructionG } from '@/components/art/KeyArt';
 import Reveal from '@/components/site/Reveal';
 import { range } from '@/lib/site';
 import { CORE } from '@/components/site/icons';
+import { HEX } from '@/lib/brand';
 import { Glyph } from './data';
 import s from './icons.module.css';
 
@@ -18,7 +19,7 @@ function Plate({ name }) {
   return (
     <Art viewBox="0 0 480 480" title={`${name} icon construction on the pixel grid`} exportName={`icons-construction-${name}`} className={s.plateSvg}>
       <rect width="480" height="480" fill="#FFFFFF" />
-      <ConstructionG x={O} y={O} size={24 * K} rings={9} stroke="#0FA05C" strokeWidth={0.3} />
+      <ConstructionG x={O} y={O} size={24 * K} rings={9} stroke={HEX.greenInk} strokeWidth={0.3} />
       {range(25).map((i) => (
         <g key={i} stroke="#162557" strokeWidth={i % 12 === 0 ? 1.2 : 0.6} opacity={i % 12 === 0 ? 0.5 : 0.18}>
           <path d={`M${O + i * K} ${O}V${O + 24 * K}`} />
@@ -64,7 +65,6 @@ export default function Construction() {
   return (
     <section id="icons-construction" aria-labelledby="icons-construction-h">
       <Reveal>
-        <p className="t-label">Deliverable 02</p>
         <h2 id="icons-construction-h" className="t-h2">
           Construction on the <span className="strong">pixel grid</span>
         </h2>
@@ -87,9 +87,9 @@ export default function Construction() {
                 <Sizes name={p.name} />
               </div>
               <ul className={s.legend}>
-                <li><i style={{ background: '#26CF7B' }} />Stroke centre line</li>
-                <li><i style={{ background: '#B3261E' }} />2 px margin</li>
-                <li><i style={{ background: '#0FA05C' }} />Construction circles</li>
+                <li><i style={{ background: 'var(--green)' }} />Stroke centre line</li>
+                <li><i style={{ background: 'var(--red-ink)' }} />2 px margin</li>
+                <li><i style={{ background: 'var(--green-ink)' }} />Construction circles</li>
               </ul>
             </div>
           </Reveal>

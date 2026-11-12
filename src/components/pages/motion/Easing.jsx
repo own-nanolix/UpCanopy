@@ -17,7 +17,7 @@ const TOKENS = [
   { key: 'lock', css: 'ease-lock', note: 'The last pixels of a piece locking in', e: ease.lock },
 ];
 
-const X0 = 50, Y0 = 230, S = 170;
+const X0 = 50, Y0 = 254, S = 170;
 const px = (x) => r2(X0 + x * S);
 const py = (y) => r2(Y0 - y * S);
 
@@ -28,8 +28,8 @@ function CurvePlate({ id, name, e }) {
   const navy = '#162557';
   const green = '#26CF7B';
   return (
-    <Art className={s.plate} viewBox="0 0 300 290" title={`Easing curve ${name}: ${values}`} exportName={`motion-${id}`}>
-      <rect width="300" height="290" fill="#FFFFFF" />
+    <Art className={s.plate} viewBox="0 0 300 314" title={`Easing curve ${name}: ${values}`} exportName={`motion-${id}`}>
+      <rect width="300" height="314" fill="#FFFFFF" />
       {range(5, (i) => i / 4).map((t) => (
         <g key={t}>
           <line x1={px(t)} y1={py(0)} x2={px(t)} y2={py(1)} stroke="#DADADA" strokeWidth="1" />
@@ -49,25 +49,28 @@ function CurvePlate({ id, name, e }) {
       <circle cx={px(a)} cy={py(b)} r="7" fill={green} stroke={navy} strokeWidth="2" />
       <circle cx={px(c)} cy={py(d)} r="7" fill={green} stroke={navy} strokeWidth="2" />
       <text x="8" y="22" fontSize="16" fontWeight="700" fill={navy} className="wide" style={{ fontFamily: 'var(--font-wide)' }}>{`ease.${name}`}</text>
-      <text x="8" y="280" fontSize="14" fill={navy}>{values}</text>
+      <text x="8" y="306" fontSize="14" fill={navy}>{values}</text>
     </Art>
   );
 }
 
 function EaseRow({ t }) {
   const [run, setRun] = useState(0);
-  const H = 132, B = 32;
+  // One horizontal lane per token: the block crosses the lane in 800 ms on that curve and stops on the end line.
   return (
     <div className={s.easeRow}>
-      <div>
+      <div className={s.easePlate}>
         <CurvePlate id={`ease-${t.css.replace('ease-', '')}`} name={t.key} e={t.e} />
       </div>
       <div className={s.laneCol}>
+        <p className={s.laneNote}><b>{`--${t.css}`}</b> 800 ms. {t.note}</p>
         <motion.div className={s.track} onViewportEnter={() => setRun((r) => r + 1)} viewport={{ once: true, amount: 0.6 }}>
-          <motion.div key={run} className={s.block} initial={run ? { y: 0 } : false} animate={{ y: -(H - B) }} transition={tr(dur.d4, t.e)} />
+          <span className={s.endLine} aria-hidden="true" />
+          <motion.div key={run} className={s.runner} initial={run ? { x: '0%' } : false} animate={{ x: '100%' }} transition={tr(dur.d4, t.e)}>
+            <span className={s.block} />
+          </motion.div>
         </motion.div>
         <Button size="sm" variant="navy" icon="play" onClick={() => setRun((r) => r + 1)}>Play</Button>
-        <p className={s.laneNote}>{`--${t.css}`}<br />800 ms. {t.note}</p>
       </div>
     </div>
   );

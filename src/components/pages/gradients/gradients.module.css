@@ -2,7 +2,7 @@
 
 .rail.rail {
   padding: 0;
-  background-image: linear-gradient(35deg, #162557 14%, #1c5c66 52%, #26cf7b 100%);
+  background-image: linear-gradient(35deg, var(--navy) 14%, #1c5c66 52%, var(--green) 100%);
   background-size: 260% 260%;
   background-position: 0% 100%;
   animation: gradients-drift 26s var(--ease-in-out) infinite alternate;
@@ -58,8 +58,7 @@
   .libGrid, .motionGrid { grid-template-columns: minmax(0, 1fr); }
   .keyGrid { grid-template-columns: minmax(0, 1fr); }
   .k1, .k2, .k3, .k4, .k5, .k6 { grid-column: 1 / -1; }
-  .grainGrid { grid-template-columns: minmax(0, 1fr); }
-  .span2, .recipe { grid-column: span 1; }
+  .recipe { grid-column: 1 / -1; }
 }
 
 /* ---------- Motion studies (the un-animated markup is the finished frame) ---------- */
