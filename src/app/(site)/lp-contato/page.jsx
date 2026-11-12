@@ -1,5 +1,5 @@
 import { pageMeta } from '@/lib/pages';
-import { LINES, PILLARS, PALETTE, CONTACT } from '@/lib/brand';
+import { LINES, PALETTE, CONTACT } from '@/lib/brand';
 import Reveal from '@/components/site/Reveal';
 import CopyValue from '@/components/site/CopyValue';
 import Button from '@/components/ui/Button';
@@ -41,7 +41,7 @@ export default function Page() {
         <div className="wrap">
           <Reveal>
             <h2 id="lp-contato-plates-h" className="t-caps-lg">Business card plates</h2>
-            <p className="t-small on-navy" style={{ marginTop: 8 }}>Printed proportion 1.75 : 1. Front and back are exportable.</p>
+            <p className="t-small on-navy" style={{ marginTop: 8 }}>Drawn at 1.75 : 1. Front and back are exportable.</p>
           </Reveal>
           <div className={s.plateGrid}>
             <Reveal className={s.plate}>
@@ -114,22 +114,6 @@ export default function Page() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className={`band ${s.strip}`} aria-labelledby="lp-contato-pillars-h">
-        <div className="wrap">
-          <Reveal>
-            <h2 id="lp-contato-pillars-h" className="sr-only">Pillars</h2>
-            <ul className={s.pillars} lang="pt-BR">
-              {PILLARS.map((p, k) => (
-                <li key={p} className={`${s.pillar} ${s[`pl${k}`]}`}>
-                  <span className={s.pillarNo}>{`0${k + 1}`}</span>
-                  <span className={s.pillarWord}>{p}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
         </div>
       </section>
 

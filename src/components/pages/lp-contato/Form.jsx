@@ -8,13 +8,13 @@ import s from './lp-contato.module.css';
 
 const EMPTY = { name: '', email: '', tel: '', message: '' };
 const REQUIRED = ['name', 'email', 'message'];
-const NAMES = { name: 'Name', email: 'Email', tel: 'Telephone', message: 'Message' };
+const NAMES = { name: 'Name', email: 'E-mail', tel: 'Telephone', message: 'Message' };
 
 // Pure check: returns the error text for one field, or '' when it is fine.
 function check(key, value) {
   const v = value.trim();
   if (REQUIRED.includes(key) && !v) return `${NAMES[key]} is required`;
-  if (key === 'email' && v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return 'Enter an e-mail address such as name@company.com';
+  if (key === 'email' && v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return 'Enter a full e-mail address, with an @ and a domain';
   return '';
 }
 

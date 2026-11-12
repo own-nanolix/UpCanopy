@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { LINES, MANIFESTO, MODES } from '@/lib/brand';
+import { LINES, MANIFESTO, MODES, HEX } from '@/lib/brand';
 import { Segmented } from '@/components/ui/Toggle';
 import Art from '@/components/art/Art';
 import { MarkG } from '@/components/art/Mark';
@@ -17,7 +17,7 @@ export default function Level() {
   return (
     <div className={s.levelGrid}>
       <div className={s.levelText}>
-        <h2 className="t-display"><span className="strong">{LINES.level}</span></h2>
+        <h2 className="t-display" lang="pt-BR"><span className="strong">{LINES.level}</span></h2>
         <p lang="pt-BR" className="t-lead" style={{ marginTop: 20 }}>{REST}</p>
         <div style={{ marginTop: 28 }} lang="pt-BR">
           <Segmented id="lp-manifesto-mode" label="Mode" options={MODES} value={mode} onChange={setMode} />
@@ -26,21 +26,21 @@ export default function Level() {
       </div>
       <div className={s.levelStage} data-mode={high ? 'high' : 'low'}>
         <Art viewBox="0 0 800 520" title="Two modes: the block lifts from survival to expansion" exportName="lp-manifesto-lift">
-          <rect width="800" height="520" fill="#F2FFE4" />
-          <rect x="0" y="470" width="800" height="50" fill="#162557" />
+          <rect width="800" height="520" fill={HEX.mint} />
+          <rect x="0" y="470" width="800" height="50" fill={HEX.navy} />
           {/* the two levels */}
-          <rect x="60" y="400" width="340" height="14" fill="#162557" />
-          <rect x="400" y="140" width="340" height="14" fill="#26CF7B" />
-          <rect x="386" y="140" width="14" height="330" fill="#162557" />
-          <text x="76" y="436" fontSize="16" fontWeight="500" letterSpacing="1.2" fill="#162557" className="wide" lang="pt-BR">{MODES[0].toUpperCase()}</text>
-          <text x="416" y="126" fontSize="16" fontWeight="500" letterSpacing="1.2" fill="#086338" className="wide" lang="pt-BR">{MODES[1].toUpperCase()}</text>
+          <rect x="60" y="400" width="340" height="14" fill={HEX.navy} />
+          <rect x="400" y="140" width="340" height="14" fill={HEX.green} />
+          <rect x="386" y="140" width="14" height="330" fill={HEX.navy} />
+          <text x="76" y="436" fontSize="16" fontWeight="500" letterSpacing="1.2" fill={HEX.navy} className="wide" lang="pt-BR">{MODES[0].toUpperCase()}</text>
+          <text x="416" y="126" fontSize="16" fontWeight="500" letterSpacing="1.2" fill={HEX.greenInk} className="wide" lang="pt-BR">{MODES[1].toUpperCase()}</text>
           {/* ten-dot scale climbing the right-hand level */}
-          <ScaleDotsG x={430} y={182} w={280} r={9} chosen={high ? 10 : 1} off="#162557" lock />
+          <ScaleDotsG x={430} y={182} w={280} r={9} chosen={high ? 10 : 1} off={HEX.navy} lock />
           {/* the block: low position is the finished state; the lift is a CSS move on the inner group */}
           <g transform="translate(150 280)">
             <g className={s.liftBlock}>
-              <rect width="120" height="120" fill={high ? '#26CF7B' : '#162557'} className={s.liftFill} />
-              <MarkG x={22} y={22} size={76} fill={high ? '#162557' : '#26CF7B'} />
+              <rect width="120" height="120" fill={high ? HEX.green : HEX.navy} className={s.liftFill} />
+              <MarkG x={22} y={22} size={76} fill={high ? HEX.navy : HEX.green} />
             </g>
           </g>
         </Art>

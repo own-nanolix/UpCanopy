@@ -3,15 +3,20 @@
 import { useState } from 'react';
 import { CONTACT, PEOPLE } from '@/lib/brand';
 import LandingNav from '@/components/ui/LandingNav';
+import { WordmarkG } from '@/components/art/Mark';
 import ContactForm from './Form';
 import s from './lp-contato.module.css';
 
-const BACK = [PEOPLE.founder.name, PEOPLE.founder.role, CONTACT.handle, CONTACT.phone, CONTACT.hello, CONTACT.address, CONTACT.webCased];
+// Back of the card as printed (m23): the name with the first name bold, the role under it; then three groups.
+const [FIRST, ...LAST] = PEOPLE.founder.name.split(' ');
+const [STUDIO, ...CITY] = CONTACT.address.split(', ');
+const GROUPS = [[CONTACT.handle, CONTACT.phone, CONTACT.hello], [`${STUDIO},`, CITY.join(', ')]];
 
 // The business card of the case study (navy front with the mark, Green Park back with small dark text) that
 // flips on click or Enter, beside a simple contact form on mint. Nothing is sent.
 export default function Hero() {
   const [flipped, setFlipped] = useState(false);
+  const [touched, setTouched] = useState(false);
   return (
     <header className={s.hero}>
       <LandingNav current="lp-contato" tone="light" />
@@ -21,8 +26,8 @@ export default function Hero() {
           <div className={s.scene}>
             <button
               type="button"
-              className={`${s.flip} ${flipped ? s.flipped : ''}`}
-              onClick={() => setFlipped((v) => !v)}
+              className={`${s.flip} ${flipped ? s.flipped : ''} ${touched ? s.touched : ''}`}
+              onClick={() => { setTouched(true); setFlipped((v) => !v); }}
               aria-pressed={flipped}
               aria-label={`Business card, showing the ${flipped ? 'back' : 'front'}. Press to flip.`}
             >
@@ -30,12 +35,17 @@ export default function Hero() {
                 <svg viewBox="0 0 100 100" className={s.frontMark} aria-hidden="true"><use href="#site-mark" /></svg>
               </span>
               <span className={`${s.face} ${s.back}`} aria-hidden={!flipped}>
-                <span className={s.backBrand}>UpCanopy</span>
+                {/* the word-mark is a logo: drawn as SVG text in white, as printed */}
+                <svg className={s.backBrand} viewBox="0 0 200 40" aria-hidden="true"><WordmarkG x={200} y={31} size={40} fill="currentColor" anchor="end" /></svg>
                 <span className={s.backName}>
-                  {BACK.slice(0, 2).map((t) => <span key={t}>{t}</span>)}
+                  <span><b>{FIRST}</b> {LAST.join(' ')}</span>
+                  <span className={s.backRole}>{PEOPLE.founder.role}</span>
                 </span>
                 <span className={s.backLines}>
-                  {BACK.slice(2).map((t) => <span key={t}>{t}</span>)}
+                  {GROUPS.map((g) => (
+                    <span key={g[0]} className={s.backGroup}>{g.map((t) => <span key={t}>{t}</span>)}</span>
+                  ))}
+                  <b>{CONTACT.webCased}</b>
                 </span>
               </span>
             </button>

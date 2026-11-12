@@ -1,4 +1,4 @@
-import { CONTACT, LINES, PEOPLE } from '@/lib/brand';
+import { CONTACT, HEX, LINES, PEOPLE } from '@/lib/brand';
 import Art from '@/components/art/Art';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { BrandDefs } from '@/components/art/KeyArt';
@@ -11,11 +11,11 @@ export function CardFront() {
     <Art viewBox="0 0 740 440" title="Business card front: Green Park mark on navy, green painted edges" exportName="lp-contato-card-front">
       <BrandDefs idp="lp-contato-cf" />
       {edges.map((e) => (
-        <rect key={e} x={20 - e * 3} y={20 + e * 3} width="700" height="400" fill={e % 2 ? '#26CF7B' : '#1FB36A'} />
+        <rect key={e} x={20 - e * 3} y={20 + e * 3} width="700" height="400" fill={HEX.green} stroke={HEX.greenDark} strokeOpacity="0.22" strokeWidth="1" />
       ))}
       <g>
-        <rect x="20" y="20" width="700" height="400" fill="#162557" filter="url(#lp-contato-cf-grain)" />
-        <MarkG x={290} y={110} size={160} fill="#26CF7B" archClass="roof-arch" barClass="roof-bar" />
+        <rect x="20" y="20" width="700" height="400" fill={HEX.navy} filter="url(#lp-contato-cf-grain)" />
+        <MarkG x={290} y={140} size={160} fill={HEX.green} archClass="roof-arch" barClass="roof-bar" />
       </g>
     </Art>
   );
@@ -27,15 +27,15 @@ export function CardBack() {
   return (
     <Art viewBox="0 0 740 440" title="Business card back: Green Park with the details as printed" exportName="lp-contato-card-back">
       <BrandDefs idp="lp-contato-cb" />
-      <rect x="20" y="20" width="700" height="400" fill="#26CF7B" filter="url(#lp-contato-cb-grain)" />
-      <g fill="#162557" className="wide" style={{ fontFamily: 'var(--font-wide)' }}>
+      <rect x="20" y="20" width="700" height="400" fill={HEX.green} filter="url(#lp-contato-cb-grain)" />
+      <g fill={HEX.navy} className="wide" style={{ fontFamily: 'var(--font-wide)' }}>
         <text x="60" y="72" fontSize="17" fontWeight="700" letterSpacing="0.6">
           {first} <tspan fontWeight="400">{rest.join(' ')}</tspan>
         </text>
         <text x="60" y="94" fontSize="13" fontWeight="400" letterSpacing="0.6">{f.role}</text>
       </g>
-      <WordmarkG x={680} y={78} size={30} fill="#162557" anchor="end" />
-      <g fill="#162557" fontSize="17" fontWeight="500">
+      <WordmarkG x={680} y={78} size={30} fill={HEX.white} anchor="end" />
+      <g fill={HEX.navy} fontSize="17" fontWeight="500">
         <text x="60" y="206">{CONTACT.handle}</text>
         <text x="60" y="232">{CONTACT.phone}</text>
         <text x="60" y="258">{CONTACT.hello}</text>
@@ -49,9 +49,9 @@ export function CardBack() {
 
 // The contact line of the folders and the envelope ("+1 (774) 360-7800 | upcanopy.com") as a strip on each ground.
 const GROUNDS = {
-  navy: { bg: '#162557', ink: '#FFFFFF', mark: '#26CF7B', name: 'navy' },
-  green: { bg: '#26CF7B', ink: '#162557', mark: '#162557', name: 'Green Park' },
-  mint: { bg: '#DFF7E6', ink: '#162557', mark: '#162557', name: 'mint' },
+  navy: { bg: HEX.navy, ink: HEX.white, mark: HEX.green, name: 'navy' },
+  green: { bg: HEX.green, ink: HEX.navy, mark: HEX.navy, name: 'Green Park' },
+  mint: { bg: HEX.mintPaper, ink: HEX.navy, mark: HEX.navy, name: 'mint' },
 };
 export function Strip({ tone }) {
   const g = GROUNDS[tone];
@@ -74,8 +74,8 @@ export function Strip({ tone }) {
 // word bold, contacts small at bottom right, a big quiet field between. One artboard on the rising gradient and
 // one on mint, with the frond entering from the lower left on the gradient.
 const HABIT = {
-  rise: { fill: 'url(#lp-contato-lay-rise-rise)', ink: '#FFFFFF', mark: '#26CF7B', strong: '#26CF7B', title: 'on the navy-to-green gradient' },
-  mint: { fill: '#F2FFE4', ink: '#162557', mark: '#162557', strong: '#162557', title: 'on mint' },
+  rise: { fill: 'url(#lp-contato-lay-rise-rise)', ink: HEX.white, mark: HEX.green, strong: HEX.white, title: 'on the navy-to-green gradient' },
+  mint: { fill: HEX.mint, ink: HEX.navy, mark: HEX.navy, strong: HEX.navy, title: 'on mint' },
 };
 export function Layout({ tone }) {
   const h = HABIT[tone];

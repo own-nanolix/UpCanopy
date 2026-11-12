@@ -9,31 +9,38 @@ import s from './lp-contato.module.css';
 
 // Only details printed in the case study; "printed on" names the pieces where SOURCE.md shows each one.
 const PICKS = [
-  { id: 'phone', label: 'Phone', rows: [{ v: CONTACT.phone, n: 'telephone number' }], on: ['Business card', 'Envelope', 'Folder', 'Poster'] },
-  { id: 'sac', label: 'Sac', rows: [{ v: CONTACT.sac, n: 'sac e-mail' }], on: ['Letterhead'] },
-  { id: 'hello', label: 'Hello', rows: [{ v: CONTACT.hello, n: 'hello e-mail' }], on: ['Business card'] },
-  { id: 'web', label: 'Web', rows: [{ v: CONTACT.web, n: 'web address' }, { v: CONTACT.webCased, n: 'web address in brand casing' }], on: ['Business card', 'Envelope', 'Truck', 'Poster', 'Wall sign'] },
-  { id: 'handle', label: 'Handle', rows: [{ v: CONTACT.handle, n: 'handle' }], on: ['Business card'] },
+  { id: 'phone', label: 'Phone', rows: [{ v: CONTACT.phone, n: 'telephone number', on: ['Business card', 'Envelope', 'Letterhead', 'Compliance letter', 'Folder', 'Poster'] }] },
+  { id: 'email', label: 'E-mail', rows: [
+    { v: CONTACT.sac, n: `e-mail address ${CONTACT.sac}`, on: ['Letterhead', 'Compliance letter'] },
+    { v: CONTACT.hello, n: `e-mail address ${CONTACT.hello}`, on: ['Business card'] },
+  ] },
+  { id: 'web', label: 'Web', rows: [
+    { v: CONTACT.web, n: 'web address', on: ['Envelope', 'Folder', 'Truck', 'Poster', 'Wall sign'] },
+    { v: CONTACT.webCased, n: 'web address in brand casing', on: ['Business card'] },
+  ] },
+  { id: 'handle', label: 'Handle', rows: [{ v: CONTACT.handle, n: 'handle', on: ['Business card'] }] },
 ];
 
 function Panel({ p }) {
   return (
     <div className={s.pickPanel}>
       {p.rows.map((r) => (
-        <div key={r.v} className={s.pickRow}>
-          <span className={`t-display ${s.pickValue}`}>{r.v}</span>
-          <CopyValue value={r.v} label={r.n} className={s.pickCopy}>Copy</CopyValue>
+        <div key={r.v} className={s.pickItem}>
+          <div className={s.pickRow}>
+            <span className={`t-display ${s.pickValue}`}>{r.v}</span>
+            <CopyValue value={r.v} label={r.n} className={s.pickCopy}>Copy</CopyValue>
+          </div>
+          <p className="t-caps">Printed on</p>
+          <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
+            {r.on.map((x) => <Chip key={x} tone="navy" size="sm">{x}</Chip>)}
+          </div>
         </div>
       ))}
-      <p className="t-caps">Printed on</p>
-      <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
-        {p.on.map((x) => <Chip key={x} tone="navy" size="sm">{x}</Chip>)}
-      </div>
     </div>
   );
 }
 
-// A channel picker: one tab per printed detail, arrow keys move between them, every value copies on click.
+// A channel picker: one tab per printed channel, arrow keys move between them, every value copies on click.
 export default function Picker() {
   const [now, setNow] = useState(PICKS[0].id);
   return (

@@ -12,12 +12,12 @@ export default function TubePlate() {
     <Art viewBox="0 0 900 520" title="Tube with a paper label: the faz-tudo to CEO line" exportName="lp-hardscape-tube-label">
       <defs>
         <linearGradient id="lp-hardscape-tube-shade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0.28" />
-          <stop offset="0.35" stopColor="#ffffff" stopOpacity="0" />
-          <stop offset="1" stopColor="#000000" stopOpacity="0.42" />
+          <stop offset="0" stopColor={HEX.white} stopOpacity="0.28" />
+          <stop offset="0.35" stopColor={HEX.white} stopOpacity="0" />
+          <stop offset="1" stopColor={HEX.asphalt} stopOpacity="0.42" />
         </linearGradient>
         <linearGradient id="lp-hardscape-tube-paper" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="0" stopColor={HEX.white} />
           <stop offset="1" stopColor={HEX.mintPaper} />
         </linearGradient>
         <clipPath id="lp-hardscape-tube-clip"><rect x="250" y="100" width="560" height="320" /></clipPath>
@@ -29,8 +29,8 @@ export default function TubePlate() {
         <rect x="250" y="100" width="560" height="320" fill={HEX.greenDark} />
         <rect x="250" y="100" width="560" height="320" fill="url(#lp-hardscape-tube-shade)" />
         {/* the open end: a rim, the dark inside, the far wall */}
-        <ellipse cx="250" cy="260" rx="62" ry="160" fill={HEX.asphalt} />
-        <ellipse cx="258" cy="260" rx="48" ry="146" fill="#0a0f0d" />
+        <ellipse cx="250" cy="260" rx="62" ry="160" fill={HEX.greenDark} />
+        <ellipse cx="258" cy="260" rx="48" ry="146" fill={HEX.asphalt} />
         <path d="M250 112A62 160 0 0 1 250 408" fill="none" stroke={HEX.gray} strokeWidth="5" opacity="0.55" />
         <ellipse cx="810" cy="260" rx="40" ry="160" fill={HEX.greenDark} />
         <ellipse cx="810" cy="260" rx="40" ry="160" fill="url(#lp-hardscape-tube-shade)" />

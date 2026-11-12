@@ -40,7 +40,7 @@ export default function Ledger() {
   return (
     <div className={s.ledger} data-screen="lp-financeiro-ledger">
       <div className={s.ledgerHead}>
-        <h2 className="t-caps-lg">Financeiro</h2>
+        <p className="t-caps-lg" lang="pt-BR">Financeiro</p>
         <Chip size="sm">{ticked.length} / {WIDTHS.length}</Chip>
       </div>
       <div className={s.ledgerCols} aria-hidden="true">

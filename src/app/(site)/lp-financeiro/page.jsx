@@ -1,5 +1,5 @@
 import { pageMeta } from '@/lib/pages';
-import { DESCRIPTOR, LINES, PERSONALITY, PILLARS, DOCUMENT, TAGLINE, TONE, VALUES, VISUAL_IDENTITY, CONTACT } from '@/lib/brand';
+import { DESCRIPTOR, LINES, PERSONALITY, PILLARS, TAGLINE, TONE, VALUES } from '@/lib/brand';
 import Reveal from '@/components/site/Reveal';
 import Icon from '@/components/site/Icon';
 import LandingNav from '@/components/ui/LandingNav';
@@ -13,7 +13,7 @@ import LedgerDesk from '@/components/pages/lp-financeiro/LedgerDesk';
 import InvoiceBuilder from '@/components/pages/lp-financeiro/InvoiceBuilder';
 import { LedgerSheetArt, RowsStripArt } from '@/components/pages/lp-financeiro/Drawings';
 import d from '@/components/pages/lp-financeiro/desk.module.css';
-import { InvoiceArt, LetterArt, ScalesArt, HeroFrond, StepsArt } from '@/components/pages/lp-financeiro/FinArt';
+import { ScalesArt, HeroFrond, StepsArt } from '@/components/pages/lp-financeiro/FinArt';
 import s from '@/components/pages/lp-financeiro/lp-financeiro.module.css';
 
 export const metadata = pageMeta('lp-financeiro');
@@ -93,48 +93,13 @@ export default function Page() {
         <Reveal><LedgerDesk /></Reveal>
       </section>
 
-      {/* 5. Invoice builder */}
+      {/* 5. The invoice sheet of the case study, with a builder */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-builder-h">
         <Reveal className={s.secHead}>
-          <h2 id="lp-financeiro-builder-h" className="t-h2">Invoice builder</h2>
-          <span className={s.eyebrow}>{DOCUMENT.invoice[2]}</span>
+          <h2 id="lp-financeiro-builder-h" className="t-h2">Invoice</h2>
+          <span className="t-small">Add a line, remove a line. The sheet follows.</span>
         </Reveal>
         <Reveal><InvoiceBuilder /></Reveal>
-      </section>
-
-      {/* 6. Invoice card */}
-      <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-invoice-h">
-        <div className={s.pair}>
-          <Reveal className={s.plate}><InvoiceArt /></Reveal>
-          <Reveal delay={120} className={`card-navy ${s.sideCard}`}>
-            <div>
-              <h2 id="lp-financeiro-invoice-h" className="t-caps-lg">Invoice</h2>
-              <p className="t-lead" style={{ marginTop: 18 }} lang="pt-BR">{VISUAL_IDENTITY}</p>
-            </div>
-            <ul className={s.legend} aria-label="Invoice labels">
-              <li><span>Bank Account n°</span><span className="ph" style={{ minWidth: '5em' }} /></li>
-              <li><span>Bank Detail</span><span className="ph" style={{ minWidth: '7em' }} /></li>
-              <li><span>Total</span><span className="ph" style={{ minWidth: '4em' }} /></li>
-            </ul>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 5. Compliance letter */}
-      <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-letter-h">
-        <div className={`${s.pair} ${s.pairRev}`}>
-          <Reveal className={`card-green ${s.sideCard}`}>
-            <div>
-              <h2 id="lp-financeiro-letter-h" className="t-caps-lg">Compliance letter</h2>
-              <p className="t-h2" style={{ marginTop: 18 }} lang="pt-BR">{LINES.close}</p>
-            </div>
-            <address className="t-body" style={{ fontStyle: 'normal' }}>
-              <span className="strong">{CONTACT.phone}</span><br />
-              {CONTACT.sac}
-            </address>
-          </Reveal>
-          <Reveal delay={120} className={s.plate}><LetterArt /></Reveal>
-        </div>
       </section>
 
       {/* 6. Trust card row */}
@@ -166,7 +131,7 @@ export default function Page() {
         </Reveal>
       </section>
 
-      {/* 8. Drawings */}
+      {/* 7. Drawings */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-draw-h">
         <Reveal className={s.secHead}>
           <h2 id="lp-financeiro-draw-h" className="t-h2">Drawings</h2>
@@ -188,7 +153,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 9. CTA */}
+      {/* 8. CTA */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-financeiro-cta-h">
         <Reveal className={`field-rise ${s.cta}`}>
           <div className={s.ctaBody}>

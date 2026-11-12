@@ -44,7 +44,7 @@ export default function SectorCards() {
       <div className={s.flips}>
         {SECTORS.map((n) => <Flip key={n} name={n} />)}
       </div>
-      <p className="t-lead" style={{ marginTop: 28, maxWidth: '40em' }} lang="pt-BR">{INTRO.text.split('. O projeto')[0].replace('A UpCanopy nasceu com uma missão clara: ', '')}.</p>
+      <p className="t-lead" style={{ marginTop: 28, maxWidth: '40em' }} lang="pt-BR">{INTRO.text.split(' O projeto')[0]}</p>
     </>
   );
 }

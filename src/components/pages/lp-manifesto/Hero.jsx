@@ -1,4 +1,4 @@
-import { MANIFESTO } from '@/lib/brand';
+import { MANIFESTO, HEX } from '@/lib/brand';
 import Art from '@/components/art/Art';
 import { FrondG } from '@/components/art/KeyArt';
 import LandingNav from '@/components/ui/LandingNav';
@@ -14,7 +14,7 @@ export default function Hero() {
       <LandingNav current="lp-manifesto" />
       <div className={s.heroArt} aria-hidden="true">
         <Art viewBox="0 0 900 760" title="Frond fanning out from the right edge" exportName="lp-manifesto-frond" decorative>
-          <rect width="900" height="760" fill="#052E25" />
+          <rect width="900" height="760" fill={HEX.greenDark} />
           <FrondG cx={900} cy={760} r={470} a0={182} a1={272} count={40} len={300} width={11} lean={58} tone="onDark" fan />
         </Art>
       </div>

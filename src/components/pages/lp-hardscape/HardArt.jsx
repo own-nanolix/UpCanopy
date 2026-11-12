@@ -5,13 +5,23 @@ import { HEX } from '@/lib/brand';
 import { r2, seeded } from '@/lib/charts';
 import { range } from '@/lib/site';
 
-// The cover: brand gradient with grain and an enlarged crop of the mark, as the closed folder (m08).
+// Two crops of the same mark, each on its own panel. "Folder" is the closed folder cover (m08), measured on the
+// photograph after taking out the perspective: the right leg of the arch crosses the panel and ends in its cut,
+// the right end of the bar sits at the bottom edge. "Hero" is the same idea re-framed for the wide hero at the top
+// of this page. The numbers are a designer's crop settings (mark width and offsets as fractions of the panel),
+// not facts about the brand.
+export const CROPS = {
+  Hero: { zoom: 1, dx: -0.3, dy: -0.5, pw: 560, ph: 315, ground: 'rise' },
+  Folder: { zoom: 1.67, dx: -0.74, dy: -0.08, pw: 400, ph: 567, ground: 'green' },
+};
+// The hero cover: brand gradient with grain and an enlarged crop of the mark, framed like the closed folder (m08):
+// the right leg of the arch crosses the field to its cut end, the bar sits along the bottom.
 export function CoverArt() {
   return (
     <Art viewBox="0 0 1600 900" title="Brand gradient with an enlarged crop of the mark" exportName="lp-hardscape-cover" decorative preserveAspectRatio="xMidYMid slice">
       <BrandDefs idp="lp-hardscape-cover" />
       <rect width="1600" height="900" fill="url(#lp-hardscape-cover-rise)" filter="url(#lp-hardscape-cover-grain)" />
-      <MarkCropG idp="lp-hardscape-cover" x={560} y={-80} w={1100} h={1060} zoom={1.55} dx={-0.22} dy={-0.12} fill={HEX.navy} opacity="0.92" />
+      <MarkCropG idp="lp-hardscape-cover" w={1600} h={900} zoom={CROPS.Hero.zoom} dx={CROPS.Hero.dx} dy={CROPS.Hero.dy} fill={HEX.navy} />
     </Art>
   );
 }

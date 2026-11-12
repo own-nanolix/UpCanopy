@@ -6,7 +6,7 @@ import s from './lp-contato.module.css';
 
 const CHANNELS = [
   { id: 'tel', title: 'Telephone', icon: 'headset', values: [{ v: CONTACT.phone, label: 'telephone number' }], tone: 'navy' },
-  { id: 'mail', title: 'Email', icon: 'note', values: [{ v: CONTACT.sac, label: 'sac e-mail' }, { v: CONTACT.hello, label: 'hello e-mail' }], tone: 'green' },
+  { id: 'mail', title: 'E-mail', icon: 'note', values: [{ v: CONTACT.sac, label: `e-mail address ${CONTACT.sac}` }, { v: CONTACT.hello, label: `e-mail address ${CONTACT.hello}` }], tone: 'green' },
   { id: 'web', title: 'Web', icon: 'link', values: [{ v: CONTACT.web, label: 'web address' }], tone: 'paper' },
 ];
 

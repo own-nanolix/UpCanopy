@@ -1,34 +1,45 @@
-import { MANIFESTO, PILLARS } from '@/lib/brand';
+import { HEX, MANIFESTO, PILLARS } from '@/lib/brand';
 import Art from '@/components/art/Art';
-import { MarkG } from '@/components/art/Mark';
+import { MARK_ARCH } from '@/components/art/Mark';
 import s from './lp-manifesto.module.css';
 
-const FILLS = [
-  { bg: '#162557', fg: '#FFFFFF', mark: '#26CF7B' },
-  { bg: '#26CF7B', fg: '#162557', mark: '#162557' },
-  { bg: '#052E25', fg: '#F2FFE4', mark: '#26CF7B' },
+// Bottom to top: the obsession is the foundation, the language the course above it, the promise the course that
+// carries the roof. The fills follow the brand's three dark-to-bright grounds.
+const COURSES = [
+  { name: PILLARS[0], bg: HEX.greenDark, fg: HEX.mint, rule: HEX.green },
+  { name: PILLARS[1], bg: HEX.green, fg: HEX.navy, rule: HEX.navy },
+  { name: PILLARS[2], bg: HEX.navy, fg: HEX.white, rule: HEX.green },
 ];
+const X = 60;
+const BW = 480;
+const BH = 100;
+const GAP = 10;
+const BASE = 540;
 
-// The three pillars as square blocks that lock together, beside paragraph six verbatim.
+// The three pillars as three locked courses laid one on another, the arch of the mark set on top as the roof.
+// Each course drops into place and locks after the one below it (CSS keyframes towards the finished artwork).
 export default function Pillars() {
   return (
     <div className={s.pillarGrid}>
       <div className={s.pillarArt}>
-        <Art viewBox="0 0 660 260" title="Three square blocks locked together: Organização, Disciplina, Confiança" exportName="lp-manifesto-pillars">
-          <rect x="0" y="240" width="660" height="20" fill="#162557" />
-          {PILLARS.map((p, k) => {
-            const f = FILLS[k];
+        <Art viewBox="0 0 600 580" title="Organização, Disciplina and Confiança laid as three courses under the arch of the mark" exportName="lp-manifesto-pillars">
+          <rect x="30" y={BASE + 6} width="540" height="16" fill={HEX.navy} />
+          {COURSES.map((c, k) => {
+            const y = BASE - (k + 1) * BH - k * GAP;
             return (
-              <g key={p} transform={`translate(${k * 220} 20)`}>
-                <g className={`lock ${s.block}`} style={{ '--i': k * 5 }}>
-                  <rect width="220" height="220" fill={f.bg} />
-                  <MarkG x={22} y={22} size={44} fill={f.mark} />
-                  <text x="22" y="190" fontSize="22" fontWeight="500" letterSpacing="-1.2" fill={f.fg} className="wide" lang="pt-BR">{p}</text>
-                  <text x="198" y="48" fontSize="14" fontWeight="500" textAnchor="end" fill={f.fg} className="wide">{`0${k + 1}`}</text>
-                </g>
+              <g key={c.name} className={`lock ${s.block}`} style={{ '--i': k * 4 }}>
+                <rect x={X} y={y} width={BW} height={BH} fill={c.bg} />
+                <rect x={X} y={y} width={BW} height="8" fill={c.rule} />
+                <text x={X + 28} y={y + 66} fontSize="34" fontWeight="500" letterSpacing="-1.6" fill={c.fg} className="wide" lang="pt-BR">{c.name}</text>
+                <text x={X + BW - 28} y={y + 64} fontSize="16" fontWeight="500" textAnchor="end" fill={c.fg} className="wide">{`0${k + 1}`}</text>
               </g>
             );
           })}
+          <g className="lock" style={{ '--i': 14 }}>
+            <g transform={`translate(120 ${BASE - 3 * BH - 2 * GAP - 244}) scale(3.6)`}>
+              <path d={MARK_ARCH} fill={HEX.green} />
+            </g>
+          </g>
         </Art>
       </div>
       <div>

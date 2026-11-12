@@ -60,7 +60,7 @@
 .sqDots { display: flex; gap: 6px; }
 .sqDots i { width: 10px; height: 10px; border-radius: 50%; background: currentColor; opacity: 0.25; }
 .sqDots i:first-child { opacity: 1; }
-@media (max-width: 600px) { .quad { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .sq { padding: 14px; } .sqLine { display: none; } }
+@media (max-width: 600px) { .quad { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .sq { padding: 14px; } .sqLine { display: none; } .sqWord { font-size: 15px; letter-spacing: -0.04em; overflow-wrap: normal; } }
 
 /* ---------- Statement columns ---------- */
 .board { background: var(--white); border-radius: var(--r-1); padding: clamp(16px, 2.2vw, 32px); display: grid; gap: 18px; }
@@ -74,18 +74,6 @@
 .cell { transition: background-color var(--dur-1) var(--ease-out); }
 .cellTotal .cellBar { background: var(--navy); }
 .colEnter { animation: lp-financeiro-rise var(--dur-3) var(--ease-out) both; }
-
-/* ---------- Invoice and letter ---------- */
-.pair { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: stretch; }
-.pairRev { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
-.plate { background: var(--mint-paper); border-radius: var(--r-0); padding: clamp(16px, 3vw, 48px); display: grid; place-items: center; position: relative; overflow: hidden; }
-.plate svg { width: 100%; max-width: 560px; height: auto; transition: transform var(--dur-3) var(--ease-out); }
-.plate:hover svg { transform: translateY(-6px) rotate(-0.6deg); }
-.sideCard { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
-.legend { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
-.legend li { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 0; border-bottom: var(--stroke) solid currentColor; font-family: var(--font-wide); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; transition: padding var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out); }
-.legend li:hover { padding-inline: 10px; background: rgba(38, 207, 123, 0.18); }
-@media (max-width: 900px) { .pair, .pairRev { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- Trust row ---------- */
 .trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }

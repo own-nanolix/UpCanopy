@@ -51,8 +51,8 @@
 
 /* ---------- Drawings ---------- */
 .drawings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
-.drawCard { display: grid; gap: 16px; align-content: space-between; }
+.drawCard { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 16px; }
 .drawCard svg { width: 100%; height: auto; display: block; }
-.drawPlate { background: var(--mint-paper); padding: clamp(12px, 2vw, 24px); }
+.drawPlate { background: var(--mint-paper); padding: clamp(12px, 2vw, 24px); display: grid; place-items: center; }
 .drawCap { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 @media (max-width: 900px) { .drawings { grid-template-columns: minmax(0, 1fr); } }

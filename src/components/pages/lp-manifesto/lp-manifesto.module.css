@@ -19,6 +19,7 @@
 .stepCard { background: var(--white); color: var(--navy); border-radius: var(--r-1); border-bottom: 6px solid var(--green); padding: clamp(24px, 3.4vw, 56px); width: 100%; min-height: clamp(220px, 26vw, 360px); display: flex; flex-direction: column; justify-content: space-between; gap: 32px; transition: box-shadow var(--dur-2) var(--ease-out); }
 .stepCard:hover { box-shadow: 0 4px 0 0 var(--navy); }
 .stepCard:focus-visible { outline: 3px solid var(--green-ink); outline-offset: 4px; }
+.stepInner { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; flex: 1; }
 .stepNavy { background: var(--navy); color: var(--white); }
 .stepNavy .stepNo { color: var(--navy-muted); }
 .controls { margin-top: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
@@ -60,7 +61,7 @@
 
 /* ---------- Closing ---------- */
 .closing { position: relative; overflow: hidden; padding-block: clamp(80px, 13vw, 200px); }
-.closingArt { position: absolute; inset: 0 0 0 auto; width: min(30%, 440px); }
+.closingArt { position: absolute; inset: 0 0 0 auto; width: min(40%, 560px); }
 .closingArt svg { width: 100%; height: 100%; }
 .closingBody { position: relative; z-index: 2; }
 .closingLine { font-weight: 300; font-size: clamp(38px, 6.2vw, 104px); line-height: 1.02; letter-spacing: -0.025em; max-width: 7em; text-wrap: balance; }
@@ -71,8 +72,9 @@
 
 @media (max-width: 820px) {
   .pillarGrid, .levelGrid { grid-template-columns: minmax(0, 1fr); }
-  .closingArt { opacity: 0.35; width: 70%; }
-  .heroArt { width: 100%; opacity: 0.5; }
+  .closingArt { opacity: 0.18; width: 70%; }
+  .heroArt { width: 100%; }
+  .heroArt svg { opacity: 0.35; }
   .liftBlock { transition-duration: var(--dur-4); }
 }
 

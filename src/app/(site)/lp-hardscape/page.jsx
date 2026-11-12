@@ -1,7 +1,5 @@
-import Link from 'next/link';
 import { pageMeta } from '@/lib/pages';
-import { LINES, MANIFESTO, CONTACT, AREAS, PILLARS } from '@/lib/brand';
-import Icon from '@/components/site/Icon';
+import { LINES, MANIFESTO, CONTACT } from '@/lib/brand';
 import Reveal from '@/components/site/Reveal';
 import LandingNav from '@/components/ui/LandingNav';
 import LandingFooter from '@/components/ui/LandingFooter';
@@ -13,17 +11,11 @@ import ModeBoard from '@/components/pages/lp-hardscape/ModeBoard';
 import HandOver from '@/components/pages/lp-hardscape/HandOver';
 import CropLab from '@/components/pages/lp-hardscape/CropLab';
 import FazTudo from '@/components/pages/lp-hardscape/FazTudo';
-import Pillars from '@/components/pages/lp-hardscape/Pillars';
 import TubePlate from '@/components/pages/lp-hardscape/TubePlate';
 import { SmallMark, DarkMark } from '@/components/pages/lp-hardscape/HardArt';
 import s from '@/components/pages/lp-hardscape/lp-hardscape.module.css';
 
 export const metadata = pageMeta('lp-hardscape');
-
-const AREA_ROUTE = { CRM: 'lp-crm', Agenda: 'lp-agenda', Financeiro: 'lp-financeiro' };
-const AREA_ICON = { CRM: 'users', Agenda: 'calendar', Financeiro: 'chart' };
-// Fragments of the manifesto paragraph that names the pillars, one per pillar.
-const PILLAR_LINES = MANIFESTO[5].split('. ').slice(1).map((l) => (l.endsWith('.') ? l : `${l}.`));
 
 export default function Page() {
   return (
@@ -74,42 +66,7 @@ export default function Page() {
         <Reveal><FazTudo /></Reveal>
       </section>
 
-      {/* 5. The three areas, as links */}
-      <section className={`wrap ${s.sec}`} aria-labelledby="lp-hardscape-areas-h">
-        <Reveal className={s.secHead}>
-          <h2 id="lp-hardscape-areas-h" className="t-h2">Three areas</h2>
-          <span className={`${s.eyebrow} hl-ink`}>Open one</span>
-        </Reveal>
-        <div className={s.areas}>
-          {AREAS.map((a, i) => (
-            <Reveal key={a} delay={i * 90}>
-              <Link href={`/${AREA_ROUTE[a]}/`} className={s.area}>
-                <Icon name={AREA_ICON[a]} size={32} />
-                <span className={s.areaName}>{a}</span>
-                <span className={s.areaGo}>Open <Icon name="arrow-right" size={18} /></span>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* 6. The pillars locked under the arch */}
-      <section className={`wrap ${s.sec}`} aria-labelledby="lp-hardscape-pillars-h">
-        <Reveal className={s.secHead}>
-          <h2 id="lp-hardscape-pillars-h" className="t-h2">{PILLARS.join(' / ')}</h2>
-          <span className={`${s.eyebrow} hl-ink`}>Three blocks, one roof</span>
-        </Reveal>
-        <Reveal className={s.pillarBox}><Pillars /></Reveal>
-        <div className={s.pillarLines} lang="pt-BR">
-          {PILLAR_LINES.map((l, i) => (
-            <Reveal key={l} delay={i * 90} className={s.pillarLine}>
-              <Line text={l} strong={PILLARS} className="strong" />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* 7. Mode switch re-lays the cards */}
+      {/* 5. Mode switch re-lays the cards */}
       <section className={`${s.modeWrap} ${s.sec}`} aria-labelledby="lp-hardscape-mode-h">
         <div className="wrap">
           <Reveal className={s.secHead}>
@@ -120,7 +77,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 8. The tube label as a plate */}
+      {/* 6. The tube label as a plate */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-hardscape-tube-h">
         <h2 id="lp-hardscape-tube-h" className="sr-only">Tube label</h2>
         <div className={s.tube}>
@@ -135,7 +92,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 9. Manifesto opening as a card */}
+      {/* 7. Manifesto opening as a card */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-hardscape-open-h">
         <h2 id="lp-hardscape-open-h" className="sr-only">Manifesto, opening</h2>
         <Reveal className={`field-paper ${s.openCard}`}>
@@ -149,7 +106,7 @@ export default function Page() {
         </Reveal>
       </section>
 
-      {/* 10. First to arrive, last to leave */}
+      {/* 8. First to arrive, last to leave */}
       <section className={`${s.over} ${s.sec}`} aria-labelledby="lp-hardscape-over-h">
         <div className="wrap">
           <Reveal>
@@ -166,7 +123,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 11. Credibility line on mint with the dark mark (brochure m16) */}
+      {/* 9. Credibility line on mint with the dark mark (brochure m16) */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-hardscape-cred-h">
         <h2 id="lp-hardscape-cred-h" className="sr-only">Credibility</h2>
         <Reveal className={s.cred}>
@@ -179,7 +136,7 @@ export default function Page() {
         </Reveal>
       </section>
 
-      {/* 12. CTA */}
+      {/* 10. CTA */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-hardscape-cta-h">
         <Reveal className={s.cta}>
           <h2 id="lp-hardscape-cta-h" className={s.ctaLine} lang="pt-BR">{LINES.level}</h2>

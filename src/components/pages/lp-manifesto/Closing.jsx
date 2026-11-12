@@ -1,18 +1,19 @@
-import { LINES } from '@/lib/brand';
+import { HEX, LINES } from '@/lib/brand';
 import Art from '@/components/art/Art';
 import { MarkCropG } from '@/components/art/Mark';
 import Reveal from '@/components/site/Reveal';
 import s from './lp-manifesto.module.css';
 
-// The closing lines full-bleed on Green Park, the mark crop (the folder's cover graphic) behind them.
+// The closing lines full-bleed on Green Park, the mark crop of the closed folder cover (m08) at the right edge,
+// with the crop measured there (mark 1.67 x the panel width, offsets -0.74 and -0.08).
 export default function Closing() {
   const [brand, ...tag] = LINES.close.split('. ');
   return (
     <div className={`field-green ${s.closing}`}>
       <div className={s.closingArt} aria-hidden="true">
-        <Art viewBox="0 0 600 700" title="Enlarged crop of the mark in Blue Ocean on Green Park" exportName="lp-manifesto-mark-crop" decorative>
-          <rect width="600" height="700" fill="#26CF7B" />
-          <MarkCropG idp="lp-manifesto-cl" w={600} h={700} zoom={1.9} dx={-0.42} dy={-0.2} fill="#162557" />
+        <Art viewBox="0 0 600 850" title="Enlarged crop of the mark in Blue Ocean on Green Park" exportName="lp-manifesto-mark-crop" decorative preserveAspectRatio="xMinYMid slice">
+          <rect width="600" height="850" fill={HEX.green} />
+          <MarkCropG idp="lp-manifesto-cl" w={600} h={850} zoom={1.67} dx={-0.74} dy={-0.08} fill={HEX.navy} />
         </Art>
       </div>
       <div className={`wrap ${s.closingBody}`}>

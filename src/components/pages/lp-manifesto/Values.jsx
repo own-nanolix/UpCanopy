@@ -1,4 +1,4 @@
-import { VALUES } from '@/lib/brand';
+import { VALUES, HEX } from '@/lib/brand';
 import Art from '@/components/art/Art';
 import { MarkG } from '@/components/art/Mark';
 import { ScaleDotsG } from '@/components/art/KeyArt';
@@ -22,15 +22,15 @@ export default function Values() {
       <div className={s.valueRow}>
         <article className={`${s.valueCard} ${s.valueWide}`}>
           <Art viewBox="0 0 120 120" title="Mark on a navy square" exportName="lp-manifesto-value-mark" className={s.valueIcon}>
-            <rect width="120" height="120" fill="#162557" />
-            <MarkG x={20} y={20} size={80} fill="#26CF7B" />
+            <rect width="120" height="120" fill={HEX.navy} />
+            <MarkG x={20} y={20} size={80} fill={HEX.green} />
           </Art>
           <h3 lang="pt-BR" className="t-h2">{DISC.title}</h3>
           <div lang="pt-BR" className={s.valueText}><Paras items={DISC.text} /></div>
         </article>
         <article className={`${s.valueCard} ${s.valueNarrow}`}>
           <Art viewBox="0 0 300 40" title="Ten dots, one green" exportName="lp-manifesto-value-dots" className={s.valueDots}>
-            <ScaleDotsG x={14} y={20} w={272} r={9} chosen={10} off="#162557" lock />
+            <ScaleDotsG x={14} y={20} w={272} r={9} chosen={10} off={HEX.navy} lock />
           </Art>
           <h3 lang="pt-BR" className="t-h2">{CONF.title}</h3>
           <div lang="pt-BR" className={s.valueText}><Paras items={CONF.text} /></div>
