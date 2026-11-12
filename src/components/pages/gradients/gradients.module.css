@@ -1,0 +1,92 @@
+/* Gradients page: layout, the drifting rail and the four looping motion studies. */
+
+.rail.rail {
+  padding: 0;
+  background-image: linear-gradient(35deg, #162557 14%, #1c5c66 52%, #26cf7b 100%);
+  background-size: 260% 260%;
+  background-position: 0% 100%;
+  animation: gradients-drift 26s var(--ease-in-out) infinite alternate;
+}
+.railPanel {
+  margin-top: auto;
+  background: var(--navy);
+  color: var(--white);
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.railMark { width: 64px; height: auto; display: block; color: var(--green); }
+.railTop { padding: var(--pad); }
+.railCount { font-family: var(--font-wide); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy-muted); }
+@keyframes gradients-drift {
+  from { background-position: 0% 100%; }
+  to { background-position: 85% 15%; }
+}
+
+.head { display: flex; flex-direction: column; gap: 10px; margin-bottom: clamp(20px, 2.4vw, 36px); max-width: 64ch; }
+.head p { margin: 0; }
+
+.fig { margin: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.plate, .wide, .wide2 { display: block; width: 100%; height: auto; }
+.cap { display: flex; flex-direction: column; gap: 2px; font-size: 13px; line-height: 1.35; color: var(--muted); }
+.cap strong { color: var(--navy); font-weight: 700; }
+
+.libGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.anatGrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: calc(var(--gap) * 1.6); }
+.grainGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gap); }
+.span2 { grid-column: span 2; }
+.recipe { grid-column: span 2; display: flex; flex-direction: column; gap: 8px; align-self: center; }
+.recipe p { margin: 0; }
+
+.keyGrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: calc(var(--gap) * 1.4) var(--gap); align-items: start; }
+.k1 { grid-column: 1 / 6; }
+.k2 { grid-column: 6 / 13; align-self: end; }
+.k5 { grid-column: 1 / 5; }
+.k6 { grid-column: 5 / 13; align-self: center; }
+.k3 { grid-column: 2 / 7; }
+.k4 { grid-column: 7 / 13; align-self: center; }
+
+.motionGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+
+@media (max-width: 900px) {
+  .libGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grainGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .railTop { display: none; }
+}
+@media (max-width: 560px) {
+  .libGrid, .motionGrid { grid-template-columns: minmax(0, 1fr); }
+  .keyGrid { grid-template-columns: minmax(0, 1fr); }
+  .k1, .k2, .k3, .k4, .k5, .k6 { grid-column: 1 / -1; }
+  .grainGrid { grid-template-columns: minmax(0, 1fr); }
+  .span2, .recipe { grid-column: span 1; }
+}
+
+/* ---------- Motion studies (the un-animated markup is the finished frame) ---------- */
+.breathe { transform-box: fill-box; transform-origin: 0 50%; animation: gradients-breathe 5s var(--ease-in-out) infinite; animation-delay: calc(var(--i, 0) * -0.16s); }
+@keyframes gradients-breathe {
+  0%, 100% { transform: none; }
+  50% { transform: scale(0.78, 0.9); }
+}
+
+.lift { animation: gradients-lift 4s var(--ease-in-out) infinite; }
+@keyframes gradients-lift {
+  0%, 12%, 100% { transform: none; }
+  45%, 60% { transform: translateY(-7px); }
+}
+
+.rising { animation: gradients-rising 8s var(--ease-in-out) infinite alternate; }
+@keyframes gradients-rising {
+  from { transform: translateY(260px); }
+  to { transform: none; }
+}
+
+.pulse { animation: gradients-pulse 4.5s var(--ease-in-out) infinite; animation-delay: calc(var(--i, 0) * 0.22s); }
+@keyframes gradients-pulse {
+  0%, 100% { opacity: 1; }
+  35% { opacity: 0.12; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail.rail, .breathe, .lift, .rising, .pulse { animation: none; }
+}

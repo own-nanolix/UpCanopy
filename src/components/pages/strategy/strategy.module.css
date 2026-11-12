@@ -1,0 +1,45 @@
+/* ---- rail: mint paper chapter index ---- */
+.rail { background: var(--mint-paper); color: var(--navy); }
+.rail.rail :focus-visible { outline-color: var(--green-ink); }
+.railList { list-style: none; margin: 0; padding: 0; display: grid; }
+.railBtn { display: grid; grid-template-columns: 36px minmax(0, 1fr); width: 100%; text-align: left; padding: 11px 10px 11px 12px; border: 0; border-top: 1px solid var(--line); border-left: 4px solid transparent; background: transparent; color: var(--navy); font-size: 15px; font-weight: 400; line-height: 1.25; transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out), padding var(--dur-2) var(--ease-out); }
+.railBtn:hover { background: rgba(22, 37, 87, 0.08); padding-left: 18px; }
+.railBtn:active { background: rgba(22, 37, 87, 0.16); }
+.railBtn[aria-current="true"] { background: var(--navy); color: #fff; border-left-color: var(--green); font-weight: 700; padding-left: 18px; }
+.railNo { font-family: var(--font-wide); font-size: 10px; align-self: center; font-variant-numeric: tabular-nums; }
+.railBtn[aria-current="true"] .railNo { color: var(--green); }
+.railBar { height: 6px; background: rgba(22, 37, 87, 0.14); }
+.railBar span { display: block; height: 100%; background: var(--navy); transform-origin: 0 50%; transition: transform var(--dur-3) var(--ease-out); }
+@media (max-height: 740px) and (min-width: 901px) { .railBtn { padding-block: 7px; font-size: 14px; } }
+
+/* ---- deck of slides ---- */
+.deck { display: grid; gap: clamp(28px, 4vw, 64px); align-content: start; }
+.slide { background: var(--slide); color: var(--navy); padding: clamp(16px, 2vw, 28px) clamp(18px, 2.6vw, 40px); display: grid; grid-template-rows: auto 1fr auto; gap: clamp(20px, 3vw, 44px); min-height: min(56vw, 640px); scroll-margin-top: 24px; }
+.slideFlush { padding: 0; }
+.cornersTop, .cornersBottom { display: flex; justify-content: space-between; gap: 16px; font-weight: 700; font-size: 10px; line-height: 1.35; letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); }
+.cornersTop span:last-child { text-align: right; font-weight: 400; }
+.slideBody { align-self: center; display: grid; gap: clamp(20px, 3vw, 40px); }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 48px); align-items: center; }
+.pair svg, .diagramWide svg { width: 100%; height: auto; }
+.text { margin-top: 18px; }
+.diagramWide { max-width: 560px; justify-self: center; width: 100%; }
+@media (max-width: 760px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+
+.intro { display: grid; gap: 12px; max-width: 70ch; }
+.points { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--gap); }
+.points li { border-top: var(--stroke) solid var(--navy); padding-top: 14px; display: grid; gap: 10px; align-content: start; }
+.lead { font-weight: 400; }
+.bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 15px; line-height: 1.5; }
+.bullets li { position: relative; padding-left: 18px; }
+.bullets li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; background: var(--green-ink); }
+.summary { border-top: var(--stroke) solid var(--navy); padding-top: 18px; display: grid; gap: 12px; max-width: 70ch; }
+
+/* ---- scales slide ---- */
+.slideSvg svg { width: 100%; height: auto; display: block; }
+.hold :global(.lock) { animation-play-state: paused; }
+
+/* ---- values diagram: the two blocks lock together ---- */
+.joinL { transform-box: fill-box; animation: strategy-join-l var(--dur-4) var(--ease-lock) 200ms both; }
+.joinR { transform-box: fill-box; animation: strategy-join-r var(--dur-4) var(--ease-lock) 200ms both; }
+@keyframes strategy-join-l { from { transform: translateX(-44px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes strategy-join-r { from { transform: translateX(44px); opacity: 0; } to { transform: none; opacity: 1; } }

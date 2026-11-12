@@ -1,0 +1,129 @@
+/* lp-home: the designer's print pieces turned into a home page. */
+
+.section { padding-block: clamp(48px, 7vw, 112px) 0; }
+.section:last-of-type { padding-bottom: clamp(56px, 8vw, 120px); }
+.head { display: grid; gap: 14px; margin-bottom: clamp(20px, 3vw, 40px); }
+.head h2 { color: var(--navy); }
+.fill { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ---------- Hero: the wall sign and the poster ---------- */
+.hero { position: relative; overflow: hidden; min-height: min(100svh, 980px); display: flex; flex-direction: column; isolation: isolate; }
+.heroField { position: absolute; inset: 0; z-index: -3; background-size: 175% 175%; background-position: 0% 100%; }
+.heroArt { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; max-width: none; pointer-events: none; }
+.heroBody { flex: 1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: var(--gap); align-items: stretch; padding-top: clamp(8px, 2vw, 24px); }
+.heroLine { grid-column: 2; grid-row: 1; justify-self: end; text-align: right; max-width: 26em; align-self: start; }
+.heroH1 { font-size: clamp(24px, 2.7vw, 44px); line-height: 1.2; outline: none; }
+.rowMask { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.rowIn { display: block; animation: lp-home-row var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 110ms + 450ms); }
+@keyframes lp-home-row { from { transform: translateY(105%); } to { transform: none; } }
+.descriptor { margin-top: clamp(14px, 2vw, 28px); color: var(--white); opacity: 0.92; animation: lp-home-fade var(--dur-4) var(--ease-out) 1.1s both; letter-spacing: 0.2em; font-size: clamp(11px, 1vw, 14px); }
+@keyframes lp-home-fade { from { opacity: 0; } to { opacity: 0.92; } }
+
+.stack { grid-column: 1; grid-row: 1; align-self: end; position: relative; width: min(600px, 100%); aspect-ratio: 1.4; margin-bottom: clamp(8px, 2vw, 24px); }
+.stackCard { position: absolute; width: 60%; height: 50%; background: var(--white); color: var(--navy); padding: clamp(12px, 1.4vw, 20px); box-shadow: 10px 10px 0 rgba(5, 46, 37, 0.38); display: flex; flex-direction: column; gap: 12px; }
+.miniHead { display: flex; justify-content: space-between; align-items: center; border-bottom: var(--stroke) solid var(--navy); padding-bottom: 8px; }
+.miniList { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.miniRow { display: flex; align-items: center; gap: 10px; }
+.miniTile { width: 22px; height: 22px; background: var(--navy); flex: none; }
+.miniText { display: grid; gap: 5px; flex: 1; min-width: 0; }
+.miniWeek { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.miniDay { height: 22px; background: rgba(22, 37, 87, 0.12); }
+.miniDayOn { height: 22px; background: var(--green); }
+.miniBar { flex: 1; height: 10px; background: rgba(22, 37, 87, 0.12); display: block; }
+.miniBar > span { display: block; height: 100%; background: var(--green); }
+
+.heroBase { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: clamp(16px, 2.4vw, 32px) clamp(22px, 3vw, 44px); }
+.heroUrl { font-size: clamp(14px, 1.2vw, 18px); font-weight: 400; color: var(--green); animation: lp-home-fade var(--dur-4) var(--ease-out) 1.3s both; }
+.homeBtn { display: inline-flex; align-items: center; gap: 14px; border: 0; background: transparent; color: var(--white); font-family: var(--font-wide); font-weight: 400; font-size: clamp(14px, 1.5vw, 22px); letter-spacing: 0.18em; padding: 10px 4px; box-shadow: inset 0 calc(var(--stroke) * -1) 0 0 transparent; transition: box-shadow var(--dur-2) var(--ease-out); animation: lp-home-fade var(--dur-4) var(--ease-out) 1.3s both; }
+.homeBtn svg { transition: transform var(--dur-2) var(--ease-out); }
+.homeBtn:hover, .homeBtn:focus-visible { box-shadow: inset 0 calc(var(--stroke) * -1) 0 0 var(--green); }
+.homeBtn:hover svg { transform: translateX(8px); }
+.homeBtn:active { transform: translateY(1px); }
+
+@media (max-width: 900px) {
+  .heroArt { opacity: 0.4; }
+  .heroBody { grid-template-columns: minmax(0, 1fr); }
+  .heroLine { grid-column: 1; grid-row: 1; }
+  .stack { grid-column: 1; grid-row: 2; margin-top: 24px; }
+}
+
+/* ---------- Three areas: modular cards that reflow ---------- */
+.areas { align-items: stretch; }
+.areaWrap { display: flex; }
+.areaWrap > .area { flex: 1; }
+.area { background: var(--white); color: var(--navy); padding: clamp(18px, 2vw, 30px); display: flex; flex-direction: column; gap: 20px; position: relative; transition: transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out); box-shadow: inset 0 0 0 0 var(--green); min-width: 0; }
+.area:hover, .area:focus-within { transform: translateY(-6px); box-shadow: inset 0 -5px 0 0 var(--green); }
+.areaHead { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: var(--stroke) solid var(--navy); }
+.areaTitle { background-image: linear-gradient(var(--green), var(--green)); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 4px; padding-bottom: 4px; transition: background-size var(--dur-3) var(--ease-out); }
+.area:hover .areaTitle, .area:focus-within .areaTitle { background-size: 100% 4px; }
+.areaUi { flex: 1; display: grid; align-content: start; gap: 14px; }
+.areaLink { align-self: flex-start; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.tile { width: 36px; height: 36px; background: var(--navy); flex: none; }
+.cells { display: grid; gap: 6px; flex: 1; min-width: 0; }
+.crmRow { display: flex; align-items: center; gap: 12px; padding: 8px; background: var(--slide); }
+.status { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; min-width: 66px; padding: 0 8px; border: 0; background: transparent; color: var(--navy); transition: background-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out); }
+.status:hover { background: rgba(22, 37, 87, 0.1); }
+.status:active { transform: scale(0.95); }
+.status .dot { transition: background-color var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-lock); }
+.status[aria-pressed='true'] .dot { transform: scale(1.2); }
+
+.week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.day { display: grid; gap: 8px; justify-items: center; padding: 10px 0 8px; min-height: 44px; border: 0; background: var(--slide); color: var(--navy); transition: background-color var(--dur-2) var(--ease-out), transform var(--dur-1) var(--ease-out); }
+.day:hover { background: var(--mint-paper); }
+.day:active { transform: translateY(1px); }
+.day[aria-pressed='true'] { background: var(--navy); color: var(--white); }
+.dayMark { width: 8px; height: 8px; background: transparent; }
+.day[aria-pressed='true'] .dayMark { background: var(--green); animation: lp-home-lock var(--dur-3) var(--ease-lock) both; }
+@keyframes lp-home-lock { from { transform: scale(0.2); } to { transform: none; } }
+.slot { display: flex; align-items: center; gap: 12px; padding: 12px 10px; background: var(--slide); border-left: 4px solid var(--green); }
+.slotTime { width: 44px; flex: none; }
+.enter { animation: lp-home-in var(--dur-3) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
+@keyframes lp-home-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+.ledgerRow { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 44px; padding: 8px 12px; border: 0; background: var(--slide); color: var(--navy); text-align: left; transition: background-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out); }
+.ledgerRow:hover { background: var(--mint-paper); }
+.ledgerRow[aria-pressed='true'] { background: var(--mint-paper); box-shadow: inset 4px 0 0 0 var(--green); }
+.run { height: 14px; background: var(--gray); overflow: hidden; }
+.runFill { display: block; height: 100%; background: var(--green); transform-origin: 0 50%; transition: transform var(--dur-4) var(--ease-out); }
+
+/* ---------- The window ---------- */
+.windows > * { min-width: 0; }
+.windows svg { width: 100%; height: auto; aspect-ratio: 1; }
+
+/* ---------- The folder ---------- */
+.folder { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); align-items: start; max-width: 1040px; margin-inline: auto; }
+.folderRight { margin-top: clamp(24px, 5vw, 72px); }
+.folderBtn { grid-column: 1 / -1; justify-self: start; }
+.ceoCard { position: relative; aspect-ratio: 3 / 4; overflow: hidden; color: var(--white); box-shadow: 12px 12px 0 rgba(22, 37, 87, 0.22); }
+.ceoText { position: absolute; left: 7.5%; right: 7.5%; bottom: 6%; font-size: clamp(17px, 2.1vw, 30px); line-height: 1.22; }
+.cover { width: 100%; height: auto; aspect-ratio: 3 / 4; box-shadow: 12px 12px 0 rgba(22, 37, 87, 0.22); }
+
+/* ---------- The brochure ---------- */
+.brochure { display: grid; grid-template-columns: minmax(0, 640fr) minmax(0, 400fr); gap: 0; max-width: 1040px; margin-inline: auto; box-shadow: 14px 14px 0 rgba(22, 37, 87, 0.2); }
+.brochure svg { width: 100%; height: auto; }
+
+/* ---------- Pillars ---------- */
+.pillars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+.pillar { aspect-ratio: 1; padding: clamp(18px, 2.4vw, 40px); display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+.pillarName { font-size: clamp(22px, 2.6vw, 42px); letter-spacing: -0.05em; overflow-wrap: anywhere; }
+.pillarText { font-size: clamp(16px, 1.4vw, 22px); line-height: 1.35; }
+.tagline { margin-top: clamp(28px, 4vw, 56px); color: var(--navy); }
+
+/* ---------- Manifesto card ---------- */
+.manifesto { position: relative; overflow: hidden; min-height: clamp(360px, 42vw, 620px); padding: clamp(24px, 4vw, 72px); display: flex; flex-direction: column; justify-content: space-between; gap: 32px; isolation: isolate; }
+.manifestoArt { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; z-index: -1; }
+.manifestoH2 { font-size: clamp(36px, 6.2vw, 104px); line-height: 1.04; color: var(--mint); max-width: 9em; }
+.manifestoBtn { display: flex; }
+
+/* ---------- Contact ---------- */
+.contact { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); max-width: 1040px; margin-inline: auto; align-items: start; }
+.card { width: 100%; height: auto; aspect-ratio: 700 / 400; box-shadow: 10px 10px 0 rgba(22, 37, 87, 0.22); }
+.contactBtn { grid-column: 1 / -1; justify-self: start; }
+
+@media (max-width: 900px) {
+  .pillars, .folder, .contact { grid-template-columns: minmax(0, 1fr); }
+  .pillar { aspect-ratio: auto; min-height: 240px; }
+  .folderRight { margin-top: 0; }
+  .brochure { grid-template-columns: minmax(0, 1fr); }
+}

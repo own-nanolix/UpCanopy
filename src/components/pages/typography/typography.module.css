@@ -1,0 +1,34 @@
+/* Typography page. Class names are local. */
+.rail { padding: 0 !important; justify-content: stretch !important; }
+.railWord { width: 100%; height: 100%; }
+.railWord svg { width: 100%; height: 100%; }
+@media (max-width: 900px) { .railWord { height: 56vh; } }
+
+.head { padding-bottom: 8px; }
+.kicker { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.note { max-width: 62ch; }
+.sec { display: grid; gap: 20px; }
+.secHead { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; border-top: var(--stroke) solid var(--navy); padding-top: 14px; }
+.secHead h2 { margin: 0; }
+.plate { background: var(--white); padding: clamp(12px, 1.6vw, 24px); }
+.plate svg { width: 100%; height: auto; }
+.plateSlide { background: var(--slide); padding: clamp(12px, 1.6vw, 24px); }
+.plateSlide svg { width: 100%; height: auto; }
+.plateNavy { background: var(--navy); padding: clamp(12px, 1.6vw, 24px); }
+.plateNavy svg { width: 100%; height: auto; }
+
+.ladder { background: var(--white); }
+.step { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 20px; align-items: center; padding: 18px clamp(14px, 1.6vw, 24px); border-bottom: 1px solid var(--line); transition: background-color var(--dur-1) var(--ease-out); }
+.step:hover { background: var(--mint); }
+.step:last-child { border-bottom: 0; }
+.stepSize { font-family: var(--font-wide); font-weight: 500; font-size: 30px; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.stepSpec { display: block; font-size: 12px; line-height: 1.45; margin-top: 6px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stepCls { display: block; font-family: var(--font-wide); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-ink); margin-bottom: 8px; }
+.sample { min-width: 0; overflow: hidden; overflow-wrap: anywhere; }
+.sampleBig { max-height: 210px; }
+@media (max-width: 700px) { .step { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+
+.habits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 1100px) { .habits { grid-template-columns: minmax(0, 1fr); } }
+.habit { display: grid; gap: 14px; align-content: start; min-height: 280px; }
+.habitDemo { min-height: 140px; display: grid; align-content: end; }

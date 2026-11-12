@@ -99,7 +99,7 @@ export function ConstructionG({ x = 0, y = 0, size = 100, rings = 9, stroke = '#
     <g transform={`translate(${x} ${y}) scale(${size / 100})`} fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeDasharray="1.2 1.2" {...rest}>
       {centres.map((c, k) =>
         Array.from({ length: rings }, (_, i) => (
-          <circle key={`${k}-${i}`} cx={c.cx} cy={c.cy} r={r2(MARK.U * (i + 0.5) * 1)} className={draw ? 'fade-in' : undefined} style={draw ? { '--i': k * rings + i } : undefined} />
+          <circle key={`${k}-${i}`} cx={c.cx} cy={c.cy} r={r2(MARK.U * (i + 1))} className={draw ? 'fade-in' : undefined} style={draw ? { '--i': k * rings + i } : undefined} />
         )),
       )}
     </g>

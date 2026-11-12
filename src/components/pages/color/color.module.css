@@ -1,0 +1,62 @@
+/* Colour page. Class names are local; keyframes are prefixed color-. */
+
+.rail { padding: 0 !important; gap: 0 !important; justify-content: stretch !important; }
+.bands { display: flex; flex-direction: column; height: 100%; width: 100%; }
+.band {
+  --w: 1;
+  flex: var(--w) 1 0;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+  width: 100%; border: 0; border-radius: 0; padding: clamp(12px, 1.6vw, 24px); text-align: left;
+  font-family: var(--font); cursor: pointer; position: relative; min-height: 0;
+  transition: flex-grow var(--dur-3) var(--ease-out), padding var(--dur-2) var(--ease-out);
+  animation: color-band var(--dur-4) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+.band:hover { flex-grow: calc(var(--w) + 0.45); }
+.band:active { transform: translateY(1px); }
+.band:focus-visible { outline: var(--stroke) solid currentColor; outline-offset: -8px; }
+.bandStrong { --w: 3; }
+.bandName { display: block; font-size: 17px; font-weight: 500; line-height: 1.15; }
+.bandHex { display: block; font-size: 13px; font-weight: 400; line-height: 1.3; margin-top: 3px; font-variant-numeric: tabular-nums; }
+.bandNo { display: block; font-size: 17px; font-weight: 300; line-height: 1.15; text-align: right; }
+.bandRole { display: block; font-size: 11px; line-height: 1.3; margin-top: 3px; text-align: right; letter-spacing: 0.02em; }
+.bandCopy { font-family: var(--font-wide); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+@keyframes color-band { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@media (max-width: 900px) { .rail { min-height: 560px !important; } }
+
+.head { padding-bottom: 8px; }
+.kicker { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.sec { display: grid; gap: 20px; }
+.secHead { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; border-top: var(--stroke) solid var(--navy); padding-top: 14px; }
+.secHead h2 { margin: 0; }
+.note { max-width: 62ch; }
+.plate { background: var(--white); padding: clamp(12px, 1.6vw, 24px); }
+.plate svg { width: 100%; height: auto; }
+.slideWrap { background: var(--slide); padding: clamp(12px, 1.6vw, 24px); }
+.slideWrap svg { width: 100%; height: auto; }
+
+.tableWrap { overflow-x: auto; background: var(--white); max-width: 100%; }
+.spec { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 13px; line-height: 1.35; }
+.spec th { text-align: left; font-family: var(--font-wide); font-weight: 500; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 12px 14px; border-bottom: var(--stroke) solid var(--navy); white-space: nowrap; }
+.spec td { padding: 9px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.spec tbody tr { transition: background-color var(--dur-1) var(--ease-out); }
+.spec tbody tr:hover { background: var(--mint); }
+.chipSw { display: inline-block; width: 38px; height: 22px; vertical-align: middle; box-shadow: inset 0 0 0 1px rgba(22, 37, 87, 0.22); }
+.ok { color: var(--green-ink); font-weight: 700; }
+.low { color: var(--muted); }
+
+.pairGrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--gap); align-items: start; }
+@media (max-width: 1280px) { .pairGrid { grid-template-columns: minmax(0, 1fr); } }
+
+.tokenCols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 700px) { .tokenCols { grid-template-columns: minmax(0, 1fr); } }
+.tokenCol { padding: clamp(14px, 1.6vw, 24px); display: grid; gap: 0; }
+.tokenLight { background: var(--mint); color: var(--navy); box-shadow: inset 0 0 0 var(--stroke) var(--navy); }
+.tokenDark { background: var(--navy); color: var(--white); }
+.tokenRow { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid currentColor; border-bottom-color: rgba(128, 140, 170, 0.35); font-size: 14px; }
+.tokenRow:last-child { border-bottom: 0; }
+.tokenSw { width: 28px; height: 28px; box-shadow: inset 0 0 0 1px rgba(128, 140, 170, 0.6); }
+.tokenName { font-weight: 700; }
+.tokenCss { font-size: 12px; opacity: 0.85; }
+.tokenVal { font-size: 13px; text-align: right; }
+.tokenHead { font-family: var(--font-wide); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 10px; border-bottom: var(--stroke) solid currentColor; }

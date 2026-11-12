@@ -1,0 +1,58 @@
+/* Page-only styles for /dataviz/. Charts are SVG; this file holds the layout, the tooltip and the UI parts. */
+
+.rail { display: flex; flex-direction: column; gap: 22px; min-height: 0; overflow-y: auto; scrollbar-width: none; }
+.rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: rule; }
+.rules li { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 10px; padding-top: 10px; border-top: var(--stroke) solid rgba(242, 255, 228, 0.9); }
+.ruleNo { font-family: var(--font-wide); font-weight: 500; font-size: 20px; line-height: 1; letter-spacing: -0.04em; color: var(--green); font-variant-numeric: tabular-nums; }
+.ruleTitle { font-family: var(--font-wide); font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.3; }
+.ruleText { font-size: 13px; line-height: 1.4; color: var(--mint); opacity: 0.86; margin-top: 4px; }
+
+/* Rows of 2 + 1 and 1 + 2 cards: a three-column track, cards take one or two columns. */
+.rows { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.s { grid-column: span 1; min-width: 0; display: flex; }
+.l { grid-column: span 2; min-width: 0; display: flex; }
+.chart { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+.chart h3 { min-width: 0; }
+.frame { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; min-width: 0; }
+.frame svg { display: block; width: 100%; height: auto; overflow: visible; }
+.frame svg [data-tip] { cursor: crosshair; outline: none; }
+.frame svg [data-tip]:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+.frame[data-play="0"] svg * { animation-play-state: paused !important; }
+.tip { position: absolute; transform: translate(-50%, calc(-100% - 8px)); z-index: 4; pointer-events: none; background: var(--navy); color: var(--white); border-left: 4px solid var(--green); padding: 7px 10px; font-family: var(--font-wide); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.3; max-width: 240px; width: max-content; }
+@media (max-width: 900px) {
+  .rows { grid-template-columns: minmax(0, 1fr); }
+  .s, .l { grid-column: span 1; }
+}
+
+.sec > h2 { margin-bottom: var(--gap); }
+.statGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.kpiGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); margin-top: var(--gap); }
+@media (max-width: 1100px) { .statGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .kpiGrid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .statGrid { grid-template-columns: minmax(0, 1fr); } }
+.stat { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.statFig { font-family: var(--font-wide); font-weight: 500; font-size: clamp(40px, 4vw, 60px); line-height: 1; letter-spacing: -0.04em; color: var(--navy); font-variant-numeric: tabular-nums; }
+.kpi { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.kpiFig { font-family: var(--font-wide); font-weight: 500; font-size: clamp(44px, 4.4vw, 68px); line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.kpi svg, .stat svg { display: block; width: 100%; height: auto; }
+
+.tableWrap { overflow-x: auto; margin-top: var(--gap); }
+.table { width: 100%; border-collapse: collapse; min-width: 520px; }
+.table th { text-align: left; font-family: var(--font-wide); font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 12px; border-bottom: var(--stroke) solid var(--navy); color: var(--muted); }
+.table td { padding: 10px 12px; border-bottom: 1px solid var(--gray); font-size: 14px; }
+.table tbody tr:hover { background: var(--mint); }
+.sw { display: inline-block; width: 22px; height: 22px; border: 1px solid rgba(22, 37, 87, 0.35); vertical-align: middle; }
+.mono { font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+
+.strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.strip > * { min-width: 0; }
+@media (max-width: 900px) { .strip { grid-template-columns: minmax(0, 1fr); } }
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.legend li { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; }
+.key { width: 14px; height: 14px; flex: none; border: 1px solid rgba(22, 37, 87, 0.35); }
+.keyRound { border-radius: 50%; }
+.state { min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 18px; background: var(--slide); }
+.stateErr { color: var(--red-ink); }
+.sk { height: 14px; width: 100%; }
+.skBlock { height: 56px; width: 56px; }
+.tipDemo { display: inline-block; position: relative; transform: none; margin-top: 8px; }

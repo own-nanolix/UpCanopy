@@ -1,0 +1,34 @@
+.railMark { width: 100%; max-width: 340px; height: auto; display: block; }
+.railWrap { flex: 1; display: grid; place-items: center; min-height: 0; }
+
+.intro { max-width: 640px; }
+.plate { display: block; width: 100%; height: auto; }
+.plateSq { max-width: 880px; }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; padding-bottom: 14px; margin-bottom: var(--gap); border-bottom: var(--stroke) solid var(--navy); }
+.head h2 { margin: 0; }
+.note { max-width: 560px; }
+
+.ratios { width: 100%; border-collapse: collapse; margin-top: var(--gap); font-size: 14px; }
+.ratios th, .ratios td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--gray); font-weight: 400; }
+.ratios th { font-family: var(--font-wide); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.ratios td:nth-child(2) { font-weight: 700; font-variant-numeric: tabular-nums; }
+.tableWrap { overflow-x: auto; }
+
+.mins { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.misuse { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.misuse figure, .mis { margin: 0; }
+.mis figcaption { margin-top: 8px; }
+.sec svg { display: block; width: 100%; height: auto; }
+@media (max-width: 900px) { .mins { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .misuse { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.pairs { display: grid; gap: var(--gap); }
+.pairs svg { display: block; width: 100%; height: auto; }
+.pairs > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 600px) { .pairs > div { grid-template-columns: minmax(0, 1fr); } }
+
+.secondary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.secondary svg { display: block; width: 100%; height: auto; }
+
+.draw { display: grid; gap: 16px; justify-items: start; max-width: 720px; }
+.draw svg { display: block; width: 100%; height: auto; }

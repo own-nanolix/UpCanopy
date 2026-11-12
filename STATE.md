@@ -67,3 +67,5 @@ http://localhost:3103 (start with `npx next dev -p 3103`; stop it before `npm ru
 - Decision: landing ids lp-home, lp-crm, lp-agenda, lp-financeiro, lp-hardscape, lp-manifesto, lp-contato.
 - Decision: page background is Green Ligth #F2FFE4; small green text on light surfaces uses #086338 (Green Park fails 4.5:1 there).
 - Step 5 started: wave 1 launched (B1 to B12, Sonnet). If a session ends here, trust only `npm run build` and `node tools/check.mjs`.
+- Wave 1 done: lint clean, build passes, check reports 17 of 30 ok. No builder relaunched. Shared fix: ConstructionG rings now sit at whole multiples of the ring unit (they were half a unit off). Notes for review: overview, strategy and lp-hardscape are under 600 lines; lp-home has small white text on the gradient that fails contrast at 390 px and a small overflow in the hero card; lp-agenda headline covers part of the week grid on wide screens.
+- Wave 2 launched (B13 to B24, Sonnet).
