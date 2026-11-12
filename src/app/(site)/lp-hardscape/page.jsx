@@ -97,7 +97,7 @@ export default function Page() {
         <h2 id="lp-hardscape-open-h" className="sr-only">Manifesto, opening</h2>
         <Reveal className={`field-paper ${s.openCard}`}>
           <p lang="pt-BR">
-            <Line text={MANIFESTO[0]} strong="Tijolo por tijolo, jardim por jardim." className="strong" />
+            {MANIFESTO[0]}
           </p>
           <div className={s.openAside}>
             <span className={`${s.eyebrow} hl-ink`}>Manifesto</span>
@@ -115,7 +115,7 @@ export default function Page() {
           <div className={s.overGrid}>
             <Reveal className={s.overText}>
               <p lang="pt-BR">
-                <Line text={MANIFESTO[2]} strong={['primeiro a chegar na obra', 'último a sair do escritório']} className="strong" />
+                {MANIFESTO[2]}
               </p>
             </Reveal>
             <Reveal delay={120}><HandOver /></Reveal>

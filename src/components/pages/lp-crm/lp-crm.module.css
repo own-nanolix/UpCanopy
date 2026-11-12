@@ -8,9 +8,8 @@
 @keyframes lp-crm-bar { from { transform: scaleX(0); } to { transform: none; } }
 .h1 { font-size: clamp(30px, 3.4vw, 54px); }
 .h1Line { display: inline; animation: lp-crm-rise var(--dur-4) var(--ease-out) both; }
-.h1Strong { color: var(--navy); background-image: linear-gradient(var(--green), var(--green)); background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 0.24em; animation: lp-crm-underline var(--dur-5) var(--ease-draw) 400ms both; }
+.h1Strong { font-weight: inherit; }
 @keyframes lp-crm-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-@keyframes lp-crm-underline { from { background-size: 0% 0.24em; } to { background-size: 100% 0.24em; } }
 @media (max-width: 1000px) { .heroGrid { grid-template-columns: minmax(0, 1fr); } }
 
 /* board */

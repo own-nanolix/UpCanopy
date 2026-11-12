@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Line } from '@/components/ui/Card';
 import { MANIFESTO, PILLARS, TAGLINE } from '@/lib/brand';
 import { ease } from '@/lib/motion';
 import s from './lp-home.module.css';
@@ -36,7 +35,7 @@ export default function Pillars() {
         ))}
       </ul>
       <p className={`t-h1 ${s.tagline}`} lang="pt-BR">
-        <Line text={TAGLINE} strong="crescimento" className="hl-ink" />
+        {TAGLINE}
       </p>
     </div>
   );

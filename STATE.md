@@ -34,7 +34,7 @@ The same pipeline was run first on Tectra (`../project-2`); its fixes are applie
 - [x] 6. Review team; shared fixes applied
 - [x] 7. Verify in the browser; SVG export
 - [x] 8. `REPORT.md` and `README.md`
-- [ ] 9. Offer to publish to Vercel
+- [x] 9. Final independent review done, fixes applied, pushed once (needs a Vercel import by the owner)
 
 ## Decisions
 
@@ -75,3 +75,4 @@ http://localhost:3103 (start with `npx next dev -p 3103`; stop it before `npm ru
 - Step 6 started: 8 reviewers launched (Opus).
 - Step 6 done: 8 reviewers (Opus) reviewed and fixed all 30 pages; each committed locally. Shared fixes applied by the lead: WordmarkVerticalG gets a top-to-bottom option (the letter reads top to bottom), MarkCropG defaults set to the crop measured on the folder cover, six icons squared, placeholder bars may shrink, landing nav links wrap under 640 px.
 - Step 7: lint clean; build passes; check --strict 30 of 30 ok; audit 30 of 30 clean at 1440 and 390 px on the built site; export-svg wrote 422 SVGs with 0 warnings.
+- Final review (Opus, independent): 3 must-fix and 8 should-fix findings, all fixed (studio address on the card, font names on the typography page, 9:41, invented bolding, private hex, studio slide furniture, LAYOUTS lines, report). Lint clean, build passes, check --strict 30 of 30, audit 30 of 30, 422 SVGs with 0 warnings. Pushed once.

@@ -44,7 +44,7 @@ export default function Page() {
             <div className={s.kicker}><Chip tone="navy">Typography</Chip><Chip>Two voices</Chip></div>
             <h1 className="t-display" tabIndex={-1}>A light voice, <span className="hl-ink">a wide one</span></h1>
             <p className={`t-lead muted ${s.note}`} style={{ marginTop: 18 }}>
-              The case study names no typefaces. Red Hat Display and Lexend Exa are the closest free matches, chosen by us.
+              The case study names no typefaces. The two voices are set in the closest free match; the font names are in the report.
             </p>
           </section>
 

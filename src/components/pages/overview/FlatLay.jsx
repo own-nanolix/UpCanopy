@@ -149,7 +149,7 @@ export default function FlatLay() {
           {[CONTACT.handle, CONTACT.phone, CONTACT.hello].map((t, i) => (
             <text key={t} x="14" y={52 + i * 10} fontSize="7" fill={NAVY}>{t}</text>
           ))}
-          <text x="14" y="102" fontSize="7" fill={NAVY}>{CONTACT.address}</text>
+          <rect x="14" y="96" width="92" height="6" rx="1" fill={NAVY} opacity="0.16" />
           <text x="14" y="140" fontSize="7" fontWeight="700" fill={NAVY}>{CONTACT.webCased}</text>
           <WordmarkG x={190} y={30} size={11} fill={NAVY} anchor="end" />
         </Slab>

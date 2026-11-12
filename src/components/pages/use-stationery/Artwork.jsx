@@ -38,7 +38,8 @@ export function CardBackG() {
       <text x="24" y="38" fontSize="9.5" fontWeight="700" fill={C.navy}>{PEOPLE.founder.name}</text>
       <text x="24" y="50" fontSize="7.5" fontWeight="400" fill={C.navy}>{PEOPLE.founder.role}</text>
       <Lines rows={[CONTACT.handle, CONTACT.phone, CONTACT.hello]} x={24} y={84} size={8} lh={1.45} fill={C.navy} />
-      <Lines rows={['HERO Studio,', 'NY, New York 3875']} x={24} y={130} size={8} lh={1.45} fill={C.navy} />
+      <rect x="24" y="124" width="84" height="8" rx="1.5" fill={C.navy} opacity="0.16" />
+      <rect x="24" y="136" width="62" height="8" rx="1.5" fill={C.navy} opacity="0.16" />
       <text x="24" y="172" fontSize="8" fontWeight="700" fill={C.navy}>{CONTACT.webCased}</text>
       <WordmarkG x={CARD.w - 22} y={36} size={14} fill={C.navy} anchor="end" weight={400} />
     </g>

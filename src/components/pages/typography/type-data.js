@@ -1,8 +1,8 @@
 // Typography page data. Samples are brand lines and labels from @/lib/brand; sizes are the t-* classes of globals.css.
 import { LINES, TAGLINE, DESCRIPTOR, DIRECTION, BRAND, CONTACT, PILLARS, SCALES, MANIFESTO } from '@/lib/brand';
 
-export const TEXT_FACE = 'Red Hat Display';
-export const WIDE_FACE = 'Lexend Exa';
+export const TEXT_FACE = 'Text voice';
+export const WIDE_FACE = 'Logotype voice';
 export const TEXT_WEIGHTS = [[300, 'Light'], [400, 'Regular'], [500, 'Medium'], [700, 'Bold']];
 export const WIDE_WEIGHTS = [[400, 'Regular'], [500, 'Medium'], [600, 'SemiBold']];
 

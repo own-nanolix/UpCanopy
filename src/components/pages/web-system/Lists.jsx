@@ -23,18 +23,18 @@ const CONTACTS = [
   { icon: 'note', label: DOCUMENT.labels[2], value: CONTACT.sac },
   { icon: 'note', label: DOCUMENT.labels[2], value: CONTACT.hello },
   { icon: 'link', label: 'Web', value: CONTACT.web },
-  { icon: 'pin', label: 'Address', value: CONTACT.address },
+  { icon: 'pin', label: 'Address', value: null },
 ];
 
 export function ContactList() {
   return (
     <ul className={s.contactList}>
       {CONTACTS.map((c) => (
-        <li key={c.value} className={s.contactItem}>
+        <li key={`${c.label}-${c.value}`} className={s.contactItem}>
           <Icon name={c.icon} size={20} />
           <span>
             <span className="t-label" style={{ display: 'block' }}>{c.label}</span>
-            {c.value}
+            {c.value ?? <span className="ph" style={{ width: '12em', minWidth: 0 }} aria-hidden="true" />}
           </span>
         </li>
       ))}

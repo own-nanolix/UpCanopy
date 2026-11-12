@@ -39,8 +39,8 @@ export function CardBack() {
         <text x="60" y="206">{CONTACT.handle}</text>
         <text x="60" y="232">{CONTACT.phone}</text>
         <text x="60" y="258">{CONTACT.hello}</text>
-        <text x="60" y="302">HERO Studio,</text>
-        <text x="60" y="328">{CONTACT.address.replace('HERO Studio, ', '')}</text>
+        <rect x="60" y="289" width="230" height="15" rx="2" fill={HEX.navy} opacity="0.16" />
+        <rect x="60" y="315" width="170" height="15" rx="2" fill={HEX.navy} opacity="0.16" />
         <text x="60" y="376" fontWeight="700">{CONTACT.webCased}</text>
       </g>
     </Art>

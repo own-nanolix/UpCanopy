@@ -121,6 +121,9 @@
 .manifestoArt { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; z-index: -1; }
 .manifestoH2 { font-size: clamp(36px, 6.2vw, 104px); line-height: 1.04; color: var(--mint); max-width: 9em; }
 .manifestoBtn { display: flex; }
+@media (max-width: 600px) {
+  .manifestoArt { inset: auto 0 0 auto; width: 42%; height: 44%; }
+}
 
 /* ---------- Contact ---------- */
 .contact { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); max-width: 1040px; margin-inline: auto; align-items: start; }

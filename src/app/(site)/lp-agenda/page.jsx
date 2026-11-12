@@ -200,7 +200,7 @@ export default function Page() {
       <section className={`${s.cta} field-green`} aria-labelledby="lp-agenda-h-cta">
         <div className="wrap">
           <Reveal>
-            <h2 id="lp-agenda-h-cta" className="t-display" lang="pt-BR"><Line text={LINES.close} strong="Organização que gera crescimento." className="strong" /></h2>
+            <h2 id="lp-agenda-h-cta" className="t-display" lang="pt-BR">{LINES.close}</h2>
             <div className="row" style={{ marginTop: 32, gap: 12 }}>
               <Button href="/lp-contato/" variant="navy" iconRight="arrow-right">Contact</Button>
               <Link href="/lp-crm/" className="btn btn-ghost">CRM <Icon name="arrow-right" size={16} /></Link>

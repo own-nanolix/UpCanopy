@@ -1,6 +1,5 @@
 import CopyValue from '@/components/site/CopyValue';
 import Icon from '@/components/site/Icon';
-import { Line } from '@/components/ui/Card';
 import { MANIFESTO } from '@/lib/brand';
 import s from './web-system.module.css';
 
@@ -10,7 +9,7 @@ export function PullQuote() {
     <figure className={s.quote}>
       <blockquote style={{ margin: 0 }}>
         <p lang="pt-BR" className="t-line">
-          <Line text={text} strong="crescimento visível" className="strong" />
+          {text}
         </p>
       </blockquote>
       <figcaption className={`t-label ${s.quoteCap}`}>Manifesto</figcaption>

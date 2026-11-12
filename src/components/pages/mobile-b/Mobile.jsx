@@ -15,7 +15,7 @@ export const Bar = ({ w = 6 }) => <span className="ph" aria-hidden="true" style=
 export function StatusBar({ tone = 'light' }) {
   return (
     <div className={`${s.status} ${tone === 'navy' ? s.statusNavy : ''}`} aria-hidden="true">
-      <b className={s.clock}>9:41</b>
+      <span className="ph" style={{ width: 38, minWidth: 0, height: 12 }} />
       <svg width="48" height="14" viewBox="0 0 48 14" fill="currentColor">
         {[0, 1, 2, 3].map((i) => <rect key={i} x={i * 6} y={10 - i * 3} width="4" height={4 + i * 3} />)}
         <rect x="28" y="1" width="18" height="12" fill="none" stroke="currentColor" strokeWidth="2" />

@@ -51,7 +51,7 @@ const TRACKS = [
 ];
 export function Tracking() {
   return (
-    <Art viewBox="0 0 1200 640" title="Letter-spacing study: the descriptor in Lexend Exa caps at five tracking values, with the values used by the brand marked" exportName="typography-tracking">
+    <Art viewBox="0 0 1200 640" title="Letter-spacing study: the descriptor in logotype voice caps at five tracking values, with the values used by the brand marked" exportName="typography-tracking">
       <rect width="1200" height="640" fill={HEX.white} />
       <Tag x="40" y="48" fill={HEX.greenInk}>WIDE CAPS · TRACKING IN EM</Tag>
       {TRACKS.map(([em, name, used], i) => {
@@ -126,15 +126,14 @@ export function VerticalStudy() {
 // Card back (m23): green, small dark type. Rows are [x, baseline, size, weight, text].
 const CARD = { x: 40, y: 40, w: 700, h: 400 };
 const CARD_NOTES = [
-  [94, 70, 'WORD-MARK', ['Lexend Exa Medium 500,', 'top right']],
+  [94, 70, 'WORD-MARK', ['Logotype voice Medium 500,', 'top right']],
   [125, 160, 'NAME AND ROLE', ['Bold 700 first name, Regular 400', 'surname and role']],
   [222, 250, 'CONTACT BLOCK', ['Regular 400, one line each,', 'line pitch 24 units']],
   [318, 350, 'ADDRESS', ['Two lines, set apart']],
   [390, 440, 'WEB ADDRESS', ['Bold 700, closes the card']],
 ];
-// As printed on m23: the first name bold, the surname regular; the address broken after the studio name.
+// As printed on m23: the first name bold, the surname regular; the address lines are quiet placeholder bars.
 const NAME = PEOPLE.founder.name.split(' ');
-const CUT = CONTACT.address.indexOf(', ');
 export function CardStudy() {
   const TX = CARD.x + 48;
   const rows = [
@@ -143,8 +142,6 @@ export function CardStudy() {
     [TX, 198, 16, 400, CONTACT.handle],
     [TX, 222, 16, 400, CONTACT.phone],
     [TX, 246, 16, 400, CONTACT.hello],
-    [TX, 306, 16, 400, CONTACT.address.slice(0, CUT)],
-    [TX, 330, 16, 400, CONTACT.address.slice(CUT + 2)],
     [TX, 390, 16, 700, CONTACT.webCased],
   ];
   return (
@@ -159,6 +156,8 @@ export function CardStudy() {
             {rest ? <tspan fontWeight="400">{` ${rest}`}</tspan> : null}
           </text>
         ))}
+        <rect x={TX} y={293} width={230} height={16} rx={2} fill={HEX.greenDark} opacity="0.16" />
+        <rect x={TX} y={317} width={170} height={16} rx={2} fill={HEX.greenDark} opacity="0.16" />
       </g>
       <rect x={CARD.x} y="500" width={CARD.w} height={CARD.h} fill={HEX.navy} />
       <g className="lock"><MarkG x={CARD.x + 285} y={620} size={130} fill={HEX.green} /></g>

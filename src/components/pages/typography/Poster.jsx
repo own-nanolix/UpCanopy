@@ -13,11 +13,11 @@ const SIDE = 80; // right margin of the type, measured on m06 (47 of 412 px)
 
 // Annotations: [y of the pointer, heading, detail lines]
 const NOTES = [
-  [134, 'BRAND LINE', ['Red Hat Display Light 300', 'line pitch about 5% of poster height', 'right-aligned, ragged left']],
+  [134, 'BRAND LINE', ['Text voice Light 300', 'line pitch about 5% of poster height', 'right-aligned, ragged left']],
   [289, 'BOLD CLOSE', ['UpCanopy in Bold 700,', 'Green Park on the dark field']],
   [560, 'FROND', ['Graphic, not type: it grows from the', 'left edge and is cropped by it']],
   [830, 'MARK', ['Green mark, lower left']],
-  [900, 'CONTACTS', ['Red Hat Display Regular 400', 'small, bottom right']],
+  [900, 'CONTACTS', ['Text voice Regular 400', 'small, bottom right']],
 ];
 
 // The frond as measured on m06: 38 leaflets, roots on the left edge from 26% to 99% of the poster height,

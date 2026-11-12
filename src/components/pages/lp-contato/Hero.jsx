@@ -9,8 +9,7 @@ import s from './lp-contato.module.css';
 
 // Back of the card as printed (m23): the name with the first name bold, the role under it; then three groups.
 const [FIRST, ...LAST] = PEOPLE.founder.name.split(' ');
-const [STUDIO, ...CITY] = CONTACT.address.split(', ');
-const GROUPS = [[CONTACT.handle, CONTACT.phone, CONTACT.hello], [`${STUDIO},`, CITY.join(', ')]];
+const GROUPS = [[CONTACT.handle, CONTACT.phone, CONTACT.hello]];
 
 // The business card of the case study (navy front with the mark, Green Park back with small dark text) that
 // flips on click or Enter, beside a simple contact form on mint. Nothing is sent.
@@ -45,6 +44,10 @@ export default function Hero() {
                   {GROUPS.map((g) => (
                     <span key={g[0]} className={s.backGroup}>{g.map((t) => <span key={t}>{t}</span>)}</span>
                   ))}
+                  <span className={s.backGroup} aria-hidden="true">
+                    <span className="ph" style={{ width: '11em', minWidth: 0 }} />
+                    <span className="ph" style={{ width: '8em', minWidth: 0, marginTop: '0.3em' }} />
+                  </span>
                   <b>{CONTACT.webCased}</b>
                 </span>
               </span>

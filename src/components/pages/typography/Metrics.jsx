@@ -40,9 +40,9 @@ export function MetricsArt() {
   return (
     <Art viewBox="0 0 1600 900" title="Type construction: ascender, cap height, x-height, baseline and descender over large letters of both voices" exportName="typography-metrics">
       <rect width="1600" height="900" fill={HEX.white} />
-      <Panel y0={10} tag="TEXT VOICE" face="Red Hat Display" m={METRICS.text} size={300} weight={400} />
+      <Panel y0={10} tag="TEXT VOICE" face="Text voice" m={METRICS.text} size={300} weight={400} />
       <path d="M50 450H1550" stroke={HEX.navy} strokeOpacity="0.2" />
-      <Panel y0={460} tag="LOGOTYPE VOICE" face="Lexend Exa" m={METRICS.wide} size={290} weight={500} wide />
+      <Panel y0={460} tag="LOGOTYPE VOICE" face="Logotype voice" m={METRICS.wide} size={290} weight={500} wide />
     </Art>
   );
 }

@@ -40,8 +40,8 @@ function Sheet({ exportName, title, face, wide, weight }) {
 }
 
 export function CharsetText() {
-  return <Sheet exportName="typography-charset-text" title="Character set of Red Hat Display, with the Portuguese accents" face="Red Hat Display" weight={400} />;
+  return <Sheet exportName="typography-charset-text" title="Character set of the text voice, with the Portuguese accents" face="Text voice" weight={400} />;
 }
 export function CharsetLogotype() {
-  return <Sheet exportName="typography-charset-logotype" title="Character set of Lexend Exa, with the Portuguese accents" face="Lexend Exa" weight={500} wide />;
+  return <Sheet exportName="typography-charset-logotype" title="Character set of the logotype voice, with the Portuguese accents" face="Logotype voice" weight={500} wide />;
 }

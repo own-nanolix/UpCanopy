@@ -35,14 +35,14 @@ function Sheet({ exportName, title, role, face, weights, samples, sizes, wide, g
 
 export function TextVoice() {
   return (
-    <Sheet exportName="typography-voice-text" title="Primary typeface, the text voice: Red Hat Display, weights 300, 400, 500 and 700" role="PRIMARY · TEXT VOICE" face={TEXT_FACE}
+    <Sheet exportName="typography-voice-text" title="Primary typeface, the text voice, weights 300, 400, 500 and 700" role="PRIMARY · TEXT VOICE" face={TEXT_FACE}
       weights={TEXT_WEIGHTS} samples={TEXT_SAMPLES} sizes={[30, 30, 28, 40]} ground={HEX.navy} ink={HEX.white} accent={HEX.green} />
   );
 }
 
 export function LogotypeVoice() {
   return (
-    <Sheet exportName="typography-voice-logotype" title="Secondary typeface, the logotype voice: Lexend Exa, weights 400, 500 and 600" role="SECONDARY · LOGOTYPE VOICE" face={WIDE_FACE} wide
+    <Sheet exportName="typography-voice-logotype" title="Secondary typeface, the logotype voice, weights 400, 500 and 600" role="SECONDARY · LOGOTYPE VOICE" face={WIDE_FACE} wide
       weights={WIDE_WEIGHTS} samples={WIDE_SAMPLES} sizes={WIDE_SIZES.map((v, i) => (i === 0 ? 22 : i === 1 ? 52 : 18))} ground={HEX.mint} ink={HEX.navy} accent={HEX.greenInk} />
   );
 }

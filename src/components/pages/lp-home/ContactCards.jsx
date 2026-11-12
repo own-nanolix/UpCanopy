@@ -29,7 +29,7 @@ export default function ContactCards() {
             <text x="44" y="190">{CONTACT.handle}</text>
             <text x="44" y="218">{CONTACT.phone}</text>
             <text x="44" y="246">{CONTACT.hello}</text>
-            <text x="44" y="300">{CONTACT.address}</text>
+            <rect x="44" y="288" width="250" height="14" rx="2" fill={ink} opacity="0.16" />
             <text x="44" y="352" fontWeight="700">{CONTACT.webCased}</text>
           </g>
           <WordmarkG x={656} y={66} size={26} fill="#FFFFFF" anchor="end" weight={400} />

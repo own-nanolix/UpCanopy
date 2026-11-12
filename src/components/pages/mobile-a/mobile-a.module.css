@@ -64,7 +64,7 @@
 .areabar :focus-visible { outline-color: var(--white); outline-offset: -4px; }
 
 /* ---------- 1 Home ---------- */
-.s1 { background: linear-gradient(to top right, #162557 15%, #1c5c66 70%, #26cf7b 100%); color: var(--white); }
+.s1 { background: linear-gradient(to top right, var(--navy) 15%, #1c5c66 70%, var(--green) 100%); color: var(--white); }
 .s1Mark { position: absolute; left: 28px; top: 84px; }
 .s1Line { position: absolute; left: 28px; top: 179px; font-size: 30px; line-height: 36px; font-weight: 300; z-index: 2; }
 .s1Areas { position: absolute; left: 28px; top: 470px; width: 334px; margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; z-index: 2; }

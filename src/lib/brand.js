@@ -42,8 +42,7 @@ export const LINES = {
 // Contact details and people printed in the case study.
 export const CONTACT = {
   phone: '+1 (774) 360-7800', web: 'upcanopy.com', webCased: 'UpCanopy.com', sac: 'sac@UpCanopy.com',
-  hello: 'hello@UpCanopy.com', handle: '@EdersonUpCanopy', address: 'HERO Studio, NY, New York 3875',
-  footer: '+1 (774) 360-7800 | upcanopy.com',
+  hello: 'hello@UpCanopy.com', handle: '@EdersonUpCanopy',  footer: '+1 (774) 360-7800 | upcanopy.com',
 };
 export const PEOPLE = {
   founder: { name: 'EDERSON DEVENS', role: 'CEO • FOUNDER', initials: 'ED' },   // business card

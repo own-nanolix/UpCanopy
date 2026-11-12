@@ -43,7 +43,7 @@ built the same way. Builders follow their lines; reviewers check against them.
 | 26 | use-stationery | The designer's flat lay rebuilt as the opening plate (as m01), then single-object plates in a 2-column staircase |
 | 27 | use-packaging | A 3-column staircase: each column starts lower than the one before |
 | 28 | use-event | Booth as the opening wide plate (as m30); then badges tall on the left with a 2 x 3 of small plates on the right |
-| 29 | use-world | Five wide scenes, alternating flush-left and flush-right at 80% width |
+| 29 | use-world | Six wide scenes, alternating flush-left and flush-right at 80% width |
 | 30 | use-product | Document box hero plate full width (as m28); kit contents as a cascade of four plates; card colourways as a row of three; devices and icon ladder as a final pair |
 
 ## Mockups (arrangement and camera)
@@ -90,7 +90,7 @@ every time.
 | use-event | Wristbands | Seven bands as diagonal stripes across the plate, cropped both ends |
 | use-event | Tickets and pass | Tickets fanned from the bottom-left corner |
 | use-event | Flags and banner | Flags of falling height stepping left; banner cropped by the top edge |
-| use-world | Truck | As m02: trailer side cropped left, cab end right |
+| use-world | Truck | As m02: trailer side cropped left, ending at the rear (no cab is drawn) |
 | use-world | Citylight and roll-ups | Citylight (m24) at left, roll-ups stepping away to the right |
 | use-world | Reception and window | The three window panels (m15) with the 3D sign (m13) above, cropped right |
 | use-world | Wall sign and wayfinding | The "HOME →" plate (m17) on a ribbed wall, wayfinding stepping below |

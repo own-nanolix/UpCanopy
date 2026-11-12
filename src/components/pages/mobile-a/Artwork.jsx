@@ -31,7 +31,7 @@ function BrandScreen() {
           <ScaleDotsG x={33} y={374 + i * 70} w={324} r={7} chosen={sc.chosen} off="#2F5E50" lock />
         </g>
       ))}
-      <text x="28" y="790" fontSize="22" fontWeight="300" fill={MINT} lang="pt-BR">Organização que gera <tspan fontWeight="700" fill={GREEN}>crescimento</tspan></text>
+      <text x="28" y="790" fontSize="22" fontWeight="300" fill={MINT} lang="pt-BR">Organização que gera crescimento</text>
     </Art>
   );
 }

@@ -2,7 +2,6 @@ import { pageMeta } from '@/lib/pages';
 import Art from '@/components/art/Art';
 import { MarkG, WordmarkG, DescriptorG } from '@/components/art/Mark';
 import Reveal from '@/components/site/Reveal';
-import { Line } from '@/components/ui/Card';
 import { MANIFESTO, SHEET, TAGLINE, DESCRIPTOR, AREAS, SECTORS, PILLARS, HEX } from '@/lib/brand';
 import FlatLay from '@/components/pages/overview/FlatLay';
 import ContentsNav from '@/components/pages/overview/ContentsNav';
@@ -45,7 +44,7 @@ export default function Page() {
         </div>
         <div className={`field-navy ${s.title}`}>
           <h1 className={`t-display ${s.h1}`} tabIndex={-1} lang="pt-BR">
-            <Line text={TAGLINE} strong="crescimento" className="hl" />
+            {TAGLINE}
           </h1>
           <div className={s.titleSide}>
             <Art viewBox="0 0 520 120" title="UpCanopy, remote back-office" exportName="overview-cover-lockup" className={s.coverLockup}>

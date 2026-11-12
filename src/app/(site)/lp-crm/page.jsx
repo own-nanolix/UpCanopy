@@ -34,7 +34,7 @@ export default function Page() {
             <p className={`t-caps ${s.kicker}`}><span className={s.kickerBar} aria-hidden="true" />CRM</p>
             <h1 className={`t-display ${s.h1}`} lang="pt-BR">
               <span className={s.h1Line}>{HEAD.join(' ')}</span>{' '}
-              <span className={`strong ${s.h1Strong}`}>{HEAD_LAST}.</span>
+              <span className={s.h1Strong}>{HEAD_LAST}.</span>
             </h1>
             <p className="t-small" style={{ maxWidth: '28em' }}>
               Move a card with its buttons, with the left and right arrow keys, or by dragging it to another column.

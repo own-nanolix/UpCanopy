@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Art from '@/components/art/Art';
-import { SCALES, DIRECTION, HEX } from '@/lib/brand';
+import { BRAND, DESCRIPTOR, SCALES, DIRECTION, HEX } from '@/lib/brand';
 import s from './strategy.module.css';
 
 // The attribute scales slide, rebuilt as reference m03: five rows of ten dots, one green dot per row, labels in
@@ -34,10 +34,9 @@ export default function ScalesSlide() {
           <text x="27" y="66">PROJETO DE IDENTIDADE VISUAL</text>
         </g>
         <g fontSize="13" fill={HEX.muted} lang="pt-BR">
-          <text x="1075" y="52">CLIENTE: EDERSON DEVENS</text>
-          <text x="1075" y="66">PROJETO: UPCANOPY</text>
-          <text x="1334" y="52">JONAS NICACIO</text>
-          <text x="1573" y="52" textAnchor="end">→(26)</text>
+          <text x="1075" y="52">{BRAND.toUpperCase()}</text>
+          <text x="1075" y="66">{DESCRIPTOR}</text>
+          <text x="1573" y="52" textAnchor="end">{DIRECTION.label}</text>
         </g>
         {SCALES.map((sc, r) => (
           <g key={sc.left} lang="pt-BR">

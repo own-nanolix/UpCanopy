@@ -137,7 +137,7 @@ export function ScreenBrand() {
           </Rise>
         ))}
       </Stag>
-      <p className={`t-line ${s.s9Tag}`} lang="pt-BR"><Line text={TAGLINE} strong="crescimento" className="hl" /></p>
+      <p className={`t-line ${s.s9Tag}`} lang="pt-BR">{TAGLINE}</p>
     </div>
   );
 }

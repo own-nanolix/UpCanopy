@@ -100,7 +100,7 @@ export function PostVerticalG({ idp }) {
       </g>
       <Mk x={884} y={64} size={124} fill={K.navy} />
       <g className="slide-up" style={{ '--i': 4 }}>
-        <Rows rows={['Organização', 'que gera', 'crescimento']} x={1008} y={800} size={60} anchor="end" fill={K.navy} strong="crescimento" strongFill={K.navy} />
+        <Rows rows={['Organização', 'que gera', 'crescimento']} x={1008} y={800} size={60} anchor="end" fill={K.navy} />
       </g>
       <text x="1008" y="1010" fontSize="26" fontWeight="400" textAnchor="end" fill={K.navy}>{CONTACT.web}</text>
     </g>

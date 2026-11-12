@@ -42,7 +42,7 @@ export function useScreenName(n) {
 export function StatusBar({ dark = false }) {
   return (
     <div className={`${s.status} ${dark ? s.statusDark : ''}`} aria-hidden="true">
-      <b>9:41</b>
+      <span className="ph" style={{ width: 38, minWidth: 0, height: 12 }} />
       <svg viewBox="0 0 54 14" width="54" height="14">
         {[0, 1, 2, 3].map((i) => <rect key={i} x={i * 6} y={10 - i * 3} width="4" height={4 + i * 3} fill="currentColor" />)}
         <rect x="32" y="2" width="20" height="10" fill="none" stroke="currentColor" strokeWidth="2" />

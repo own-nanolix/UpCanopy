@@ -57,8 +57,7 @@ export function BadgeScreenG({ idp }) {
 // then three groups of small dark lines: handle, phone and email; the address on two lines; the web address bold.
 export function BusinessCardG() {
   const [first, ...rest] = PEOPLE.founder.name.split(' ');
-  const [studio, ...city] = CONTACT.address.split(', ');
-  const groups = [[CONTACT.handle, CONTACT.phone, CONTACT.hello], [studio, city.join(', ')]];
+  const groups = [[CONTACT.handle, CONTACT.phone, CONTACT.hello]];
   const ink = '#052E25';
   return (
     <g>
@@ -72,6 +71,8 @@ export function BusinessCardG() {
       {groups.map((g, k) => g.map((t, i) => (
         <text key={`${k}-${i}`} x="22" y={r2(80 + k * 46 + i * 11)} fontSize="8" fill={ink}>{t}</text>
       )))}
+      <rect x="22" y="126" width="104" height="8" rx="1.5" fill={ink} opacity="0.16" />
+      <rect x="22" y="137" width="76" height="8" rx="1.5" fill={ink} opacity="0.16" />
       <text x="22" y="170" fontSize="9" fontWeight="700" fill={ink}>{CONTACT.webCased}</text>
     </g>
   );

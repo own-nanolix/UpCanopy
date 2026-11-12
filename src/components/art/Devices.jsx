@@ -140,7 +140,7 @@ export function ScreenHomeG({ idp }) {
       </linearGradient>
       <rect width="390" height="844" fill={`url(#${idp}-sh-bg)`} />
       <FrondG cx={-40} cy={520} r={330} a0={285} a1={395} count={30} len={210} width={8} lean={64} tone="onNavy" opacity={0.55} />
-      <text x="34" y="46" fontSize="15" fontWeight="700" fill="#FFFFFF">9:41</text>
+      <rect x="34" y="35" width="38" height="12" rx="2" fill="#FFFFFF" opacity="0.2" />
       <MarkG x={28} y={84} size={44} fill="#26CF7B" />
       <text fontSize="30" fontWeight="300" fill="#FFFFFF">
         <tspan x="28" y="208">A ponte entre</tspan>
