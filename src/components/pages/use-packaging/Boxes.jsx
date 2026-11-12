@@ -82,7 +82,7 @@ function PlainBox({ id, m, a, b, h }) {
 function NavyBox({ id, m, a, b, h }) {
   const unfold = (shift) => (
     <g transform={`translate(${-shift} 0)`}>
-      <FrondG cx={a - 10} cy={h + 30} r={h * 1.05} a0={185} a1={330} count={34} len={h * 0.75} width={h * 0.035} lean={58} tone="onNavy" opacity={0.9} />
+      <FrondG cx={a - 10} cy={h + 30} r={h * 1.05} a0={185} a1={330} count={34} len={h * 0.85} width={h * 0.055} lean={58} tone="onNavy" opacity={1} />
       <WordmarkG x={-24} y={h * 0.9} size={h * 0.62} fill="#fff" weight={500} />
     </g>
   );
@@ -95,7 +95,7 @@ function NavyBox({ id, m, a, b, h }) {
   );
 }
 
-function ShipPlate({ id, title, big, small }) {
+function ShipPlate({ id, title, big, small, at = { sm: [760, 470], lg: [260, 790] } }) {
   return (
     <Plate id={id} title={title}>
       {({ idp, m }) => {
@@ -108,8 +108,8 @@ function ShipPlate({ id, title, big, small }) {
         );
         return (
           <g>
-            <StepG i={1} x={760} y={470}>{mk(small, 'sm', { a: 190, b: 170, h: 130 })}</StepG>
-            <StepG i={0} x={260} y={790}>{mk(big, 'lg', { a: WIDE, b: 310, h: 250 })}</StepG>
+            <StepG i={1} x={at.sm[0]} y={at.sm[1]}>{mk(small, 'sm', { a: 190, b: 170, h: 130 })}</StepG>
+            <StepG i={0} x={at.lg[0]} y={at.lg[1]}>{mk(big, 'lg', { a: WIDE, b: 310, h: 250 })}</StepG>
           </g>
         );
       }}
@@ -117,5 +117,5 @@ function ShipPlate({ id, title, big, small }) {
   );
 }
 export const ShipPlain = () => <ShipPlate id="ship-plain" title="Plain board shipping box" big="plain" small="navy" />;
-export const ShipNavy = () => <ShipPlate id="ship-navy" title="Navy printed shipping box" big="navy" small="plain" />;
+export const ShipNavy = () => <ShipPlate id="ship-navy" title="Navy printed shipping box" big="navy" small="plain" at={{ sm: [250, 400], lg: [700, 820] }} />;
 

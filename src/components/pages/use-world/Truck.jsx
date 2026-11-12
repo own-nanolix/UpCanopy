@@ -1,7 +1,7 @@
 // The truck trailer wrap (reference m02): trailer side cropped at the left, navy-to-green gradient, frond,
 // pale mark, the line in five rows, twin rear wheels, underrun. Drawn in the reference's own 1600 x 900 space.
 import { SweepG, MaterialDefs, StepG, ShadowG } from '@/components/art/Mockup';
-import { BrandDefs, FrondG } from '@/components/art/KeyArt';
+import { BrandDefs, FROND_TONES } from '@/components/art/KeyArt';
 import { MarkG } from '@/components/art/Mark';
 import { CONTACT, LINES } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
@@ -14,6 +14,36 @@ const TOP = 175;
 const BAND = 520;
 const SKIRT = 548;
 const BOT = 718;
+
+// The frond as on m02: one sweep that runs from the top edge out to the right above the band and curls back
+// to the left across the lower skirt. Leaflets stay nearly level (their right ends trace the curve), so this
+// is drawn along a curve rather than with FrondG's circle. Measured from the reference in 1600 x 900.
+const FP = { p0: [285, 176], c: [860, 470], p2: [330, 706] };
+const quad = (a, b, c, t) => (1 - t) * (1 - t) * a + 2 * t * (1 - t) * b + t * t * c;
+function TruckFrond() {
+  const T = FROND_TONES.onNavy;
+  const n = 34;
+  return (
+    <g opacity="0.95">
+      {Array.from({ length: n }, (_, i) => {
+        const t = i / (n - 1);
+        const x = r2(quad(FP.p0[0], FP.c[0], FP.p2[0], t));
+        const y = r2(quad(FP.p0[1], FP.c[1], FP.p2[1], t));
+        const env = Math.sin(Math.PI * (0.18 + 0.72 * t));
+        const L = r2(80 + 90 * env), W = r2(6.5 + 5.5 * env);
+        const rot = r2(202 - 44 * t); // left and a little up at the top, left and a little down at the bottom
+        return (
+          <g key={i} transform={`translate(${x} ${y}) rotate(${rot})`} opacity={t > 0.64 ? 0.72 : 1}>
+            <g className="fan" style={{ '--i': i }}>
+              <path d={`M0 0Q${r2(L * 0.5)} ${-W} ${L} 0Q${r2(L * 0.5)} ${W} 0 0Z`} fill={T.a} />
+              <path d={`M0 0Q${r2(L * 0.5)} ${-W} ${L} 0Q${r2(L * 0.5)} ${r2(-W * 0.15)} 0 0Z`} fill={T.b} />
+            </g>
+          </g>
+        );
+      })}
+    </g>
+  );
+}
 
 function Wheel({ cx, i }) {
   const cy = 672;
@@ -69,21 +99,16 @@ export default function Truck() {
       </defs>
 
       {/* hard cast shadow on the floor, lower right */}
-      <g transform="translate(170 40)">
+      <g>
         <path d={`M${X0 + 40} 722H1180L1330 800H${X0 + 160}Z`} fill="#052E25" opacity="0.2" filter={`url(#${P}-blur)`} />
       </g>
 
-      <StepG i={0} x={170} y={40}>
+      <StepG i={0}>
         {/* trailer body */}
         <g clipPath={`url(#${P}-body)`}>
           <rect x={X0} y={TOP} width={X1 - X0} height={BOT - TOP} fill={`url(#${P}-b-rise)`} filter={`url(#${P}-b-grain)`} />
           <rect x={X0} y={SKIRT} width={X1 - X0} height={BOT - SKIRT} fill="#0C1445" opacity="0.32" />
-          <g clipPath={`url(#${P}-up)`}>
-            <FrondG cx={80} cy={480} r={345} a0={-72} a1={10} count={34} len={195} width={12} lean={14} tone="onNavy" opacity={0.95} fan />
-          </g>
-          <g clipPath={`url(#${P}-low)`}>
-            <FrondG cx={400} cy={900} r={300} a0={-150} a1={-62} count={30} len={120} width={8} lean={100} tone="onNavy" opacity={0.7} />
-          </g>
+          <TruckFrond />
           {/* dark band along the lower third of the box, lit edge on top */}
           <rect x={X0} y={BAND} width={X1 - X0} height={SKIRT - BAND} fill="#0A0E1C" />
           <rect x={X0} y={BAND} width={X1 - X0} height="2" fill="#FFFFFF" opacity="0.18" />
@@ -122,7 +147,7 @@ export default function Truck() {
         <text x="985" y="690" fontSize="17" fill="#4FDB95" fillOpacity="0.85">{CONTACT.web}</text>
       </StepG>
 
-      <StepG i={1} x={170} y={40}>
+      <StepG i={1}>
         {/* wheel arch, then the twin wheels */}
         <path d="M572 722V690C572 624 650 586 762 586C874 586 950 624 950 690V722Z" fill="#05081A" />
         <path d="M572 722V690C572 624 650 586 762 586C874 586 950 624 950 690" fill="none" stroke="#2C3470" strokeWidth="4" />

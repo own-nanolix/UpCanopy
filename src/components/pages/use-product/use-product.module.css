@@ -7,7 +7,8 @@
 .row3 { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(16px, 2vw, 28px); }
 .final { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(16px, 2vw, 28px); align-items: start; }
 .sizes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 18px; padding: 18px; background: var(--mint); margin-top: 12px; }
-.sizes svg { display: block; flex: none; max-width: 100%; height: auto; }
+.size { display: block; flex: none; max-width: 100%; }
+.sizes svg { display: block; width: 100%; height: auto; }
 .sizeCap { display: block; margin-top: 6px; font-family: var(--font-wide); font-size: 10px; letter-spacing: 0.08em; color: var(--muted); }
 
 @media (min-width: 700px) {

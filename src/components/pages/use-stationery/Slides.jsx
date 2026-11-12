@@ -3,24 +3,21 @@
 import Art from '@/components/art/Art';
 import { LockupG, LockupStackG, MarkG } from '@/components/art/Mark';
 import { ConstructionG, ScaleDotsG } from '@/components/art/KeyArt';
-import { PALETTE, SCALES, DIRECTION, SHEET, DESCRIPTOR, BRAND } from '@/lib/brand';
+import { PALETTE, SCALES, DIRECTION, DESCRIPTOR, BRAND, CONTACT } from '@/lib/brand';
 import { ID, C } from './parts';
 
 export const SLIDE = { w: 1600, h: 900 };
 const FU = { fill: '#6B6F72', fontSize: 12.5 };
-const CLIENT = `${SHEET[0][0].toUpperCase()}: ${SHEET[0][1].toUpperCase()}`;
-const PROJECT = `${SHEET[1][0].toUpperCase()}: ${SHEET[1][1].toUpperCase()}`;
 
-// Slide furniture: tiny caps in the four corners.
-function Furniture({ n }) {
+// Slide furniture: tiny caps in the four corners, as on the designer's slides. The studio's own furniture
+// (presentation title, client sheet, page numbers) is left out: only the brand's name, descriptor and
+// printed contacts appear on the deck.
+function Furniture() {
   return (
     <g {...FU}>
-      <text x="27" y="52" fontWeight="700">APRESENTAÇÃO DO</text>
-      <text x="27" y="66" fontWeight="700">PROJETO DE IDENTIDADE VISUAL</text>
-      <text x="1075" y="52" fontWeight="400">{CLIENT}</text>
-      <text x="1075" y="66" fontWeight="400">{PROJECT}</text>
-      <text x="1573" y="52" fontWeight="400" textAnchor="end">→(0{n})</text>
-      <text x="27" y="874" fontWeight="400">{BRAND.toUpperCase()}</text>
+      <text x="27" y="52" fontWeight="700">{BRAND.toUpperCase()}</text>
+      <text x="1573" y="52" fontWeight="400" textAnchor="end">{CONTACT.web}</text>
+      <text x="27" y="874" fontWeight="400">{CONTACT.phone}</text>
       <text x="1573" y="874" fontWeight="400" textAnchor="end">{DESCRIPTOR}</text>
     </g>
   );
@@ -44,7 +41,7 @@ function LockupSlide({ n, stacked }) {
           <LockupG x={1205 - 207} y={402} scale={1.15} fill={C.white} />
         </>
       )}
-      <Furniture n={n} />
+      <Furniture />
     </g>
   );
 }
@@ -91,7 +88,7 @@ function ScalesSlide({ n }) {
       <text x="696" y="781" fontSize="26" fontWeight="700" fill={C.ink} textAnchor="end">{DIRECTION.label}</text>
       <path d="M712 750V796" stroke="#BDBDBD" strokeWidth="1.2" />
       <text x="724" y="779" fontSize="26" fontWeight="700" fill={C.ink}>{DIRECTION.words.join(' • ')}</text>
-      <Furniture n={n} />
+      <Furniture />
     </g>
   );
 }
@@ -106,7 +103,7 @@ function ConstructionSlide({ n, cid }) {
         <ConstructionG x={590} y={240} size={420} rings={9} stroke="#4A4A4A" strokeWidth={0.3} />
         <MarkG x={590} y={240} size={420} fill="#A5A5A5" />
       </g>
-      <Furniture n={n} />
+      <Furniture />
     </g>
   );
 }

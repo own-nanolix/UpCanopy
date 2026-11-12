@@ -4,11 +4,17 @@
 .wide { margin: 0; }
 .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap); align-items: start; }
 .tall { display: grid; gap: var(--gap); min-width: 0; }
-.small { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); min-width: 0; }
-.small > :last-child:nth-child(odd) { grid-column: 1 / -1; }
-.span { grid-column: 1 / -1; }
-.group { display: grid; gap: 12px; min-width: 0; }
-.group h2 { margin: 0; }
+.tall h2, .cell h2 { margin: 0; }
+/* the 2 x 3 of small plates */
+.small { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); min-width: 0; align-items: start; }
+.cell { display: grid; gap: 12px; min-width: 0; }
+/* first plate leads at full width; the other colourways sit beside one another below it */
+.cellPlates { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; min-width: 0; }
+.cellPlates > * { grid-column: span 2; }
+.cellPlates > :first-child { grid-column: 1 / -1; }
+.cellPlates > :first-child:nth-last-child(2), .cellPlates > :first-child:nth-last-child(2) ~ * { grid-column: span 3; }
+.cellPlates > :first-child:nth-last-child(3) ~ * { grid-column: span 3; }
+.cellPlates > :not(:first-child) :global(.mock-cap) { font-size: 11px; }
 @media (max-width: 900px) {
   .split { grid-template-columns: minmax(0, 1fr); }
 }

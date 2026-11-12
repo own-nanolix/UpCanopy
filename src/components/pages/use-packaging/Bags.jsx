@@ -88,16 +88,28 @@ function Bag({ id, m, b, way, w, h }) {
   );
 }
 
+// Each plate stages the three bags differently. Bags are listed back to front (drawing order); i is the
+// entrance step, k the colourway.
+const STAGES = [
+  // navy: rising heights stepping right, the tallest cropped by the right edge
+  cascade(3, 70, 730, 735, 690).map((p, i) => ({ ...p, k: i, w: [205, 250, 300][i], h: [290, 380, 480][i] })).reverse(),
+  // green: the tallest at the back left, falling heights stepping down-right, the last cropped by the bottom
+  cascade(3, 70, 640, 690, 790).map((p, i) => ({ ...p, k: [1, 0, 2][i], w: [290, 240, 200][i], h: [470, 360, 280][i] })),
+  // mint: one large bag cropped by the left and bottom edges, two small ones stepping up-right behind it
+  [
+    { x: 790, y: 520, i: 2, k: 1, w: 150, h: 210 },
+    { x: 560, y: 590, i: 1, k: 0, w: 185, h: 265 },
+    { x: -70, y: 830, i: 0, k: 2, w: 430, h: 680 },
+  ],
+];
+
 function BagPlate({ n }) {
-  const order = [0, 1, 2].map((k) => WAYS[(n + k) % 3]);
-  const steps = cascade(3, 60, 725, 640, 655);
-  const dims = [{ w: 205, h: 290 }, { w: 250, h: 375 }, { w: 290, h: 465 }];
   return (
     <Plate id={`bag-${WAYS[n].key}`} title={WAYS[n].name}>
       {({ idp, m, b }) => (
-        [...steps].reverse().map((p) => (
+        STAGES[n].map((p) => (
           <StepG key={p.i} i={p.i} x={p.x} y={p.y}>
-            <Bag id={`${idp}-b${p.i}`} m={m} b={b} way={order[p.i]} {...dims[p.i]} />
+            <Bag id={`${idp}-b${p.i}`} m={m} b={b} way={WAYS[p.k]} w={p.w} h={p.h} />
           </StepG>
         ))
       )}

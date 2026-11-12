@@ -61,7 +61,7 @@ export default function Page() {
             <div>
               <Plate cap="App icon" delay={120}><IconLadder /></Plate>
               <div className={s.sizes}>
-                {SIZES.map((n) => <IconAt key={n} size={n} />)}
+                {SIZES.map((n) => <span key={n} className={s.size} style={{ width: n }}><IconAt size={n} /></span>)}
               </div>
             </div>
           </div>

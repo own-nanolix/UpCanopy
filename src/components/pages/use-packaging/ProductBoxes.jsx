@@ -1,14 +1,24 @@
 // The case study's own pieces (m01, m28): the document box and the tube, rebuilt faithfully.
-import { StepG, CastG, ShadowG, SheenG, cascade } from '@/components/art/Mockup';
+import { StepG, CastG, ShadowG, SheenG } from '@/components/art/Mockup';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { LINES } from '@/lib/brand';
-import { Plate, IsoBox, boxOutline, ContactG, BridgeG, C, K, darken } from './parts';
+import { Plate, IsoBox, ContactG, BridgeG, C, K, darken } from './parts';
 
 const PAPER_LINES = Array.from({ length: 11 }, (_, i) => i);
 
 // The document box (m01): gradient lid, small green mark top left, brand line, contacts, the white word-mark
 // along the bottom edge of the lid and the paper stack visible beneath it. a runs down-right, b up-right.
-export function DocBox({ id, m, b, lid = 'rise', a = 250, w = 300, scale = 1 }) {
+// Hard shadow of a low box: its footprint swept to the lower right by len (a short shadow, not a slab).
+function footShadow(a, w, len) {
+  const L = [-K * a, -0.5 * a], R = [K * w, -0.5 * w];
+  const s = [len * 0.64, len * 0.77];
+  // footprint (front, left, back, right) and the same shifted; the outline of the swept shape
+  const F = [[0, 0], L, [L[0] + R[0], L[1] + R[1]], R];
+  const S = F.map(([x, y]) => [x + s[0], y + s[1]]);
+  return `M${[F[1], F[2], F[3], S[3], S[0], S[1]].map((p) => p.map((v) => Math.round(v * 10) / 10).join(' ')).join('L')}Z`;
+}
+
+export function DocBox({ id, m, b, lid = 'rise', a = 250, w = 300, scale = 1, ground = true }) {
   const lidH = 38, h = 78;
   const fill = lid === 'rise' ? `url(#${b}-rise)` : C.navy;
   const stack = (len, hh, shade) => (
@@ -22,8 +32,14 @@ export function DocBox({ id, m, b, lid = 'rise', a = 250, w = 300, scale = 1 }) 
   );
   return (
     <g transform={`scale(${scale})`}>
-      <ShadowG idp={`${id}-sh`} cx={0} cy={6} rx={w * 0.8} ry={14} opacity={0.3} />
-      <CastG d={boxOutline(a, w, h)} depth={34} opacity={0.26} />
+      {ground ? (
+        <>
+          <path d={footShadow(a, w, h * 0.7)} fill="#052E25" opacity="0.24" />
+          <path d={footShadow(a, w, 6)} fill="#052E25" opacity="0.3" />
+        </>
+      ) : (
+        <path d={footShadow(a, w, 5)} fill="#000000" opacity="0.35" />
+      )}
       <IsoBox id={id} m={m} a={a} b={w} h={h} swap base={C.navy}
         fills={{ top: fill, left: lid === 'rise' ? '#1A3D68' : C.navy, right: lid === 'rise' ? '#142B5D' : darken(C.navy, 0.2) }}
         grain={`url(#${b}-grain)`}
@@ -107,7 +123,9 @@ export function Tube({ id, m, scale = 1, len = 360, r = 64 }) {
 
 function ProductPlate({ id, title, hero }) {
   const tubeHero = hero === 'tube';
-  const pos = tubeHero ? { box: [300, 300, 0.9], tube: [300, 610, 1.45] } : { box: [210, 450, 1.4], tube: [380, 705, 1.1] };
+  // box hero: box upper left, tube stepping down-right. Tube hero: the tube cropped by the left edge rising
+  // up-right, the small box stepping up-right behind it.
+  const pos = tubeHero ? { box: [790, 300, 0.78], tube: [-30, 650, 1.5] } : { box: [210, 450, 1.4], tube: [380, 705, 1.1] };
   return (
     <Plate id={id} title={title}>
       {({ idp, m, b }) => (
@@ -128,16 +146,17 @@ function ProductPlate({ id, title, hero }) {
 export const DocumentBox = () => <ProductPlate id="box-document" title="Document box with gradient lid" hero="box" />;
 export const TubeProduct = () => <ProductPlate id="box-tube" title="Tube with pale label" hero="tube" />;
 
-// Extra: the navy document box (m28) in three sizes stepping down-right.
+// Extra: the navy document box (m28) stacked three high, each box stepping a little to the right, the pile
+// cropped by the bottom edge.
 export function NavyDocBoxes() {
-  const steps = cascade(3, 330, 330, 800, 620);
-  const sc = [1.2, 0.95, 0.8];
+  const sc = 1.25;
+  const steps = [0, 1, 2].map((i) => ({ i, x: 470 + i * 34, y: 800 - i * 78 * sc }));
   return (
-    <Plate id="box-navy" title="Navy document boxes">
+    <Plate id="box-navy" title="Navy document boxes stacked">
       {({ idp, m, b }) => (
-        [...steps].reverse().map((p) => (
+        steps.map((p) => (
           <StepG key={p.i} i={p.i} x={p.x} y={p.y}>
-            <DocBox id={`${idp}-box${p.i}`} m={m} b={b} lid="navy" scale={sc[p.i]} />
+            <DocBox id={`${idp}-box${p.i}`} m={m} b={b} lid="navy" scale={sc} ground={p.i === 0} />
           </StepG>
         ))
       )}

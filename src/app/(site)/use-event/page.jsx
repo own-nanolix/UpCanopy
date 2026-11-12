@@ -18,6 +18,15 @@ function Plate({ caption, className, children }) {
   );
 }
 
+function Cell({ title, children }) {
+  return (
+    <div className={s.cell}>
+      <h2 className="t-h3">{title}</h2>
+      <div className={s.cellPlates}>{children}</div>
+    </div>
+  );
+}
+
 export default function Page() {
   return (
     <section className="page" id="p-use-event" aria-label="Event">
@@ -32,26 +41,40 @@ export default function Page() {
 
         <div className={`${s.sec} ${s.split}`}>
           <div className={s.tall}>
+            <h2 className="t-h3">Badges</h2>
             <Plate caption="Lanyard with speaker badge"><LanyardBadge /></Plate>
             <Plate caption="VIP pass"><VipPass /></Plate>
           </div>
+          {/* 2 x 3 of small plates: each cell leads with one plate, its other colourways below it */}
           <div className={s.small}>
-            <Plate caption="Staff ID, navy"><StaffIds which="founder" /></Plate>
-            <Plate caption="Staff ID, Green Park"><StaffIds which="badge" /></Plate>
-            {FABRIC.map((d, i) => (
-              <Plate key={d.name} caption={`Fabric wristband ${i + 1}`}><FabricBand index={i} /></Plate>
-            ))}
-            {SILICONE.map((d, i) => (
-              <Plate key={d.name} caption={`Silicone wristband ${i + 1}`}><SiliconeBand index={i} /></Plate>
-            ))}
-            {TICKETS.map((d, i) => (
-              <Plate key={d.name} caption={`Ticket ${i + 1}`}><TicketFan index={i} /></Plate>
-            ))}
-            {FLAGS.map((d, i) => (
-              <Plate key={d.name} caption={`Feather flag ${i + 1}`}><FeatherFlag index={i} /></Plate>
-            ))}
-            <Plate caption="Hanging banner"><HangingBanner /></Plate>
-            <Plate caption="Feather flags" className={s.span}><FlagLineup /></Plate>
+            <Cell title="Staff IDs">
+              <Plate caption="Staff ID, navy"><StaffIds which="founder" /></Plate>
+              <Plate caption="Staff ID, Green Park"><StaffIds which="badge" /></Plate>
+            </Cell>
+            <Cell title="Fabric wristbands">
+              {FABRIC.map((d, i) => (
+                <Plate key={d.name} caption={`Fabric ${i + 1}`}><FabricBand index={i} /></Plate>
+              ))}
+            </Cell>
+            <Cell title="Silicone wristbands">
+              {SILICONE.map((d, i) => (
+                <Plate key={d.name} caption={`Silicone ${i + 1}`}><SiliconeBand index={i} /></Plate>
+              ))}
+            </Cell>
+            <Cell title="Tickets">
+              {TICKETS.map((d, i) => (
+                <Plate key={d.name} caption={`Ticket ${i + 1}`}><TicketFan index={i} /></Plate>
+              ))}
+            </Cell>
+            <Cell title="Feather flags">
+              <Plate caption="Three flags"><FlagLineup /></Plate>
+              {FLAGS.map((d, i) => (
+                <Plate key={d.name} caption={`Flag ${i + 1}`}><FeatherFlag index={i} /></Plate>
+              ))}
+            </Cell>
+            <Cell title="Hanging banner">
+              <Plate caption="Hanging banner"><HangingBanner /></Plate>
+            </Cell>
           </div>
         </div>
       </div>

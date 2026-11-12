@@ -168,7 +168,7 @@ export default function Booth() {
       {/* Green Park wall: dark mark, the large frond, the bridge line, panel seams */}
       <rect x="640" y="318" width="625" height="264" fill={C.green} />
       <g clipPath={`url(#${P}-clip-green)`}>
-        <FrondG cx={980} cy={400} r={270} a0={232} a1={96} count={44} len={330} width={11} lean={-150} tone="onGreen" fan />
+        <FrondG cx={985} cy={395} r={270} a0={240} a1={40} count={46} len={280} width={10} lean={-150} tone="onGreen" fan />
         <MarkG x={650} y={326} size={36} fill={C.dark} />
         <g fill={C.dark} fontSize="12.5" fontWeight="300" textAnchor="end" lang="pt-BR">
           {LINES.bridge.rows4.map((row, i) => (

@@ -1,7 +1,7 @@
 // Shared parts of the use-product page: geometry helpers, the compliance letter, the pen, small marks.
 import { r2 } from '@/lib/charts';
 import { CONTACT, DOCUMENT } from '@/lib/brand';
-import { MarkG, WordmarkVerticalG } from '@/components/art/Mark';
+import { MarkG, WordmarkG } from '@/components/art/Mark';
 
 export const NAVY = '#162557';
 export const GREEN = '#26CF7B';
@@ -75,7 +75,8 @@ export function Letter({ idp, mat, w = 430, h = 620 }) {
       <path d={`M0 6Q${w * 0.5} -22 ${w} 4L${w} ${h}L0 ${h}Z`} fill={`url(#${idp}-sheet)`} filter={`url(#${mat}-paper)`} />
       <path d={`M0 6Q${w * 0.5} -22 ${w} 4L${w} ${h}L0 ${h}Z`} fill={`url(#${idp}-sheet-shade)`} />
       <path d={`M${w} 4L${w} ${h}`} stroke="#FFFFFF" strokeWidth="1.4" opacity="0.8" />
-      <WordmarkVerticalG x={14} y={h - 22} size={96} fill={NAVY} />
+      {/* the word set vertically, reading top to bottom with the letter tops towards the text, as on m12 / m28 */}
+      <g transform={`translate(${r2(14 + 96 * 0.97)} 26) rotate(90)`}><WordmarkG x={0} y={r2(96 * 0.76)} size={96} fill={NAVY} /></g>
       <MarkG x={w - 68} y={22} size={36} fill={GREEN} />
       <text x="136" y="64" fontSize="11.5" fill={NAVY}>{DOCUMENT.title}</text>
       <text x="136" y="82" fontSize="9" fill={NAVY} opacity="0.8">{DOCUMENT.address}</text>

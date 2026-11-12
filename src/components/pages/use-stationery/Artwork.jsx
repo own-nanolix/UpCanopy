@@ -60,7 +60,8 @@ export function LetterG({ idp }) {
         <stop offset="1" stopColor="#F6F7F4" />
       </linearGradient>
       <rect width={w} height={h} fill={`url(#${idp}-sheet)`} />
-      <WordmarkVerticalG x={14} y={h - 20} size={84} fill={C.navy} />
+      {/* the word set vertically, reading top to bottom with the letter tops towards the text, as on m12 / m28 */}
+      <g transform={`translate(${r2(14 + 84 * 0.97)} 22) rotate(90)`}><WordmarkG x={0} y={r2(84 * 0.76)} size={84} fill={C.navy} /></g>
       <MarkG x={w - 62} y={22} size={32} fill={C.green} />
       <text x="118" y="68" fontSize="11" fontWeight="400" fill={C.navy}>{DOCUMENT.title}</text>
       <text x="118" y="84" fontSize="8.5" fontWeight="400" fill={C.navy} opacity="0.8">{DOCUMENT.address}</text>

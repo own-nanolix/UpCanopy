@@ -76,7 +76,10 @@ function Roll({ id, m, kind, base, rx = 124, hh = 86 }) {
 // One mockup: the hero roll and a partner in the other colourway, stepping up-right and cropped by the frame.
 function RollPlate({ n }) {
   const order = [TAPES[n], TAPES[1 - n]];
-  const steps = cascade(2, 340, 520, 790, 330);
+  // navy: the hero near at lower left, the partner stepping up-right. Green: the partner far at upper left,
+  // the hero stepping down-right, larger, its tail cropped by the right edge.
+  const steps = n === 0 ? cascade(2, 340, 520, 790, 330)
+    : [{ i: 0, x: 650, y: 540, s: 1.75 }, { i: 1, x: 220, y: 280, s: 0.95 }];
   return (
     <Plate id={`tape-${TAPES[n].key}`} title={TAPES[n].name}>
       {({ idp, m }) => (
@@ -84,7 +87,7 @@ function RollPlate({ n }) {
           const t = order[p.i];
           return (
             <StepG key={p.i} i={p.i} x={p.x} y={p.y}>
-              <g transform={`scale(${p.i ? 1.15 : 1.6})`}>
+              <g transform={`scale(${p.s || (p.i ? 1.15 : 1.6)})`}>
                 <Roll id={`${idp}-r${p.i}`} m={m} kind={t.key} base={t.base} />
               </g>
             </StepG>

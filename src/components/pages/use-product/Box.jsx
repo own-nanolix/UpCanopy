@@ -13,6 +13,7 @@ function Board({ id, mat, x, y, w, h, grain, tone = BOARD, lit = true }) {
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} fill={tone} filter={`url(#${grain}-grain)`} />
+      <rect x={x} y={y} width={w} height={h} fill="#FFFFFF" filter={`url(#${id}-fibre)`} />
       <rect x={x} y={y} width={w} height={h} fill={`url(#${id}-lighten)`} />
       {lit && <path d={`M${x} ${y + h}V${y}H${x + w}`} fill="none" stroke="#FFFFFF" strokeOpacity="0.2" strokeWidth="1.6" />}
       <rect x={x} y={y} width={w} height={h} fill={`url(#${mat}-shade)`} opacity="0.5" />
@@ -23,6 +24,12 @@ function Board({ id, mat, x, y, w, h, grain, tone = BOARD, lit = true }) {
 function BoardDefs({ id }) {
   return (
     <defs>
+      {/* board fibre: pale flecks stretched along the board, kept inside the shape they overlay */}
+      <filter id={`${id}-fibre`} x="0" y="0" width="1" height="1">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9 0.28" numOctaves="2" seed="5" result="n" />
+        <feColorMatrix in="n" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1 0 0 0 -0.54" result="f" />
+        <feComposite in="f" in2="SourceAlpha" operator="in" />
+      </filter>
       <linearGradient id={`${id}-lighten`} x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.09" />
         <stop offset="0.55" stopColor="#FFFFFF" stopOpacity="0" />
@@ -131,11 +138,13 @@ export function BoxFront() {
         <path d="M200 578H1000" stroke="#000000" strokeOpacity="0.55" strokeWidth="6" />
         {/* lid thickness (front face) */}
         <path d={poly(lidFront)} fill="#1A2C66" filter={`url(#${br}-grain)`} />
+        <path d={poly(lidFront)} fill="#FFFFFF" filter={`url(#${id}-fibre)`} />
         <path d={poly(lidFront)} fill={`url(#${mat}-shade)`} />
         <path d="M190 500H1010" stroke="#FFFFFF" strokeOpacity="0.3" strokeWidth="2" />
         <path d="M190 578H1010" stroke="#0A1233" strokeOpacity="0.7" strokeWidth="3" />
         {/* lid top, a shallow trapezoid in perspective */}
         <path d={poly(top)} fill={BOARD} filter={`url(#${br}-grain)`} />
+        <path d={poly(top)} fill="#FFFFFF" filter={`url(#${id}-fibre)`} />
         <path d={poly(top)} fill={`url(#${id}-lighten)`} />
         <g clipPath={`url(#${id}-top)`}>
           <path d="M290 240H910L1000 480H200Z" fill="none" stroke="#0A1233" strokeOpacity="0.55" strokeWidth="3" />
@@ -178,10 +187,12 @@ export function BoxSide() {
           <path d="M-14 0L40 -26H1060L1010 0Z" fill="#FFFFFF" opacity="0.1" />
           {/* lid side (overhangs the tray by 14) */}
           <rect x="-14" y="0" width="1024" height="96" fill="#1A2C66" filter={`url(#${br}-grain)`} />
+          <rect x="-14" y="0" width="1024" height="96" fill="#FFFFFF" filter={`url(#${id}-fibre)`} />
           <rect x="-14" y="0" width="1024" height="96" fill={`url(#${id}-lighten)`} />
           <path d="M1010 0L1060 -26V70L1010 96Z" fill="#0E1A4A" />
           {/* tray side, recessed */}
           <rect x="0" y="96" width="996" height="234" fill={BOARD} filter={`url(#${br}-grain)`} />
+          <rect x="0" y="96" width="996" height="234" fill="#FFFFFF" filter={`url(#${id}-fibre)`} />
           <rect x="0" y="96" width="996" height="234" fill={`url(#${id}-lighten)`} />
           <rect x="0" y="96" width="996" height="22" fill="#000000" opacity="0.38" />
           {seams.map((y, i) => (

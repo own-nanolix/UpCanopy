@@ -62,18 +62,27 @@ function Card({ c, id, mat, children }) {
   );
 }
 
+// Each colourway is staged differently: navy steps down-right from the front; green steps up-right with the
+// front overlapping the back; mint lies front over a tilted back, the pair turning against each other.
+const STAGE = {
+  navy: { front: [70, 90, -5], back: [180, 450, -5] },
+  green: { front: [60, 430, 6], back: [230, 110, 6] },
+  mint: { front: [70, 430, 8], back: [230, 200, -12] },
+};
+
 export function AccessCard({ way }) {
   const c = WAYS.find((w) => w.key === way);
   const id = `use-product-card-${c.key}`;
   const mat = `${id}-m`;
+  const S = STAGE[c.key];
   return (
     <Art viewBox="0 0 800 880" title={`Access card, ${c.name}, front over back`} exportName={`use-product-card-${c.key}`}>
       <MaterialDefs idp={mat} />
       <SweepG idp={`${id}-s`} w={800} h={880} horizon={0.7} />
-      <StepG i={0} x={180} y={450} rotate={-5}>
+      <StepG i={0} x={S.back[0]} y={S.back[1]} rotate={S.back[2]}>
         <Card c={c} id={`${id}-back`} mat={mat}><Back c={c} /></Card>
       </StepG>
-      <StepG i={1} x={70} y={90} rotate={-5}>
+      <StepG i={1} x={S.front[0]} y={S.front[1]} rotate={S.front[2]}>
         <g className="mock-lit">
           <Card c={c} id={`${id}-front`} mat={mat}><Front c={c} id={`${id}-front`} /></Card>
         </g>
