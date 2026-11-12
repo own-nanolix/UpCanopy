@@ -1,0 +1,8 @@
+.head { padding-top: var(--pad); padding-bottom: clamp(24px, 4vw, 56px); }
+.stack { display: grid; gap: clamp(40px, 6vw, 96px); padding-bottom: clamp(48px, 8vw, 120px); }
+.scene { margin: 0; width: 80%; }
+.left { margin-right: auto; }
+.right { margin-left: auto; }
+@media (max-width: 700px) {
+  .scene { width: 100%; }
+}
