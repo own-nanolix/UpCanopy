@@ -43,17 +43,19 @@ export default function Page() {
           <Bay id="buttons" label="Button set" note="52 px, radius 0, padding 24, caps 12 px" span={7}><ButtonSet /></Bay>
           <Bay id="icon-buttons" label="Icon buttons" note="52 px square" span={5}><IconButtons /></Bay>
 
-          <Bay id="links" label="Links" note="2 px underline" span={5}><Links /></Bay>
-          <Bay id="nav" label="Navigation bar" note="navy and light tones" span={7}>
+          {/* The bar needs the full width: at 7 of 12 columns its last link slid under the HOME button. */}
+          <Bay id="nav" label="Navigation bar" note="navy and light tones" span={12}>
             <div className={`${s.navBox} field-rise`}><LandingNav current="lp-crm" /></div>
             <div className={`${s.navBox} ${s.gWhite}`}><LandingNav current="lp-agenda" tone="light" /></div>
           </Bay>
 
+          <Bay id="links" label="Links" note="2 px underline" span={5}><Links /></Bay>
           <Bay id="tags" label="Tags and chips" note="stroke 2, radius 0" span={7}><Tags /></Bay>
-          <Bay id="status" label="Status scale" note="ten steps, one green" span={5}><ScaleStatus /></Bay>
 
+          <Bay id="status" label="Status scale" note="ten steps, one green" span={7}><ScaleStatus /></Bay>
           <Bay id="rail" label="App rail" note="72 px rail, 52 px buttons" span={5}><AppRail /></Bay>
-          <Bay id="area-cards" label="Area cards" span={7}><AreaCards /></Bay>
+
+          <Bay id="area-cards" label="Area cards" span={12}><AreaCards /></Bay>
 
           <Bay id="line-card" label="Brand line card" note="gradient field" span={7}><BrandLineCard /></Bay>
           <Bay id="ceo-card" label="Navy card with mark crop" span={5}><CeoCard /></Bay>

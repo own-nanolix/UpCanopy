@@ -56,6 +56,31 @@ export function BoardOutlineArt() {
   );
 }
 
+// The three board stages as thick bands with cut ends, stepping up to the right like the arch's legs; each
+// band carries a column of quiet rows that shortens as the stage moves on. Labels name the board columns.
+const STAGES = ['New', 'In progress', 'Done'];
+export function StageFlowArt() {
+  const W = 960, H = 260, bw = 260, gap = 40;
+  return (
+    <Art viewBox={`0 0 ${W} ${H}`} title="Board stages: New, In progress, Done, stepping up to the right" exportName="lp-crm-stage-flow" style={{ width: '100%', height: 'auto' }}>
+      <rect width={W} height={H} fill="#F2FFE4" />
+      {STAGES.map((name, i) => {
+        const x = 40 + i * (bw + gap), top = 150 - i * 50, last = i === STAGES.length - 1;
+        return (
+          <g key={name} className="rise" style={{ '--i': i }}>
+            <path d={`M${x} ${H - 30}L${x + 18} ${top}H${x + bw}L${x + bw - 18} ${H - 30}Z`} fill={last ? '#26CF7B' : '#162557'} />
+            <text x={x + 34} y={top + 30} fontSize="15" fontWeight="700" letterSpacing="1.5" fill={last ? '#162557' : '#FFFFFF'}>{name.toUpperCase()}</text>
+            {Array.from({ length: 3 - i }, (_, k) => (
+              <rect key={k} x={x + 34} y={top + 50 + k * 20} width={r2(150 - k * 30)} height="8" fill={last ? '#162557' : '#FFFFFF'} opacity="0.3" />
+            ))}
+            {!last && <path d={`M${x + bw + 6} ${top + 22}H${x + bw + gap - 6}M${x + bw + gap - 16} ${top + 12}L${x + bw + gap - 6} ${top + 22}L${x + bw + gap - 16} ${top + 32}`} fill="none" stroke="#162557" strokeWidth="3" />}
+          </g>
+        );
+      })}
+    </Art>
+  );
+}
+
 // The mark on the brand gradient: a square tile for the masonry.
 export function MarkTileArt() {
   return (

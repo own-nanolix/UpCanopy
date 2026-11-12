@@ -33,7 +33,10 @@ export default function Hero() {
       />
       <Art className={s.heroArt} viewBox="0 0 1440 900" preserveAspectRatio="xMinYMid slice" decorative exportName="lp-home-hero-frond">
         <defs><GrainDefs id="lp-home-hero-grain" opacity={0.2} /></defs>
-        <FrondG cx={640} cy={430} r={640} a0={146} a1={216} count={34} len={560} width={17} lean={170} tone="onNavy" opacity={0.95} fan />
+        {/* Measured on the poster (m06), in units of the field height H = 900: leaflets enter from the left
+            edge, the first at 0.26 H with its tip at 0.05 H, the longest tip (0.42 H) at 0.74 H, and the rest
+            run off the bottom edge; about 3.4% of H between leaflets. */}
+        <FrondG cx={2011.5} cy={945} r={2160} a0={199.2} a1={172.1} count={34} len={540} width={8} lean={172.6} tone="onNavy" opacity={0.95} fan />
         <rect width="1440" height="900" fill="#FFFFFF" filter="url(#lp-home-hero-grain)" />
       </Art>
 

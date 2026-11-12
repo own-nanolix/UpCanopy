@@ -1,6 +1,5 @@
 import Art from '@/components/art/Art';
 import { MarkG, MarkCropG, WordmarkVerticalG } from '@/components/art/Mark';
-import { BrandDefs } from '@/components/art/KeyArt';
 import { Line } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Reveal from '@/components/site/Reveal';
@@ -37,10 +36,28 @@ export default function Folder() {
       </Reveal>
       <Reveal delay={140} className={s.folderRight}>
         <Art className={s.cover} viewBox="0 0 480 640" title="Folder cover: green with the enlarged mark and the word-mark set vertically" exportName="lp-home-folder-cover">
-          <BrandDefs idp="lp-home-folder" />
-          <rect width="480" height="640" fill="url(#lp-home-folder-green)" />
-          <MarkCropG idp="lp-home-folder" w={480} h={640} zoom={1.9} dx={-0.42} dy={-0.2} fill={HEX.navy} />
-          <WordmarkVerticalG x={412} y={32 + 6.1 * 50} size={50} fill="#FFFFFF" />
+          {/* Re-measured on m08 after un-warping the closed cover to a flat 480 x 640: the crop is the right leg
+              of the arch and the right end of the bar (mark drawn 869 units wide at -453.5, -106.5); the word
+              reads bottom to top along the right edge, from y 210 to y 31, about 30 units high. Colours sampled:
+              green on the right, a pale blue-grey on the left, darker under the top edge. */}
+          <defs>
+            <linearGradient id="lp-home-folder-cover-sky" x1="0" y1="0.55" x2="1" y2="0.45">
+              <stop offset="0" stopColor="#8FA6AC" />
+              <stop offset="0.4" stopColor="#80C3A6" />
+              <stop offset="0.85" stopColor="#30CC80" />
+              <stop offset="1" stopColor="#2ECF7F" />
+            </linearGradient>
+            <linearGradient id="lp-home-folder-cover-shade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#162557" stopOpacity="0.45" />
+              <stop offset="0.4" stopColor="#162557" stopOpacity="0" />
+            </linearGradient>
+            <GrainDefs id="lp-home-folder-cover-grain" opacity={0.16} />
+          </defs>
+          <rect width="480" height="640" fill="url(#lp-home-folder-cover-sky)" />
+          <rect width="480" height="640" fill="url(#lp-home-folder-cover-shade)" />
+          <MarkCropG idp="lp-home-folder" w={480} h={640} zoom={1.811} dx={-0.945} dy={-0.166} fill={HEX.navy} />
+          <rect width="480" height="640" fill="#FFFFFF" filter="url(#lp-home-folder-cover-grain)" />
+          <WordmarkVerticalG x={426} y={210} size={30} fill="#FFFFFF" />
         </Art>
       </Reveal>
       <Reveal className={s.folderBtn} delay={200}>

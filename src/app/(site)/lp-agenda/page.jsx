@@ -53,7 +53,7 @@ export default function Page() {
 
       {/* 2. Three stacked horizontal cards: the steps of the day */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-agenda-h-steps">
-        <Reveal><h2 id="lp-agenda-h-steps" className="t-h1">One day, three steps</h2></Reveal>
+        <Reveal><h2 id="lp-agenda-h-steps" className="t-h1">Three steps</h2></Reveal>
         <ol className={s.steps}>
           {STEPS.map((st, i) => (
             <li key={st.kind}>
@@ -75,7 +75,7 @@ export default function Page() {
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-agenda-h-cards">
         <Reveal>
           <p className="t-caps" style={{ color: 'var(--green-ink)' }}>Agenda</p>
-          <h2 id="lp-agenda-h-cards" className="t-h1" style={{ marginTop: 10 }}>Week, month, one card</h2>
+          <h2 id="lp-agenda-h-cards" className="t-h1" style={{ marginTop: 10 }}>Week and month</h2>
         </Reveal>
         <div className={m.bento}>
           <Reveal className={`${m.bentoWide} card`}><MonthWeek /></Reveal>
@@ -104,7 +104,7 @@ export default function Page() {
         <div className="wrap">
           <Reveal>
             <p className="t-caps" style={{ color: 'var(--green-ink)' }}>Day</p>
-            <h2 id="lp-agenda-h-scrub" className="t-h1" style={{ margin: '10px 0 28px' }}>Scrub the day</h2>
+            <h2 id="lp-agenda-h-scrub" className="t-h1" style={{ margin: '10px 0 28px' }}>Day scrubber</h2>
           </Reveal>
           <Reveal delay={100}><DayTimeline /></Reveal>
         </div>
@@ -114,7 +114,7 @@ export default function Page() {
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-agenda-h-now">
         <Reveal>
           <p className="t-caps" style={{ color: 'var(--green-ink)' }}>Day</p>
-          <h2 id="lp-agenda-h-now" className="t-h1" style={{ marginTop: 10 }}>Step through the day</h2>
+          <h2 id="lp-agenda-h-now" className="t-h1" style={{ marginTop: 10 }}>Now</h2>
         </Reveal>
         <div className={m.nowGrid}>
           <Reveal><DayNow /></Reveal>
@@ -200,9 +200,9 @@ export default function Page() {
       <section className={`${s.cta} field-green`} aria-labelledby="lp-agenda-h-cta">
         <div className="wrap">
           <Reveal>
-            <h2 id="lp-agenda-h-cta" className="t-display" lang="pt-BR">{LINES.control}</h2>
+            <h2 id="lp-agenda-h-cta" className="t-display" lang="pt-BR"><Line text={LINES.close} strong="Organização que gera crescimento." className="strong" /></h2>
             <div className="row" style={{ marginTop: 32, gap: 12 }}>
-              <Button href="/lp-contato/" variant="navy" iconRight="arrow-right">HOME</Button>
+              <Button href="/lp-contato/" variant="navy" iconRight="arrow-right">Contact</Button>
               <Link href="/lp-crm/" className="btn btn-ghost">CRM <Icon name="arrow-right" size={16} /></Link>
               <Link href="/lp-financeiro/" className="btn btn-ghost">Financeiro <Icon name="arrow-right" size={16} /></Link>
             </div>

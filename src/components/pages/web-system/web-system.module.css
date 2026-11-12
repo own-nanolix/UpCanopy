@@ -8,7 +8,7 @@
 /* 12-column workbench: bays alternate 7 + 5 and 5 + 7, each with a thick left rule */
 .bays { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(36px, 4.5vw, 72px) var(--gap); padding-bottom: clamp(48px, 6vw, 96px); }
 .bay { grid-column: span 12; min-width: 0; border-left: calc(var(--stroke) * 2) solid var(--navy); padding-left: clamp(14px, 1.6vw, 24px); }
-@media (min-width: 901px) { .s7 { grid-column: span 7; } .s5 { grid-column: span 5; } }
+@media (min-width: 901px) { .s7 { grid-column: span 7; } .s5 { grid-column: span 5; } .s12 { grid-column: span 12; } }
 .bayHead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
 .sub { margin: 22px 0 10px; }
 .stack { display: grid; gap: 14px; }

@@ -89,6 +89,7 @@
 
 .listHead { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--gap); align-items: end; margin-bottom: 24px; }
 .listCard { padding: clamp(14px, 2vw, 28px); }
+.flow { margin-top: var(--gap); border-top: 6px solid var(--navy); }
 .listBar { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
 .tableWrap { overflow-x: auto; }
 .table { width: 100%; min-width: 520px; border-collapse: collapse; }

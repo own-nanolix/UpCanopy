@@ -10,12 +10,16 @@ import { LINES, MANIFESTO, PILLARS, SECTORS, TONE } from '@/lib/brand';
 import CrmBoard from '@/components/pages/lp-crm/CrmBoard';
 import OrderSlider from '@/components/pages/lp-crm/OrderSlider';
 import ClientList from '@/components/pages/lp-crm/ClientList';
-import { ScalesArt, FrondArt, BoardOutlineArt, MarkTileArt } from '@/components/pages/lp-crm/CrmArt';
+import { ScalesArt, FrondArt, BoardOutlineArt, MarkTileArt, StageFlowArt } from '@/components/pages/lp-crm/CrmArt';
 import s from '@/components/pages/lp-crm/lp-crm.module.css';
 
 export const metadata = pageMeta('lp-crm');
 
-const ORG = 'Por isso, nossa obsessão é a Organização.';
+// MANIFESTO paragraph 6, verbatim: its first sentence is the headline, its second begins the pillar line.
+const P6 = MANIFESTO[5].split('. ');
+const ORG = `${P6[1]}.`;
+const HEAD = P6[0].split(' ');
+const HEAD_LAST = HEAD.pop();
 
 export default function Page() {
   const quote = TONE.points[0];
@@ -29,8 +33,8 @@ export default function Page() {
           <div className={s.heroText}>
             <p className={`t-caps ${s.kicker}`}><span className={s.kickerBar} aria-hidden="true" />CRM</p>
             <h1 className={`t-display ${s.h1}`} lang="pt-BR">
-              <span className={s.h1Line}>Acreditamos que a informalidade é o teto que limita o seu</span>{' '}
-              <span className={`strong ${s.h1Strong}`}>potencial.</span>
+              <span className={s.h1Line}>{HEAD.join(' ')}</span>{' '}
+              <span className={`strong ${s.h1Strong}`}>{HEAD_LAST}.</span>
             </h1>
             <p className="t-small" style={{ maxWidth: '28em' }}>
               Move a card with its buttons, with the left and right arrow keys, or by dragging it to another column.
@@ -45,7 +49,7 @@ export default function Page() {
 
       {/* 2. Masonry of mixed-size cards */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-crm-h-masonry">
-        <Reveal><h2 id="lp-crm-h-masonry" className="t-caps-lg">Cards, kept in order</h2></Reveal>
+        <Reveal><h2 id="lp-crm-h-masonry" className="t-caps-lg">Cards</h2></Reveal>
         <div className={s.masonry}>
           <Reveal className={`${s.m} ${s.mLine} field-rise`}>
             <p className="t-caps" style={{ opacity: 0.8 }}>01</p>
@@ -80,9 +84,8 @@ export default function Page() {
       <section className={`${s.sec} ${s.orderBand}`} aria-labelledby="lp-crm-h-order">
         <div className="wrap">
           <Reveal>
-            <p className="t-caps" style={{ color: 'var(--green)' }}>Before / after</p>
-            <h2 id="lp-crm-h-order" className="t-h1" style={{ marginTop: 12, maxWidth: '16em' }}>
-              Informality to <span className="hl">order</span>
+                        <h2 id="lp-crm-h-order" className="t-h1" style={{ marginTop: 12, maxWidth: '16em' }}>
+              Before <span className="hl">and after</span>
             </h2>
           </Reveal>
           <Reveal delay={100} className={s.sliderWrap}><OrderSlider /></Reveal>
@@ -92,10 +95,11 @@ export default function Page() {
       {/* 4. Client list */}
       <section className={`wrap ${s.sec}`} aria-labelledby="lp-crm-h-list">
         <div className={s.listHead}>
-          <Reveal><h2 id="lp-crm-h-list" className="t-h2">Every client, one list</h2></Reveal>
+          <Reveal><h2 id="lp-crm-h-list" className="t-h2">Client list</h2></Reveal>
           <Reveal delay={80}><p className="t-lead" lang="pt-BR">{MANIFESTO[6].split('. ')[1]}</p></Reveal>
         </div>
         <Reveal delay={120} className={`card ${s.listCard}`}><ClientList /></Reveal>
+        <Reveal delay={160} className={s.flow}><StageFlowArt /></Reveal>
       </section>
 
       {/* 5. Pull quote from the tone of voice */}
@@ -136,7 +140,7 @@ export default function Page() {
               <Line text={LINES.control} strong="Assuma o controle." className="hl" />
             </h2>
             <div className="row" style={{ marginTop: 32, gap: 12 }}>
-              <Button href="/lp-contato/" variant="white" iconRight="arrow-right">HOME</Button>
+              <Button href="/lp-contato/" variant="white" iconRight="arrow-right">Contact</Button>
               <Link href="/lp-agenda/" className="btn btn-ghost">Agenda <Icon name="arrow-right" size={16} /></Link>
               <Link href="/lp-financeiro/" className="btn btn-ghost">Financeiro <Icon name="arrow-right" size={16} /></Link>
             </div>

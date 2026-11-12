@@ -9,7 +9,8 @@ import s from './lp-agenda.module.css';
 // Scrub the day: a green marker moves along a thick rule and the card behind turns from sobrevivência to expansão.
 export default function DayTimeline() {
   const [p, setP] = useState(12);
-  const t = clamp((p - 35) / 30, 0, 1);
+  // The ground flips with the mode (a short cross-fade), so the text colour always sits on its own ground.
+  const t = p < 50 ? 0 : 1;
   const hr = 6 + (p / 100) * 14;
   const hh = String(Math.floor(hr)).padStart(2, '0');
   const mode = p < 50 ? MODES[0] : MODES[1];

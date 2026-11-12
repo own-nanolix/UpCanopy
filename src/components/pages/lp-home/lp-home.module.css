@@ -20,7 +20,7 @@
 @keyframes lp-home-fade { from { opacity: 0; } to { opacity: 0.92; } }
 
 .stack { grid-column: 1; grid-row: 1; align-self: end; position: relative; width: min(600px, 100%); aspect-ratio: 1.4; margin-bottom: clamp(8px, 2vw, 24px); }
-.stackCard { position: absolute; width: 60%; height: 50%; background: var(--white); color: var(--navy); padding: clamp(12px, 1.4vw, 20px); box-shadow: 10px 10px 0 rgba(5, 46, 37, 0.38); display: flex; flex-direction: column; gap: 12px; }
+.stackCard { position: absolute; width: 60%; height: 50%; overflow: hidden; background: var(--white); color: var(--navy); padding: clamp(10px, 1.4vw, 20px); box-shadow: 10px 10px 0 rgba(5, 46, 37, 0.38); display: flex; flex-direction: column; gap: clamp(8px, 1vw, 12px); }
 .miniHead { display: flex; justify-content: space-between; align-items: center; border-bottom: var(--stroke) solid var(--navy); padding-bottom: 8px; }
 .miniList { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .miniRow { display: flex; align-items: center; gap: 10px; }
@@ -45,6 +45,12 @@
   .heroBody { grid-template-columns: minmax(0, 1fr); }
   .heroLine { grid-column: 1; grid-row: 1; }
   .stack { grid-column: 1; grid-row: 2; margin-top: 24px; }
+}
+@media (max-width: 600px) {
+  /* The cards are a third of the phone width: two rows each, so nothing spills past a card's edge. */
+  .miniList { gap: 8px; }
+  .miniList > li:nth-child(n + 3) { display: none; }
+  .miniHead { padding-bottom: 6px; }
 }
 
 /* ---------- Three areas: modular cards that reflow ---------- */
@@ -95,12 +101,12 @@
 .folder { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); align-items: start; max-width: 1040px; margin-inline: auto; }
 .folderRight { margin-top: clamp(24px, 5vw, 72px); }
 .folderBtn { grid-column: 1 / -1; justify-self: start; }
-.ceoCard { position: relative; aspect-ratio: 3 / 4; overflow: hidden; color: var(--white); box-shadow: 12px 12px 0 rgba(22, 37, 87, 0.22); }
+.ceoCard { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--navy); color: var(--white); box-shadow: 12px 12px 0 rgba(22, 37, 87, 0.22); }
 .ceoText { position: absolute; left: 7.5%; right: 7.5%; bottom: 6%; font-size: clamp(17px, 2.1vw, 30px); line-height: 1.22; }
 .cover { width: 100%; height: auto; aspect-ratio: 3 / 4; box-shadow: 12px 12px 0 rgba(22, 37, 87, 0.22); }
 
 /* ---------- The brochure ---------- */
-.brochure { display: grid; grid-template-columns: minmax(0, 640fr) minmax(0, 400fr); gap: 0; max-width: 1040px; margin-inline: auto; box-shadow: 14px 14px 0 rgba(22, 37, 87, 0.2); }
+.brochure { display: grid; grid-template-columns: minmax(0, 757fr) minmax(0, 312fr); gap: 0; max-width: 1040px; margin-inline: auto; box-shadow: 14px 14px 0 rgba(22, 37, 87, 0.2); }
 .brochure svg { width: 100%; height: auto; }
 
 /* ---------- Pillars ---------- */
@@ -125,5 +131,4 @@
   .pillars, .folder, .contact { grid-template-columns: minmax(0, 1fr); }
   .pillar { aspect-ratio: auto; min-height: 240px; }
   .folderRight { margin-top: 0; }
-  .brochure { grid-template-columns: minmax(0, 1fr); }
 }

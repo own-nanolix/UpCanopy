@@ -22,7 +22,7 @@
 .isToday { color: var(--green); box-shadow: inset 0 -4px 0 var(--green); }
 .hourLabel { padding: 6px 10px 0 12px; font-family: var(--font-wide); font-size: 10px; letter-spacing: 0.04em; color: var(--navy-muted); font-variant-numeric: tabular-nums; }
 .blockSlot { padding: 3px 6px; z-index: 2; min-height: 0; }
-.block { display: grid; align-content: start; gap: 8px; width: 100%; height: 100%; padding: 10px; border: 0; border-radius: 0; background: var(--green); color: var(--navy); text-align: left; transform-origin: 50% 100%; animation: lp-agenda-block var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 80ms + 1000ms); transition: background-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out); }
+.block { display: grid; grid-template-columns: minmax(0, 1fr); overflow: hidden; align-content: start; gap: 8px; width: 100%; height: 100%; padding: 10px; border: 0; border-radius: 0; background: var(--green); color: var(--navy); text-align: left; transform-origin: 50% 100%; animation: lp-agenda-block var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 80ms + 1000ms); transition: background-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out); }
 .block :global(.ph) { height: 7px; opacity: 0.4; display: block; }
 @keyframes lp-agenda-block { from { opacity: 0; transform: scaleY(0.2) translateY(30px); } to { opacity: 1; transform: none; } }
 .block:hover { background: var(--mint); }
@@ -51,7 +51,7 @@
 .modeCard { background: var(--navy-deep); position: relative; overflow: hidden; min-height: clamp(260px, 30vw, 380px); display: flex; align-items: flex-end; }
 .modeA, .modeB { position: absolute; inset: 0; }
 .modeA { background: var(--navy-deep); }
-.modeB { background: linear-gradient(35deg, #26cf7b 20%, #8ff0bc); }
+.modeB { background: linear-gradient(35deg, var(--green) 20%, var(--mint-paper)); transition: opacity var(--dur-3) var(--ease-in-out); }
 .modeBody { position: relative; padding: clamp(20px, 3vw, 48px); display: grid; gap: 12px; }
 .modeWord { font-size: clamp(44px, 8vw, 128px); line-height: 1; letter-spacing: -0.03em; }
 .scrub { position: relative; margin-top: 18px; padding-bottom: 8px; }
