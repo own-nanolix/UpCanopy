@@ -69,9 +69,17 @@ export function LockupStackG({ x = 0, y = 0, scale = 1, fill = 'currentColor', m
   );
 }
 
-// The word set vertically and very large, reading bottom to top, as on the letter, the cards and the jackets.
-// x, y is the bottom-left corner of the column; size is the font size.
-export function WordmarkVerticalG({ x = 0, y = 0, size = 120, fill = 'currentColor', ...rest }) {
+// The word set vertically and very large. Default: reading bottom to top (cards, jackets); x, y is the
+// bottom-left corner of the column. With `down`: reading top to bottom, as on the letter (m12, m28); x, y is
+// then the top-left corner of the column. size is the font size.
+export function WordmarkVerticalG({ x = 0, y = 0, size = 120, fill = 'currentColor', down = false, ...rest }) {
+  if (down) {
+    return (
+      <g transform={`translate(${x} ${y}) rotate(90)`} {...rest}>
+        <WordmarkG x={0} y={-size * 0.24} size={size} fill={fill} />
+      </g>
+    );
+  }
   return (
     <g transform={`translate(${x} ${y}) rotate(-90)`} {...rest}>
       <WordmarkG x={0} y={size * 0.76} size={size} fill={fill} />
@@ -92,7 +100,7 @@ export function AppIconG({ x = 0, y = 0, size = 100, radius = 22, tile = '#16255
 // The mark crop: an enlarged piece of the mark inside a w x h panel (the cover graphic of the folders).
 // Needs idp for its clip path. zoom is how many times larger than the panel width the mark is drawn;
 // dx / dy shift the mark (in panel units) to choose the crop.
-export function MarkCropG({ idp, x = 0, y = 0, w = 300, h = 420, zoom = 1.9, dx = -0.42, dy = -0.2, fill = '#162557', ...rest }) {
+export function MarkCropG({ idp, x = 0, y = 0, w = 300, h = 420, zoom = 1.67, dx = -0.74, dy = -0.08, fill = '#162557', ...rest }) {
   const id = `${idp}-crop`;
   const size = w * zoom;
   return (
