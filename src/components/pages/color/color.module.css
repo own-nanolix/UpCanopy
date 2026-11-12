@@ -60,3 +60,38 @@
 .tokenCss { font-size: 12px; opacity: 0.85; }
 .tokenVal { font-size: 13px; text-align: right; }
 .tokenHead { font-family: var(--font-wide); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 10px; border-bottom: var(--stroke) solid currentColor; }
+
+.ladders { display: grid; gap: 18px; background: var(--white); padding: clamp(12px, 1.6vw, 24px); }
+.ladder h3 { margin: 0 0 8px; }
+.ladderRow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 4px; }
+.ladderCell { display: grid; gap: 4px; min-width: 0; }
+.ladderSw { display: block; height: 44px; box-shadow: inset 0 0 0 1px rgba(22, 37, 87, 0.16); transition: transform var(--dur-2) var(--ease-out); }
+.ladderCell:hover .ladderSw { transform: translateY(-4px); }
+.ladderHex { font-size: 10px; letter-spacing: -0.02em; text-align: left; padding: 2px 0; }
+@media (max-width: 900px) { .ladderRow { grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); } }
+
+.tester { display: grid; gap: 16px; background: var(--white); padding: clamp(14px, 1.8vw, 28px); }
+.testerControls { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: end; }
+@media (max-width: 560px) { .testerControls { grid-template-columns: minmax(0, 1fr); } }
+.pick { display: grid; gap: 6px; min-width: 0; }
+.select { width: 100%; min-height: 44px; padding: 0 12px; font: inherit; font-size: 14px; color: var(--navy); background: var(--white); border: var(--stroke) solid var(--navy); border-radius: 0; cursor: pointer; transition: background-color var(--dur-1) var(--ease-out); }
+.select:hover { background: var(--mint); }
+.select:focus-visible, .swap:focus-visible { outline: var(--stroke) solid var(--green-ink); outline-offset: 2px; }
+.swap { min-height: 44px; padding: 0 18px; font-family: var(--font-wide); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--navy); border: 0; border-radius: 0; cursor: pointer; transition: transform var(--dur-1) var(--ease-out), background-color var(--dur-1) var(--ease-out); }
+.swap:hover { background: var(--green-ink); }
+.swap:active { transform: translateY(1px); }
+.testerSample { display: grid; gap: 6px; padding: clamp(20px, 3vw, 44px); box-shadow: inset 0 0 0 1px rgba(22, 37, 87, 0.2); }
+.sampleLarge { font-size: clamp(30px, 4vw, 52px); font-weight: 700; line-height: 1.1; }
+.sampleSmall { font-size: 16px; font-weight: 300; }
+.testerResult { display: grid; grid-template-columns: minmax(0, 1.2fr) repeat(2, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+@media (max-width: 700px) { .testerResult { grid-template-columns: minmax(0, 1fr); } }
+.ratio { display: grid; gap: 2px; align-content: center; }
+.ratioNum { font-family: var(--font-wide); font-size: clamp(24px, 3vw, 36px); font-weight: 500; text-align: left; }
+.verdict { display: flex; align-items: center; gap: 12px; padding: 12px 14px; font-size: 14px; border: var(--stroke) solid var(--navy); }
+.verdictMark { font-family: var(--font-wide); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 8px; }
+.pass .verdictMark { background: var(--green); color: var(--navy); }
+.fail .verdictMark { background: var(--navy); color: var(--white); }
+.fail { border-style: dashed; }
+
+.surfaceGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
+@media (max-width: 1100px) { .surfaceGrid { grid-template-columns: minmax(0, 1fr); } }

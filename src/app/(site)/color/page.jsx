@@ -7,6 +7,9 @@ import { ScaleStrip, SpecTable } from '@/components/pages/color/Scales';
 import Proportion from '@/components/pages/color/Proportion';
 import { PairingsArt, PairingsTable } from '@/components/pages/color/Pairings';
 import { TokensArt, TokenColumns } from '@/components/pages/color/Tokens';
+import { LaddersArt, LadderCells } from '@/components/pages/color/Ladders';
+import Tester from '@/components/pages/color/Tester';
+import { GroundsPlate, GradientPlate, FrondPlate } from '@/components/pages/color/Plates';
 import { GREEN_SCALE, BLUE_SCALE, NEUTRALS } from '@/components/pages/color/color-data';
 import s from '@/components/pages/color/color.module.css';
 
@@ -61,6 +64,13 @@ export default function Page() {
           </section>
 
           <section className={s.sec}>
+            <Reveal><Head n="03b" title="Tint and shade ladders" /></Reveal>
+            <p className={`t-small ${s.note}`}>Eleven steps from the printed colour (0%) to white or black (100%), mixed in code. Click any cell to copy its hex.</p>
+            <Reveal><div className={s.plate}><LaddersArt /></div></Reveal>
+            <LadderCells />
+          </section>
+
+          <section className={s.sec}>
             <Reveal><Head n="04" title="Proportion">estimated</Head></Reveal>
             <p className={`t-small ${s.note}`}>Estimated by eye from the case study images; the designer does not publish proportions.</p>
             <Reveal><div className={s.plate}><Proportion /></div></Reveal>
@@ -78,6 +88,22 @@ export default function Page() {
             <Reveal><Head n="06" title="Semantic tokens" /></Reveal>
             <Reveal><div className={s.plate}><TokensArt /></div></Reveal>
             <TokenColumns />
+          </section>
+
+          <section className={s.sec}>
+            <Reveal><Head n="07" title="Pairing tester" /></Reveal>
+            <p className={`t-small ${s.note}`}>Pick an ink and a ground. The ratio is computed from the two hex values; small text is under 24 px.</p>
+            <Reveal><Tester /></Reveal>
+          </section>
+
+          <section className={s.sec}>
+            <Reveal><Head n="08" title="Colour on the brand surfaces" /></Reveal>
+            <p className={`t-small ${s.note}`}>The mark on each ground, the rising gradient and the frond tones, each an exportable plate.</p>
+            <Reveal><div className={s.plate}><GroundsPlate /></div></Reveal>
+            <div className={s.surfaceGrid}>
+              <Reveal><div className={s.plate}><GradientPlate /></div></Reveal>
+              <Reveal><div className={s.plate}><FrondPlate /></div></Reveal>
+            </div>
           </section>
         </div>
       </div>

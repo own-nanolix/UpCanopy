@@ -68,6 +68,48 @@ export const PROPORTION = [
   { id: 'dark', label: 'Asfalt and Gray', pct: 5, parts: [HEX.asphalt, HEX.gray] },
 ];
 
+// Ladders: eleven steps from the printed colour (0%) to white (tints) or black (shades) at 100%.
+const ladder = (id, label, base, to) => ({
+  id,
+  label,
+  steps: Array.from({ length: 11 }, (_, i) => ({ token: `${id}-${i * 10}`, pct: i * 10, hex: mix(base, to, i / 10) })),
+});
+export const LADDERS = [
+  ladder('green-tint', 'Green Park tints', HEX.green, '#FFFFFF'),
+  ladder('green-shade', 'Green Park shades', HEX.green, '#000000'),
+  ladder('navy-tint', 'Blue Ocean tints', HEX.navy, '#FFFFFF'),
+  ladder('navy-shade', 'Blue Ocean shades', HEX.navy, '#000000'),
+];
+
+// The palette plus white, for the pairing tester.
+export const TESTER_COLORS = [
+  { name: 'Green Park', hex: HEX.green },
+  { name: 'Blue Ocean', hex: HEX.navy },
+  { name: 'Green Dark', hex: HEX.greenDark },
+  { name: 'Asfalt', hex: HEX.asphalt },
+  { name: 'Green Ligth', hex: HEX.mint },
+  { name: 'Gray', hex: HEX.gray },
+  { name: 'White', hex: HEX.white },
+];
+
+// The mark on each ground, as the case study sets it.
+export const GROUNDS = [
+  { id: 'navy', name: 'Blue Ocean', ground: HEX.navy, mark: HEX.green },
+  { id: 'green', name: 'Green Park', ground: HEX.green, mark: HEX.navy },
+  { id: 'dark', name: 'Green Dark', ground: HEX.greenDark, mark: HEX.mint },
+  { id: 'asphalt', name: 'Asfalt', ground: HEX.asphalt, mark: HEX.green },
+  { id: 'mint', name: 'Green Ligth', ground: HEX.mint, mark: HEX.navy },
+  { id: 'gray', name: 'Gray', ground: HEX.gray, mark: HEX.navy },
+];
+
+// The frond's tones on its four grounds (keys of FROND_TONES).
+export const FRONDS = [
+  { tone: 'onDark', name: 'On Green Dark', ground: HEX.greenDark },
+  { tone: 'onNavy', name: 'On Blue Ocean', ground: HEX.navy },
+  { tone: 'onGreen', name: 'On Green Park', ground: HEX.green },
+  { tone: 'onMint', name: 'On Green Ligth', ground: HEX.mint },
+];
+
 export const TOKENS = [
   { name: 'background', css: '--bg', light: HEX.mint, dark: HEX.navy },
   { name: 'surface', css: '--surface', light: HEX.white, dark: HEX.navyDeep },
