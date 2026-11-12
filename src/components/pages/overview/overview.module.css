@@ -64,3 +64,37 @@
 .rowCount { font-size: clamp(24px, 2.4vw, 36px); text-align: right; }
 @media (max-width: 1000px) { .rowProduct { grid-template-columns: 44px minmax(0, 1fr) 28px; } .rowHolds { grid-column: 2 / 3; grid-row: 2; } .rowCount { display: none; } .rowProduct .rowArrow { grid-row: 1; grid-column: 3; } }
 @media (max-width: 760px) { .ledgerGrid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- signature band ---- */
+.signature { position: relative; overflow: hidden; }
+.signatureArt { display: block; width: 100%; height: auto; min-height: 260px; }
+@media (max-width: 700px) { .signatureArt { height: 320px; } }
+
+/* ---- brand lines ---- */
+.lines { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.lineCard { min-height: clamp(280px, 28vw, 440px); padding: clamp(18px, 2.2vw, 36px); display: flex; flex-direction: column; justify-content: space-between; gap: 24px; transition: transform var(--dur-3) var(--ease-out); }
+.lineCard:hover { transform: translateY(-6px); }
+.lineArt { width: 100%; max-width: 220px; height: auto; }
+.lineText { text-wrap: balance; }
+.personality { grid-column: 1 / -1; display: grid; gap: 14px; padding-top: 24px; border-top: var(--stroke) solid var(--navy); }
+.personList { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 48px; }
+@media (max-width: 1000px) { .lines { grid-template-columns: minmax(0, 1fr); } .lineCard { min-height: 240px; } }
+
+/* ---- direction and palette sheets ---- */
+.direction { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
+.dirCol { display: grid; gap: 12px; min-width: 0; }
+.dirCap { color: var(--muted); }
+.sheetArt { display: block; width: 100%; height: auto; }
+@media (max-width: 900px) { .direction { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- chapter tiles ---- */
+.thumbs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.thumb { display: grid; gap: 12px; }
+.thumbArt { display: block; width: 100%; height: auto; transition: transform var(--dur-3) var(--ease-out); }
+.thumb:hover .thumbArt { transform: translateY(-6px); }
+.thumbCap { display: grid; gap: 4px; padding-top: 10px; border-top: var(--stroke) solid var(--navy); color: var(--navy); text-decoration: none; transition: color var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out); }
+.thumbCap:hover { color: var(--green-ink); transform: translateX(6px); }
+.thumbCap:active { transform: translateX(2px); }
+.thumbCount { color: var(--muted); }
+@media (max-width: 1000px) { .thumbs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .thumbs { grid-template-columns: minmax(0, 1fr); } }

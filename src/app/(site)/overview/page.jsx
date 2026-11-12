@@ -8,6 +8,10 @@ import FlatLay from '@/components/pages/overview/FlatLay';
 import ContentsNav from '@/components/pages/overview/ContentsNav';
 import Principles from '@/components/pages/overview/Principles';
 import { ChapterLedger, ProductLedger } from '@/components/pages/overview/Ledgers';
+import Signature from '@/components/pages/overview/Signature';
+import Direction from '@/components/pages/overview/Direction';
+import Thumbs from '@/components/pages/overview/Thumbs';
+import BrandLines from '@/components/pages/overview/BrandLines';
 import s from '@/components/pages/overview/overview.module.css';
 
 export const metadata = pageMeta('overview');
@@ -16,6 +20,9 @@ const CONTENTS = [
   { id: 'overview-about', label: 'About this brand' },
   { id: 'overview-manifesto', label: 'Manifesto' },
   { id: 'overview-principles', label: 'Principles' },
+  { id: 'overview-lines', label: 'Brand lines' },
+  { id: 'overview-direction', label: 'Direction and palette' },
+  { id: 'overview-tiles', label: 'Chapter tiles' },
   { id: 'overview-chapters', label: 'Every chapter' },
   { id: 'overview-products', label: 'Mockups and products' },
 ];
@@ -49,6 +56,8 @@ export default function Page() {
           </div>
         </div>
       </header>
+
+      <Signature />
 
       <div className="split">
         <aside className="split-rail" aria-label="Project sheet and contents">
@@ -100,7 +109,22 @@ export default function Page() {
         <Principles />
       </section>
 
-      <section id="overview-chapters" aria-labelledby="overview-chapters-h" className={`wrap ${s.block}`}>
+      <section id="overview-lines" aria-labelledby="overview-lines-h" className={`wrap ${s.block}`}>
+        <h2 id="overview-lines-h" className={`t-h1 ${s.blockHead}`}>Brand lines</h2>
+        <BrandLines />
+      </section>
+
+      <section id="overview-direction" aria-labelledby="overview-direction-h" className={`wrap ${s.block}`}>
+        <h2 id="overview-direction-h" className={`t-h1 ${s.blockHead}`}>Direction and palette</h2>
+        <Direction />
+      </section>
+
+      <section id="overview-tiles" aria-labelledby="overview-tiles-h" className={`wrap ${s.block}`}>
+        <h2 id="overview-tiles-h" className={`t-h1 ${s.blockHead}`}>Chapter tiles</h2>
+        <Thumbs />
+      </section>
+
+      <section id="overview-chapters"aria-labelledby="overview-chapters-h" className={`wrap ${s.block}`}>
         <h2 id="overview-chapters-h" className={`t-h1 ${s.blockHead}`}>Every chapter</h2>
         <ChapterLedger />
       </section>
